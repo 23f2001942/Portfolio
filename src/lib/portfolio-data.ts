@@ -16,7 +16,7 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       role: "Mechanical Subsystem Member",
-      company: "Aeolus BPHC",
+      company: "Aeolus - BITS Pilani Hyderabad Campus",
       period: "Sep 2025 - Present",
       description: []
     },
