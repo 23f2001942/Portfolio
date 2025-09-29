@@ -28,12 +28,25 @@ export default function LicensesSection() {
                 <ul className="space-y-4">
                   {iitmCerts.map((license, index) => (
                     <li key={index}>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-semibold">{license.name}</p>
-                          <p className="text-sm text-muted-foreground">{license.issuer}</p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-start gap-2">
+                          <div>
+                            <p className="font-semibold">{license.name}</p>
+                            <p className="text-sm text-muted-foreground">{license.issuer}</p>
+                          </div>
+                          <p className="text-sm text-muted-foreground whitespace-nowrap">{license.date}</p>
                         </div>
-                        <p className="text-sm text-muted-foreground">{license.date}</p>
+                        {license.credentialUrl && (
+                          <Button variant="secondary" size="sm" asChild>
+                            <Link href={license.credentialUrl} target="_blank">
+                              <ExternalLink />
+                              Show Credential
+                            </Link>
+                          </Button>
+                        )}
+                        {license.credentialId && (
+                           <p className="text-sm text-muted-foreground">Credential ID: {license.credentialId}</p>
+                        )}
                       </div>
                       {index < iitmCerts.length - 1 && <Separator className="mt-4" />}
                     </li>

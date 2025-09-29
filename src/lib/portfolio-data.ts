@@ -151,20 +151,30 @@ export const portfolioData: PortfolioData = {
     {
       name: "Diploma in Data Science",
       issuer: "Indian Institute of Technology, Madras",
-      date: "2025",
-      type: "iitm"
+      date: "April 2025",
+      type: "iitm",
+      credentialUrl: "https://ds.study.iitm.ac.in/document_verification/a4d154f538ad2e0523dc3b397c98a81e1babf43e71844e38786a7be5dc437c33"
     },
     {
       name: "Diploma in Programming",
       issuer: "Indian Institute of Technology, Madras",
-      date: "2025",
-      type: "iitm"
+      date: "September 2025",
+      type: "iitm",
+      credentialUrl: "https://ds.study.iitm.ac.in/document_verification/514f9e47f3785298e09c50fc53a06b590e6a5617fb2e7eef6b881f1967f3983f"
     },
     {
       name: "Advanced Certificate in Programming and Application Development",
       issuer: "Indian Institute of Technology, Madras",
-      date: "2025",
-      type: "iitm"
+      date: "June 2025",
+      type: "iitm",
+      credentialUrl: "https://ds.study.iitm.ac.in/document_verification/e401fabd2b7d7c0a8994084978f3a56cf2932eb7728a55ffc3e9adf4f5c8bb5f"
+    },
+    {
+      name: "Foundation Level",
+      issuer: "Indian Institute of Technology, Madras",
+      date: "December 2023",
+      type: "iitm",
+      credentialUrl: "https://app.onlinedegree.iitm.ac.in/document_verification/8a6f0a3f1a1fed74af1e3053c965a4f359f880bf904920ab523129ad881574fc"
     },
     {
       name: "Achieving Personal and Professional Success Specilization",
