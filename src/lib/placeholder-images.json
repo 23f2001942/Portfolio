@@ -1,0 +1,46 @@
+{
+  "placeholderImages": [
+    {
+      "id": "skyone",
+      "description": "Image of the SkyOne drone project",
+      "imageUrl": "/images/SkyOne.png",
+      "imageHint": "simple drone"
+    },
+    {
+      "id": "skytwo",
+      "description": "Image of the SkyTwo drone project",
+      "imageUrl": "/images/SkyTwo.png",
+      "imageHint": "drone technology"
+    },
+    {
+      "id": "airlink",
+      "description": "Image of the AirLink project",
+      "imageUrl": "/images/AirLink.png",
+      "imageHint": "communication antenna"
+    },
+    {
+      "id": "milkfroth",
+      "description": "Image of the Smart Milk Froth Monitor project",
+      "imageUrl": "https://images.unsplash.com/photo-1670597744104-8addd86301ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2ZmZWUlMjBraXRjaGVufGVufDB8fHx8MTc1ODg3NDM1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee kitchen"
+    },
+    {
+      "id": "vitallink",
+      "description": "Image of the VitalLink project",
+      "imageUrl": "https://images.unsplash.com/photo-1597765654534-e42ea47ab66a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWVkaWNhbCUyMGRldmljZXxlbnwwfHx8fDE3NTg5NDQ3NTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "medical device"
+    },
+    {
+      "id": "sponnect",
+      "description": "Image of the Sponnect software project",
+      "imageUrl": "https://images.unsplash.com/photo-1741615331533-2360157c55aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzb2NpYWwlMjBjb25uZWN0aW9ufGVufDB8fHx8MTc1ODk1MzIyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social connection"
+    },
+    {
+      "id": "parkease",
+      "description": "Image of the ParkEase software project",
+      "imageUrl": "https://images.unsplash.com/photo-1630165356811-645a4914aaca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXJraW5nJTIwY2FyfGVufDB8fHx8MTc1ODk2OTcwMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "parking car"
+    }
+  ]
+}
