@@ -4,7 +4,7 @@ import type { PortfolioData } from '@/types/portfolio';
 export const portfolioData: PortfolioData = {
   name: "Shamanthak Reddy Mallu",
   title: "AI & Web Development | Aerospace, Drones & UAV Enthusiast",
-  intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online program at IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
+  intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online BS Degree from IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
   headshot: "",
   socials: [
     { name: "linkedin", url: "https://www.linkedin.com/in/shamanthak/" },
