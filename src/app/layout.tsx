@@ -6,7 +6,7 @@ import Header from "@/components/header";
 import { KaggleIcon, InstagramIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Profolio",
+  title: "Portfolio",
   description:
     "A modern and professional portfolio website to showcase my work and skills.",
 };
