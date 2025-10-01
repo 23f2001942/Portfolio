@@ -66,7 +66,9 @@ export const portfolioData: PortfolioData = {
       degree: "B.S. Mechanical Engineering",
       institution: "University at Buffalo School of Engineering and Applied Sciences",
       period: "2024 - 2028",
-      description: ""
+      description: "",
+      logoUrl: "/images/UB_Logo.png",
+      universityUrl: "https://www.buffalo.edu/"
     }
   ],
   qualifications: [
