@@ -15,6 +15,8 @@ export interface Education {
   institution: string;
   period: string;
   description: string;
+  logoUrl?: string;
+  universityUrl?: string;
 }
 
 export interface Qualification {

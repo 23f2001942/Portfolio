@@ -50,7 +50,9 @@ export const portfolioData: PortfolioData = {
       degree: "B.E. Mechanical Engineering",
       institution: "BITS Pilani, Hyderabad Campus",
       period: "2024 - 2028",
-      description: ""
+      description: "",
+      logoUrl: "/images/BITS_Logo.png",
+      universityUrl: "https://www.bits-pilani.ac.in/"
     },
     {
       degree: "BS in Data Science and Applications",
