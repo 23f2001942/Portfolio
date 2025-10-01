@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
-import { KaggleIcon, InstagramIcon } from "@/components/icons";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Shamanthak Reddy Mallu",
@@ -37,6 +37,7 @@ export default function RootLayout({
           {children}
         </main>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
