@@ -58,7 +58,9 @@ export const portfolioData: PortfolioData = {
       degree: "BS in Data Science and Applications",
       institution: "Indian Institute of Technology, Madras",
       period: "2023 - 2027",
-      description: "https://ds.study.iitm.ac.in/student/23F2001942"
+      description: "Online Degree: https://ds.study.iitm.ac.in/student/23F2001942",
+      logoUrl: "/images/IITM_Logo.png",
+      universityUrl: "https://study.iitm.ac.in/ds/"
     },
     {
       degree: "B.S. Mechanical Engineering",
