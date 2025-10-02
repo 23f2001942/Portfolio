@@ -1,10 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { KaggleIcon, InstagramIcon } from "@/components/icons";
-import { getPlaceholderImage } from "@/lib/placeholder-images";
 
 const iconMap = {
   linkedin: Linkedin,
@@ -15,8 +13,6 @@ const iconMap = {
 };
 
 export default function HeroSection() {
-  const headshotImage = getPlaceholderImage(portfolioData.headshot);
-
   return (
     <section
       id="home"
@@ -56,18 +52,6 @@ export default function HeroSection() {
           })}
         </div>
       </div>
-      {headshotImage && (
-        <div className="flex-shrink-0">
-          <Image
-            src={headshotImage.imageUrl}
-            alt={headshotImage.description}
-            width={256}
-            height={256}
-            data-ai-hint={headshotImage.imageHint}
-            className="rounded-full object-cover w-48 h-48 md:w-64 md:h-64 border-4 border-primary/50 shadow-lg"
-          />
-        </div>
-      )}
     </section>
   );
 }
