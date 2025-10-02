@@ -1,4 +1,5 @@
 import AnimatedWrapper from "@/components/animated-wrapper";
+import AwardsSection from "@/components/awards-section";
 import HeroSection from "@/components/hero-section";
 import QualificationsSection from "@/components/qualifications-section";
 
@@ -10,6 +11,9 @@ export default function Home() {
       </AnimatedWrapper>
       <AnimatedWrapper>
         <QualificationsSection />
+      </AnimatedWrapper>
+      <AnimatedWrapper>
+        <AwardsSection />
       </AnimatedWrapper>
     </div>
   );

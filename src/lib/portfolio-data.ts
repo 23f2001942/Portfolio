@@ -5,7 +5,7 @@ export const portfolioData: PortfolioData = {
   name: "Shamanthak Reddy Mallu",
   title: "AI & Web Development | Aerospace, Drones & UAV Enthusiast",
   intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online BS Degree from IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
-  headshot: "",
+  headshot: "headshot1",
   socials: [
     { name: "linkedin", url: "https://www.linkedin.com/in/shamanthak/" },
     { name: "github", url: "https://github.com/23f2001942" },
@@ -297,5 +297,18 @@ export const portfolioData: PortfolioData = {
       type: "software"
     }
   ],
-  awards: []
+  awards: [
+    {
+      name: "Secured Rank 1 in International Rank Holder's Olympiad",
+      issuer: "SilverZone",
+      date: "2018",
+      description: "Secured Rank 1 at the Zonal Level in the International Rank Holder's Olympiad for the academic year 2018-2019."
+    },
+    {
+      name: "Got selected for INSPIRE Award",
+      issuer: "Department of Science And Technology, India",
+      date: "2018",
+      description: "Selected for the Innovation in Science Pursuit for Inspired Research (INSPIRE) award by the Department of Science and Technology, India, for an innovative project."
+    }
+  ]
 };
