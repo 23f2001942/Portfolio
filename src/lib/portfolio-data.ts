@@ -18,31 +18,34 @@ export const portfolioData: PortfolioData = {
       role: "Mechanical Subsystem Member",
       company: "Aeolus - BITS Pilani Hyderabad Campus",
       period: "Sep 2025 - Present",
-      description: []
+      description: "",
+      logoUrl: "/images/AelousLogo.png",
+      socials: [
+        { name: "linkedin", url: "https://www.linkedin.com/company/aeolus-bphc/" },
+        { name: "instagram", url: "https://www.instagram.com/aeolusbphc/" },
+      ]
     },
     {
       role: "Associate Electronics Subdivision",
       company: "Project Vanguard (formerly Mars Rover Team)",
       period: "Mar 2025 - Present",
-      description: [
-        "Contributing to the design and development of a custom PCB to support efficient power distribution to motors and a range of onboard sensors for a Mars Rover."
+      description: "Contributing to the design and development of a custom PCB to support efficient power distribution to motors and a range of onboard sensors for a Mars Rover.",
+      logoUrl: "/images/VanguardLogo.png",
+      socials: [
+        { name: "instagram", url: "https://www.instagram.com/vanguard_bphc/" }
       ]
     },
     {
-      role: "Associate Tech Team",
+      role: "Tech Team Member",
       company: "Innovation Cell, BITS Pilani Hyderabad Campus",
       period: "Sep 2024 - May 2025",
-      description: [
-        "I contribute to the Innovation Cell Technical Team, where we empower students by organizing hands-on workshops and sessions on core technologies such as Python, Arduino, Raspberry Pi, and AI. Our goal is to foster a strong technical foundation among peers and ignite a culture of innovation across the campus."
-      ]
+      description: "I contribute to the Innovation Cell Technical Team, where we empower students by organizing hands-on workshops and sessions on core technologies such as Python, Arduino, Raspberry Pi, and AI. Our goal is to foster a strong technical foundation among peers and ignite a culture of innovation across the campus."
     },
     {
       role: "Project Intern",
       company: "CADD Centre Training Services Pvt Ltd.",
       period: "Jul 2021 - Dec 2021",
-      description: [
-        "Project Internship in Product Design of Electric Bike"
-      ]
+      description: "Project Internship in Product Design of Electric Bike"
     }
   ],
   education: [

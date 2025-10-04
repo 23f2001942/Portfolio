@@ -1,3 +1,4 @@
+
 export interface SocialLink {
   name: string;
   url: string;
@@ -7,7 +8,9 @@ export interface Experience {
   role: string;
   company: string;
   period: string;
-  description: string[];
+  description: string;
+  logoUrl?: string;
+  socials?: SocialLink[];
 }
 
 export interface Education {
