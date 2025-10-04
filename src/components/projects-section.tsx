@@ -59,7 +59,7 @@ export default function ProjectsSection() {
                   </CardContent>
                   <CardFooter className="flex gap-2">
                     {project.detailsUrl && (
-                       <Button variant="default" size="sm" asChild>
+                       <Button variant="outline" size="sm" asChild>
                          <Link href={project.detailsUrl}>
                            <ExternalLink />
                            View Details
@@ -120,7 +120,7 @@ export default function ProjectsSection() {
                       </Button>
                     )}
                     {project.liveUrl && (
-                      <Button variant="default" size="sm" asChild>
+                      <Button variant="outline" size="sm" asChild>
                         <Link href={project.liveUrl} target="_blank">
                           <ExternalLink />
                           Live Demo

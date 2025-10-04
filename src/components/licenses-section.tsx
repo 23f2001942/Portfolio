@@ -37,7 +37,7 @@ export default function LicensesSection() {
                           <p className="text-sm text-muted-foreground whitespace-nowrap">{license.date}</p>
                         </div>
                         {license.credentialUrl && (
-                          <Button variant="secondary" size="sm" asChild>
+                          <Button variant="outline" size="sm" asChild>
                             <Link href={license.credentialUrl} target="_blank">
                               <ExternalLink />
                               Show Credential
@@ -74,7 +74,7 @@ export default function LicensesSection() {
                           <p className="text-sm text-muted-foreground whitespace-nowrap">{license.date}</p>
                         </div>
                         {license.credentialUrl && (
-                          <Button variant="secondary" size="sm" asChild>
+                          <Button variant="outline" size="sm" asChild>
                             <Link href={license.credentialUrl} target="_blank">
                               <ExternalLink />
                               Show Credential

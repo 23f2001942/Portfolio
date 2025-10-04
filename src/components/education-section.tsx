@@ -59,7 +59,7 @@ export default function EducationSection() {
                   )}
                 </CardDescription>
                 {url && (
-                   <Button variant="secondary" size="sm" asChild className="mt-2">
+                   <Button variant="outline" size="sm" asChild className="mt-2">
                      <Link href={url} target="_blank">
                        <ExternalLink />
                        Student Profile
