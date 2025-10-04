@@ -18,7 +18,7 @@ export const portfolioData: PortfolioData = {
       role: "Mechanical Subsystem Member",
       company: "Aeolus - BITS Pilani Hyderabad Campus",
       period: "Sep 2025 - Present",
-      description: "",
+      description: "As a member of the mechanical subsystem, I contribute to the design, analysis, and fabrication of our aircraft's structural components. My responsibilities include CAD modeling, performing structural simulations, and ensuring the airframe meets competition requirements for durability and performance.",
       logoUrl: "/images/AelousLogo.png",
       socials: [
         { name: "linkedin", url: "https://www.linkedin.com/company/aeolus-bphc/" },
@@ -39,7 +39,12 @@ export const portfolioData: PortfolioData = {
       role: "Tech Team Member",
       company: "Innovation Cell, BITS Pilani Hyderabad Campus",
       period: "Sep 2024 - May 2025",
-      description: "I contribute to the Innovation Cell Technical Team, where we empower students by organizing hands-on workshops and sessions on core technologies such as Python, Arduino, Raspberry Pi, and AI. Our goal is to foster a strong technical foundation among peers and ignite a culture of innovation across the campus."
+      description: "I contribute to the Innovation Cell Technical Team, where we empower students by organizing hands-on workshops and sessions on core technologies such as Python, Arduino, Raspberry Pi, and AI. Our goal is to foster a strong technical foundation among peers and ignite a culture of innovation across the campus.",
+      logoUrl: "/images/ICellLogo.png",
+      socials: [
+        { name: "linkedin", url: "https://www.linkedin.com/company/icellbphc/" },
+        { name: "instagram", url: "https://www.instagram.com/icell_bphc/" }
+      ]
     },
     {
       role: "Project Intern",
