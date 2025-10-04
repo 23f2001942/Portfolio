@@ -302,13 +302,17 @@ export const portfolioData: PortfolioData = {
       name: "AP Scholar Award",
       issuer: "College Board, USA",
       date: "2023",
-      description: "I received this award for my performance on AP Exams in 2023, where I demonstrated strong college-level achievement across multiple subjects."
+      description: "I received this award for my performance on AP Exams in 2023, where I demonstrated strong college-level achievement across multiple subjects.",
+      logoUrl: "/images/CollegeBoard.png",
+      awardUrl: "https://apcentral.collegeboard.org/exam-administration-ordering-scores/scores/awards/scholar-awards"
     },
     {
       name: "AP Scholar Award",
       issuer: "College Board, USA",
       date: "2022",
-      description: "I was honored with this award for excelling in several AP Exams, showcasing consistent academic strength at the college level while in high school."
+      description: "I was honored with this award for excelling in several AP Exams, showcasing consistent academic strength at the college level while in high school.",
+      logoUrl: "/images/CollegeBoard.png",
+      awardUrl: "https://apcentral.collegeboard.org/exam-administration-ordering-scores/scores/awards/scholar-awards"
     }
   ]
 };

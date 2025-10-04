@@ -49,6 +49,8 @@ export interface Award {
   issuer: string;
   date: string;
   description: string;
+  logoUrl?: string;
+  awardUrl?: string;
 }
 
 export interface PortfolioData {
