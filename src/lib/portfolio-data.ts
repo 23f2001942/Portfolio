@@ -260,7 +260,7 @@ export const portfolioData: PortfolioData = {
       name: "AirLink",
       description: "A custom DIY Arduino-based RC transmitter and receiver system, designed to wirelessly control any Arduino project — from drones to RC cars and planes. With simple receiver-side adjustments, AirLink provides a versatile and low-cost alternative to commercial transmitters.",
       image: "airlink",
-      tags: [],
+      tags: ["Arduino", "Communication", "PCB Design", "Sensors"],
       detailsUrl: "/projects/airlink",
       type: "hardware"
     },
@@ -268,7 +268,7 @@ export const portfolioData: PortfolioData = {
       name: "Smart Milk Froth Monitor",
       description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility.",
       image: "milkfroth",
-      tags: [],
+      tags: ["Arduino", "Sensors", "ESP32", "Android App", "PCB Design"],
       detailsUrl: "/projects/smart-milk-froth-monitor",
       type: "hardware"
     },
@@ -282,9 +282,9 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "Sponnect",
-      description: "",
+      description: "A platform built with Python (Flask) to connect sponsors and influencers for campaign collaborations, ad request negotiations, and real-time analytics with a role-based system.",
       image: "sponnect",
-      tags: [],
+      tags: ["Flask (Python)", "HTML + CSS", "SQLite", "Flask-RESTful"],
       repoUrl: "https://github.com/23f2001942/Sponnect",
       type: "software"
     },
@@ -299,16 +299,16 @@ export const portfolioData: PortfolioData = {
   ],
   awards: [
     {
-      name: "Secured Rank 1 in International Rank Holder's Olympiad",
-      issuer: "SilverZone",
-      date: "2018",
-      description: "Secured Rank 1 at the Zonal Level in the International Rank Holder's Olympiad for the academic year 2018-2019."
+      name: "AP Scholar Award",
+      issuer: "College Board, USA",
+      date: "2023",
+      description: "I received this award for my performance on AP Exams in 2023, where I demonstrated strong college-level achievement across multiple subjects."
     },
     {
-      name: "Got selected for INSPIRE Award",
-      issuer: "Department of Science And Technology, India",
-      date: "2018",
-      description: "Selected for the Innovation in Science Pursuit for Inspired Research (INSPIRE) award by the Department of Science and Technology, India, for an innovative project."
+      name: "AP Scholar Award",
+      issuer: "College Board, USA",
+      date: "2022",
+      description: "I was honored with this award for excelling in several AP Exams, showcasing consistent academic strength at the college level while in high school."
     }
   ]
 };
