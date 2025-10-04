@@ -284,15 +284,15 @@ export const portfolioData: PortfolioData = {
       name: "Sponnect",
       description: "A platform built with Python (Flask) to connect sponsors and influencers for campaign collaborations, ad request negotiations, and real-time analytics with a role-based system.",
       image: "sponnect",
-      tags: ["Flask (Python)", "HTML + CSS", "SQLite", "Flask-RESTful"],
+      tags: ["Flask (Python)", "HTML + CSS", "SQLite"],
       repoUrl: "https://github.com/23f2001942/Sponnect",
       type: "software"
     },
     {
       name: "ParkEase",
-      description: "",
+      description: "ParkEase is a full-stack web application that streamlines 4-wheeler parking management with role-based dashboards for admins and users. It supports parking lot creation, spot reservations, cost tracking, and data-driven analytics. The app also automates reminders, monthly reports, and CSV exports for a seamless management experience.",
       image: "parkease",
-      tags: [],
+      tags: ["Flask (Python)", "Vue.js", "SQLite", "Redis", "Celery"],
       repoUrl: "https://github.com/23f2001942/ParkEase",
       type: "software"
     }
