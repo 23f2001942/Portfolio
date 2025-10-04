@@ -20,7 +20,7 @@ export default function ProjectsSection() {
   const hardwareProjects = portfolioData.projects.filter(p => p.type === 'hardware');
 
   return (
-    <>
+    <div className="space-y-20">
       {hardwareProjects.length > 0 && (
         <Section
           id="hardware-projects"
@@ -134,6 +134,6 @@ export default function ProjectsSection() {
           </div>
         </Section>
       )}
-    </>
+    </div>
   );
 }
