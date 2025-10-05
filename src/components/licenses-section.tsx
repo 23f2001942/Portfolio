@@ -21,7 +21,7 @@ export default function LicensesSection() {
     >
       <div className="space-y-6">
         {iitmCerts.length > 0 && (
-          <div>
+          <div id="iitm-certifications" className="scroll-mt-24">
             <h3 className="text-xl font-semibold mb-4 text-primary">Indian Institute of Technology, Madras Certifications</h3>
             <Card>
               <CardContent className="p-4">
@@ -58,7 +58,7 @@ export default function LicensesSection() {
         )}
 
         {moocCerts.length > 0 && (
-           <div>
+           <div id="moocs" className="scroll-mt-24">
             <h3 className="text-xl font-semibold mb-4 text-primary">MOOCs</h3>
             <Card>
               <CardContent className="p-4">
