@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
 
+  // Logic to show/hide the button
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -21,6 +24,11 @@ export default function ScrollToTop() {
 
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
+
+  // Logic to scroll to top on page navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({
