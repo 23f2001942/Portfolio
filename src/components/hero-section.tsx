@@ -20,17 +20,17 @@ export default function HeroSection() {
     >
       <div className="flex-1 space-y-4">
         <div className="flex items-center gap-2">
-            <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">
+          <h1 className="text-3xl font-bold font-headline text-primary">
             About Me
-            </h1>
+          </h1>
         </div>
         <h2 className="text-2xl font-semibold text-foreground/80">
           {portfolioData.title}
         </h2>
         {portfolioData.intro && (
-            <p className="text-lg text-muted-foreground max-w-prose">
-                {portfolioData.intro}
-            </p>
+          <p className="text-lg text-muted-foreground max-w-prose">
+            {portfolioData.intro}
+          </p>
         )}
         <div id="contact" className="flex gap-2 pt-4 scroll-mt-20">
           {portfolioData.socials.map((social) => {
@@ -43,7 +43,11 @@ export default function HeroSection() {
                 asChild
                 className="bg-card hover:bg-accent hover:text-accent-foreground"
               >
-                <Link href={social.url} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Icon className="h-5 w-5" />
                   <span className="sr-only">{social.name}</span>
                 </Link>
