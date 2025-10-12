@@ -4,7 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
   title: "Shamanthak Reddy Mallu",
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Toaster />
         <Analytics />
         <SpeedInsights />
+        <ScrollToTop />
       </body>
     </html>
   );
