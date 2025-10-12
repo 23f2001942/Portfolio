@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, User } from "lucide-react";
 import { KaggleIcon, InstagramIcon } from "@/components/icons";
 
 const iconMap = {
@@ -19,7 +19,8 @@ export default function HeroSection() {
       className="flex flex-col-reverse md:flex-row items-center gap-10 scroll-mt-20"
     >
       <div className="flex-1 space-y-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <User className="h-8 w-8 text-primary" />
           <h1 className="text-3xl font-bold font-headline text-primary">
             About Me
           </h1>

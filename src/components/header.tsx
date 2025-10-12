@@ -31,7 +31,6 @@ export default function Header() {
           href="/"
           className="flex items-center gap-2 font-bold text-xl text-primary font-headline"
         >
-          <User className="h-6 w-6" />
           Shamanthak Reddy Mallu
         </Link>
 
@@ -68,7 +67,6 @@ export default function Header() {
                     onClick={() => setSheetOpen(false)}
                     className="flex items-center gap-2 font-bold text-xl text-primary font-headline"
                   >
-                    <User className="h-6 w-6" />
                     Shamanthak Reddy Mallu
                   </Link>
                   <SheetTrigger asChild>
