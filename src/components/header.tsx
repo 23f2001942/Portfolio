@@ -32,7 +32,7 @@ export default function Header() {
           className="flex items-center gap-2 font-bold text-xl text-primary font-headline"
         >
           <User className="h-6 w-6" />
-          Portfolio
+          Shamanthak Reddy Mallu
         </Link>
 
         {/* Desktop Navigation */}
@@ -69,7 +69,7 @@ export default function Header() {
                     className="flex items-center gap-2 font-bold text-xl text-primary font-headline"
                   >
                     <User className="h-6 w-6" />
-                    Portfolio
+                    Shamanthak Reddy Mallu
                   </Link>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon">

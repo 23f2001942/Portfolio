@@ -21,7 +21,7 @@ export default function HeroSection() {
       <div className="flex-1 space-y-4">
         <div className="flex items-center gap-2">
             <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">
-            {portfolioData.name}
+            About Me
             </h1>
         </div>
         <h2 className="text-2xl font-semibold text-foreground/80">
