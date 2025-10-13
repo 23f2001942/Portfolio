@@ -25,9 +25,11 @@ export default function ScrollToTop() {
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  // Logic to scroll to top on page navigation
+  // Logic to scroll to top on page navigation, unless there's a hash
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   const scrollToTop = () => {
