@@ -25,9 +25,6 @@ export default function HeroSection() {
             About Me
           </h1>
         </div>
-        <h2 className="text-2xl font-semibold text-foreground/80">
-          {portfolioData.title}
-        </h2>
         {portfolioData.intro && (
           <p className="text-lg text-muted-foreground max-w-prose">
             {portfolioData.intro}

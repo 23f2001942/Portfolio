@@ -13,6 +13,7 @@ import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { Button } from "./ui/button";
 import Autoplay from "embla-carousel-autoplay";
 import { Card } from "./ui/card";
+import { portfolioData } from "@/lib/portfolio-data";
 
 const carouselItems = [
   {
@@ -85,6 +86,11 @@ export default function HeroCarousel() {
                     <h2 className="text-3xl md:text-5xl font-bold font-headline mb-4">
                       {item.title}
                     </h2>
+                    {index === 0 && (
+                      <p className="text-xl md:text-2xl font-semibold text-foreground/80 mb-4">
+                        {portfolioData.title}
+                      </p>
+                    )}
                     <p className="text-lg md:text-xl max-w-3xl mb-8">
                       {item.description}
                     </p>
