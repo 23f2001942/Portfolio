@@ -40,12 +40,20 @@ const carouselItems = [
     buttonLink: "/experience",
   },
   {
-    image: "projects",
-    title: "From Concept to Creation",
+    image: "hardware-projects",
+    title: "Hardware Projects",
     description:
-      "Browse my collection of hardware and software projects, showcasing my passion for technology and engineering.",
-    buttonText: "See My Projects",
-    buttonLink: "/projects",
+      "From autonomous drones to custom RC transmitters, browse my collection of hands-on engineering and electronics projects.",
+    buttonText: "See My Hardware Projects",
+    buttonLink: "/projects#hardware-projects",
+  },
+  {
+    image: "software-projects",
+    title: "Software Projects",
+    description:
+      "Explore my full-stack web applications, showcasing my skills in Python, Vue.js, and database management.",
+    buttonText: "See My Software Projects",
+    buttonLink: "/projects#software-projects",
   },
 ];
 
@@ -53,7 +61,7 @@ export default function HeroCarousel() {
   return (
     <Carousel
       className="w-full"
-      plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
+      plugins={[Autoplay({ delay: 7000, stopOnInteraction: true })]}
       opts={{ loop: true }}
     >
       <CarouselContent>

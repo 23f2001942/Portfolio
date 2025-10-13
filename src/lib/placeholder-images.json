@@ -52,25 +52,31 @@
       "id": "welcome",
       "description": "Abstract technology background for a welcome slide.",
       "imageUrl": "https://picsum.photos/seed/welcome/1280/720",
-      "imageHint": "abstract technology"
+      "imageHint": "futuristic technology"
     },
     {
       "id": "education",
       "description": "A university campus building.",
       "imageUrl": "https://picsum.photos/seed/education/1280/720",
-      "imageHint": "university campus"
+      "imageHint": "university building"
     },
     {
       "id": "experience",
       "description": "A modern office environment.",
       "imageUrl": "https://picsum.photos/seed/experience/1280/720",
-      "imageHint": "modern office"
+      "imageHint": "engineering workshop"
     },
     {
-      "id": "projects",
-      "description": "A circuit board with components.",
-      "imageUrl": "https://picsum.photos/seed/projects/1280/720",
-      "imageHint": "circuit board"
+      "id": "hardware-projects",
+      "description": "A workbench with electronic components and tools.",
+      "imageUrl": "https://picsum.photos/seed/hardware/1280/720",
+      "imageHint": "robotics workshop"
+    },
+    {
+      "id": "software-projects",
+      "description": "Code on a computer screen.",
+      "imageUrl": "https://picsum.photos/seed/software/1280/720",
+      "imageHint": "code screen"
     }
   ]
 }
