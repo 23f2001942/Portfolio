@@ -11,7 +11,7 @@ export default function QualificationsSection() {
   return (
     <Section
       id="qualifications"
-      title="Skills & Qualifications"
+      title="Skills"
       icon={<Lightbulb className="h-8 w-8 text-primary" />}
     >
       <Card>

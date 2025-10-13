@@ -16,7 +16,7 @@ export default function AwardsSection() {
   return (
     <Section
       id="awards"
-      title="Honors & Awards"
+      title="Awards"
       icon={<Award className="h-8 w-8 text-primary" />}
     >
       <Card>

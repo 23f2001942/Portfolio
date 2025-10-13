@@ -16,7 +16,7 @@ export default function LicensesSection() {
   return (
     <Section
       id="licenses"
-      title="Licenses & Certifications"
+      title="Certifications"
       icon={<BookMarked className="h-8 w-8 text-primary" />}
     >
       <div className="space-y-6">
