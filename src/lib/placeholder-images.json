@@ -47,6 +47,30 @@
       "description": "Image of the ParkEase software project",
       "imageUrl": "https://images.unsplash.com/photo-1630165356811-645a4914aaca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXJraW5nJTIwY2FyfGVufDB8fHx8MTc1ODk2OTcwMnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "parking car"
+    },
+    {
+      "id": "welcome",
+      "description": "Abstract technology background for a welcome slide.",
+      "imageUrl": "https://picsum.photos/seed/welcome/1280/720",
+      "imageHint": "abstract technology"
+    },
+    {
+      "id": "education",
+      "description": "A university campus building.",
+      "imageUrl": "https://picsum.photos/seed/education/1280/720",
+      "imageHint": "university campus"
+    },
+    {
+      "id": "experience",
+      "description": "A modern office environment.",
+      "imageUrl": "https://picsum.photos/seed/experience/1280/720",
+      "imageHint": "modern office"
+    },
+    {
+      "id": "projects",
+      "description": "A circuit board with components.",
+      "imageUrl": "https://picsum.photos/seed/projects/1280/720",
+      "imageHint": "circuit board"
     }
   ]
 }

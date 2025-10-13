@@ -16,6 +16,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/education", label: "Education" },
   { href: "/experience", label: "Experience" },
   { href: "/projects", label: "Projects" },

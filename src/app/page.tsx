@@ -1,11 +1,11 @@
 import AnimatedWrapper from "@/components/animated-wrapper";
-import HeroSection from "@/components/hero-section";
+import HeroCarousel from "@/components/hero-carousel";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-4xl space-y-20">
+    <div className="mx-auto max-w-7xl space-y-20">
       <AnimatedWrapper>
-        <HeroSection />
+        <HeroCarousel />
       </AnimatedWrapper>
     </div>
   );
