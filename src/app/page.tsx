@@ -3,7 +3,7 @@ import HeroCarousel from "@/components/hero-carousel";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-7xl space-y-20">
+    <div className="w-full">
       <AnimatedWrapper>
         <HeroCarousel />
       </AnimatedWrapper>

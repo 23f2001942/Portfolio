@@ -14,13 +14,14 @@ import { Button } from "./ui/button";
 import Autoplay from "embla-carousel-autoplay";
 import { Card } from "./ui/card";
 import { portfolioData } from "@/lib/portfolio-data";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const carouselItems = [
   {
     image: "welcome",
     title: "Welcome to My Digital Portfolio",
-    description:
-      "Discover my journey in aerospace, AI, and web development. Explore my projects, skills, and professional experience.",
+    description: "",
     buttonText: "Learn More About Me",
     buttonLink: "/about",
   },
@@ -59,6 +60,22 @@ const carouselItems = [
 ];
 
 export default function HeroCarousel() {
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+
+  useEffect(() => {
+    const mainElement = document.querySelector("main");
+    if (mainElement) {
+      if (isHomepage) {
+        mainElement.setAttribute("data-is-homepage", "true");
+        mainElement.classList.remove("px-4", "md:px-6", "lg:px-8");
+      } else {
+        mainElement.removeAttribute("data-is-homepage");
+        mainElement.classList.add("px-4", "md:px-6", "lg:px-8");
+      }
+    }
+  }, [isHomepage, pathname]);
+
   return (
     <Carousel
       className="w-full"
@@ -70,8 +87,8 @@ export default function HeroCarousel() {
           const slideImage = getPlaceholderImage(item.image);
           return (
             <CarouselItem key={index}>
-              <Card className="overflow-hidden">
-                <div className="relative aspect-video md:aspect-[16/7] w-full">
+              <Card className="overflow-hidden rounded-none border-none">
+                <div className="relative aspect-video h-[calc(100vh-5rem)] w-full md:aspect-[16/9]">
                   {slideImage && (
                     <Image
                       src={slideImage.imageUrl}
@@ -87,7 +104,7 @@ export default function HeroCarousel() {
                       {item.title}
                     </h2>
                     {index === 0 && (
-                      <p className="text-base md:text-2xl font-semibold text-foreground/80 mb-2 md:mb-4">
+                      <p className="text-base md:text-2xl text-foreground/80 mb-2 md:mb-4">
                         {portfolioData.title}
                       </p>
                     )}

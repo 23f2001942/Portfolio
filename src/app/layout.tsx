@@ -40,7 +40,7 @@ export default function RootLayout({
       </head>
       <body className={cn("min-h-screen bg-background font-body antialiased")}>
         <Header />
-        <main className="container mx-auto px-4 py-8 pt-24 md:px-6 lg:px-8">
+        <main className="container mx-auto py-8 pt-24 data-[is-homepage=true]:p-0 data-[is-homepage=true]:pt-20">
           {children}
         </main>
         <Toaster />
