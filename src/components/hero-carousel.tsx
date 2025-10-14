@@ -71,7 +71,7 @@ export default function HeroCarousel() {
           return (
             <CarouselItem key={index}>
               <Card className="overflow-hidden">
-                <div className="relative aspect-[16/7] w-full">
+                <div className="relative aspect-video md:aspect-[16/7] w-full">
                   {slideImage && (
                     <Image
                       src={slideImage.imageUrl}
@@ -83,18 +83,18 @@ export default function HeroCarousel() {
                   )}
                   <div className="absolute inset-0 bg-black/60" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
-                    <h2 className="text-3xl md:text-5xl font-bold font-headline mb-4">
+                    <h2 className="text-2xl md:text-5xl font-bold font-headline mb-2 md:mb-4">
                       {item.title}
                     </h2>
                     {index === 0 && (
-                      <p className="text-xl md:text-2xl font-semibold text-foreground/80 mb-4">
+                      <p className="text-base md:text-2xl font-semibold text-foreground/80 mb-2 md:mb-4">
                         {portfolioData.title}
                       </p>
                     )}
-                    <p className="text-lg md:text-xl max-w-3xl mb-8">
+                    <p className="text-sm md:text-xl max-w-3xl mb-4 md:mb-8">
                       {item.description}
                     </p>
-                    <Button asChild size="lg">
+                    <Button asChild size="sm" className="md:size-lg">
                       <Link href={item.buttonLink}>{item.buttonText}</Link>
                     </Button>
                   </div>
