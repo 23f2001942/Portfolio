@@ -32,7 +32,7 @@ export interface License {
   name: string;
   issuer: string;
   date: string;
-  type: 'iitm' | 'mooc';
+  type: 'iitm' | 'mooc' | 'nptel';
   credentialUrl?: string;
   credentialId?: string;
 }
