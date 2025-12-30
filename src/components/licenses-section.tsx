@@ -26,7 +26,7 @@ interface CertCategory {
 }
 
 const categories: CertCategory[] = [
-  { type: 'nptel', title: 'NPTEL Certifications', icon: <GraduationCap className="h-6 w-6 text-primary/80" /> },
+  { type: 'nptel', title: 'NPTEL Certifications (SWAYAM)', icon: <GraduationCap className="h-6 w-6 text-primary/80" /> },
   { type: 'mooc', title: 'MOOCs', icon: <Server className="h-6 w-6 text-primary/80" /> },
 ];
 
