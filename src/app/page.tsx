@@ -24,7 +24,7 @@ export default function Home() {
       {/* Right Panel (Scrollable) */}
       <div className="w-full md:w-3/5 md:ml-auto">
         <div className="p-4 sm:p-6 md:p-8 space-y-12">
-            <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm -mx-8 px-8 pt-8 pb-4">
+            <div className="bg-background/80 backdrop-blur-sm -mx-8 px-8 pt-8 pb-4">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-grow">
                     <HeroSection />

@@ -2,17 +2,14 @@ import Link from "next/link";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { InstagramIcon, KaggleIcon } from "@/components/icons";
 
 const iconMap = {
   linkedin: Linkedin,
   github: Github,
-  kaggle: KaggleIcon,
-  instagram: InstagramIcon,
 };
 
 export default function ContactBar() {
-  const socialLinks = portfolioData.socials.filter(s => s.name !== 'email');
+  const socialLinks = portfolioData.socials.filter(s => s.name === 'linkedin' || s.name === 'github');
   const emailLink = portfolioData.socials.find(s => s.name === 'email');
 
   return (
