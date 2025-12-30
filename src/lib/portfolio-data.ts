@@ -107,6 +107,20 @@ export const portfolioData: PortfolioData = {
   ],
   licenses: [
     {
+      name: "Introduction to Aerospace Engineering - Flight",
+      issuer: "NPTEL & IIT Bombay",
+      type: "nptel",
+      date: "Oct 2025",
+      credentialUrl: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/101/noc25-ae19/Course/NPTEL25AE19S35820973410846767.pdf"
+    },
+    {
+      name: "Drone Systems and Control",
+      issuer: "NPTEL & IISc Bangalore",
+      type: "nptel",
+      date: "Oct 2025",
+      credentialUrl: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/101/noc25-ae30/Course/NPTEL25AE30S115820792210846767.pdf"    
+    },
+    {
       name: "A Story of Economics: A Principles Tale Specilization",
       issuer: "Rice University",
       date: "Jul 2025",
