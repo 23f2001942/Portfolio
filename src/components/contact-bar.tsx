@@ -2,7 +2,6 @@ import Link from "next/link";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const iconMap = {
   linkedin: Linkedin,
