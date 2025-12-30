@@ -56,6 +56,15 @@ export interface Award {
   awardUrl?: string;
 }
 
+export interface LeadershipRole {
+  role: string;
+  organization: string;
+  logo: string;
+  date: string;
+  location: string;
+  description: string;
+}
+
 export interface PortfolioData {
   name: string;
   title: string;
@@ -71,4 +80,5 @@ export interface PortfolioData {
   licenses: License[];
   projects: Project[];
   awards: Award[];
+  leadership: LeadershipRole[];
 }

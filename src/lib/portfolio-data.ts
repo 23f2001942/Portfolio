@@ -254,6 +254,16 @@ export const portfolioData: PortfolioData = {
       credentialId: "5801616170043"
     }
   ],
+  leadership: [
+    {
+      role: "Student Representative (BITS-UB 2024 Cohort)",
+      organization: "BITS Pilani Hyderabad Campus",
+      logo: "/images/BITS_Logo.png",
+      date: "Aug 2024 - Present",
+      location: "Hyderabad, India",
+      description: "Serving as the primary liaison between the BITS-UB 2+2 International Collaboration cohort and the administration of both universities. I facilitate seamless communication by disseminating critical academic and administrative updates to students while representing their concerns to key offices. I collaborate frequently with the Mechanical Engineering Department (Hyderabad), AUGSD, the BITS-UB Office (Pilani), and the UB SEAS Office to resolve student issues and ensure operational efficiency."
+    }
+  ],
   projects: [
     {
       name: "SkyOne",
