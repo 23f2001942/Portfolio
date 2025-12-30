@@ -83,24 +83,33 @@ export const portfolioData: PortfolioData = {
     }
   ],
   qualifications: [
+    // Top Skills
     { skill: "Arduino", type: "top" },
     { skill: "Raspberry Pi", type: "top" },
-    { skill: "Python (Programming Language)", type: "top" },
-    { skill: "Pandas", type: "top"},
-    { skill: "Machine Learning", type: "top" },
-    { skill: "Web Development", type: "top" },
-    { skill: "Printed Circuit Board (PCB)", type: "top" },
+    { skill: "Python", type: "top" },
+    { skill: "Pandas", type: "top" },
     { skill: "MATLAB", type: "top" },
-    { skill: "Computer-Aided Design (CAD)", type: "other" },
-    { skill: "Solidworks", type: "other" },
-    { skill: "Embedded Systems", "type": "other" },
-    { skill: "Artificial Intelligence (AI)", type: "other" },
-    { skill: "Large Language Models (LLM)", type: "other" },
-    { skill: "SQL", type: "other" },
-    { skill: "Deep Learning", type: "other" },
-    { skill: "Keras", type: "other" },
+    
+    // Other Skills
+    { skill: "React", type: "other" },
+    { skill: "Next.js", type: "other" },
+    { skill: "Node.js", type: "other" },
+    { skill: "Vue.js", type: "other" },
+    { skill: "TypeScript", type: "other" },
+    { skill: "JavaScript", type: "other" },
+    { skill: "HTML", type: "other" },
+    { skill: "CSS", type: "other" },
+    { skill: "Flask", type: "other" },
+    { skill: "TensorFlow", type: "other" },
     { skill: "PyTorch", type: "other" },
-    { skill: "Generative AI", type: "other" }
+    { skill: "OpenCV", type: "other" },
+    { skill: "NumPy", type: "other" },
+    { skill: "Matplotlib", type: "other" },
+    { skill: "Solidworks", type: "other" },
+    { skill: "Computer-Aided Design (CAD)", type: "other" },
+    { skill: "Embedded Systems", type: "other" },
+    { skill: "Artificial Intelligence (AI)", type: "other" },
+    { skill: "SQL", type: "other" }
   ],
   licenses: [
     {
