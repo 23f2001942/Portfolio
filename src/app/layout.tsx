@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Header from "@/components/header";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
   title: "Shamanthak Reddy Mallu",
@@ -39,14 +37,10 @@ export default function RootLayout({
         />
       </head>
       <body className={cn("min-h-screen bg-background font-body antialiased")}>
-        <Header />
-        <main className="container mx-auto py-8 pt-24 data-[is-homepage=true]:p-0 data-[is-homepage=true]:pt-20">
-          {children}
-        </main>
+        <main>{children}</main>
         <Toaster />
         <Analytics />
         <SpeedInsights />
-        <ScrollToTop />
       </body>
     </html>
   );
