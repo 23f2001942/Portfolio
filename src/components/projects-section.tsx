@@ -27,7 +27,7 @@ export default function ProjectsSection() {
           title="Hardware Projects"
           icon={<Wrench className="h-8 w-8 text-primary" />}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hardwareProjects.map((project, index) => {
               const projectImage = getPlaceholderImage(project.image);
               return (
@@ -80,7 +80,7 @@ export default function ProjectsSection() {
           title="Software Projects"
           icon={<FolderGit2 className="h-8 w-8 text-primary" />}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {softwareProjects.map((project, index) => {
               const projectImage = getPlaceholderImage(project.image);
               return (
