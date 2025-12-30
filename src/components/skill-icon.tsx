@@ -1,23 +1,5 @@
-import { 
-  SiArduino, 
-  SiRaspberrypi, 
-  SiPython, 
-  SiAltiumdesigner,
-  SiMatlab,
-  SiDassaultsystemes,
-  SiKeras, 
-  SiPytorch,
-  SiPandas
-} from "react-icons/si";
-import { 
-  BrainCircuit,
-  Cpu,
-  Globe,
-  Layers,
-  Box,
-  Database,
-  Code
-} from "lucide-react";
+import React from "react";
+import { SolidworksIcon, RaspberryPiIcon } from "@/components/custom-icons";
 
 type SkillIconProps = {
   name: string;
@@ -27,24 +9,41 @@ type SkillIconProps = {
 export default function SkillIcon({ name, className }: SkillIconProps) {
   const skillKey = name.toLowerCase();
 
-  if (skillKey.includes("arduino")) return <SiArduino className={className} color="#00979D" />;
-  if (skillKey.includes("raspberry")) return <SiRaspberrypi className={className} color="#C51A4A" />;
-  if (skillKey.includes("python")) return <SiPython className={className} color="#3776AB" />;
-  if (skillKey.includes("matlab")) return <SiMatlab className={className} color="#0076A8" />;
-  if (skillKey.includes("solidworks")) return <SiDassaultsystemes className={className} color="#193665" />;
-  if (skillKey.includes("keras")) return <SiKeras className={className} color="#D00000" />;
-  if (skillKey.includes("pytorch")) return <SiPytorch className={className} color="#EE4C2C" />;
-  if (skillKey.includes("sql")) return <Database className={className} />;
-  if (skillKey.includes("pandas")) return <SiPandas className={className} color="#130654" />;
-  
-  if (skillKey.includes("machine learning")) return <BrainCircuit className={className} />;
-  if (skillKey.includes("artificial intelligence") || skillKey.includes("ai")) return <BrainCircuit className={className} />;
-  if (skillKey.includes("deep learning")) return <Layers className={className} />;
-  if (skillKey.includes("generative")) return <BrainCircuit className={className} />;
-  if (skillKey.includes("web")) return <Globe className={className} />;
-  if (skillKey.includes("pcb") || skillKey.includes("circuit")) return <SiAltiumdesigner className={className} color="#A58A54" />;
-  if (skillKey.includes("embedded")) return <Cpu className={className} />;
-  if (skillKey.includes("cad")) return <Box className={className} />;
+  // 1. CUSTOM ENGINEERING ICONS
+  if (skillKey.includes("solidworks")) return <SolidworksIcon className={className} />;
+  if (skillKey.includes("raspberry")) return <RaspberryPiIcon className={className} />;
 
-  return <Code className={className} />;
+  // 2. SKILLICONS IMAGES (Standard Web/Software Stack)
+  let iconUrl = "";
+
+  if (skillKey.includes("html")) iconUrl = "https://skillicons.dev/icons?i=html";
+  else if (skillKey.includes("css")) iconUrl = "https://skillicons.dev/icons?i=css";
+  else if (skillKey.includes("react")) iconUrl = "https://skillicons.dev/icons?i=react";
+  else if (skillKey.includes("vue")) iconUrl = "https://skillicons.dev/icons?i=vue";
+  else if (skillKey.includes("next")) iconUrl = "https://skillicons.dev/icons?i=nextjs";
+  else if (skillKey.includes("node")) iconUrl = "https://skillicons.dev/icons?i=nodejs";
+  else if (skillKey.includes("flask")) iconUrl = "https://skillicons.dev/icons?i=flask";
+  else if (skillKey.includes("typescript")) iconUrl = "https://skillicons.dev/icons?i=ts";
+  else if (skillKey.includes("javascript") || skillKey === "js") iconUrl = "https://skillicons.dev/icons?i=js";
+  else if (skillKey.includes("python")) iconUrl = "https://skillicons.dev/icons?i=py";
+  else if (skillKey.includes("tensorflow")) iconUrl = "https://skillicons.dev/icons?i=tensorflow";
+  else if (skillKey.includes("pytorch")) iconUrl = "https://skillicons.dev/icons?i=pytorch";
+  else if (skillKey.includes("opencv")) iconUrl = "https://skillicons.dev/icons?i=opencv";
+  else if (skillKey.includes("matlab")) iconUrl = "https://skillicons.dev/icons?i=matlab";
+  else if (skillKey.includes("arduino")) iconUrl = "https://skillicons.dev/icons?i=arduino";
+  
+  // DevIcons for Data Science (looks better)
+  else if (skillKey.includes("numpy")) iconUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg";
+  else if (skillKey.includes("pandas")) iconUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg";
+  else if (skillKey.includes("matplotlib")) iconUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg";
+
+  if (iconUrl) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={iconUrl} alt={name} className={className} style={{ objectFit: "contain" }} />
+    );
+  }
+
+  // Fallback
+  return <div className={`bg-gray-200 rounded-full ${className}`} />;
 }
