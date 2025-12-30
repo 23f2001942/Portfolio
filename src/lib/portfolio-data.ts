@@ -4,6 +4,7 @@ import type { PortfolioData } from '@/types/portfolio';
 export const portfolioData: PortfolioData = {
   name: "Shamanthak Reddy Mallu",
   title: "AI & Web Development | Aerospace, Drones & UAV Enthusiast",
+  summary: "Currently pursuing a dual degree in Mechanical Engineering and studying AI, I am passionate about combining aerospace engineering with AI to innovate new technologies.",
   intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online BS Degree from IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
   headshot: "headshot1",
   socials: [
@@ -11,7 +12,7 @@ export const portfolioData: PortfolioData = {
     { name: "github", url: "https://github.com/23f2001942" },
     { name: "kaggle", url: "https://www.kaggle.com/shamanthakreddymallu" },
     { name: "instagram", url: "https://www.instagram.com/shamanthakreddy/" },
-    { name: "email", url: "mailto:alex.doe@example.com" },
+    { name: "email", url: "mailto:shamanthak.mallu@gmail.com" },
   ],
   experience: [
     {

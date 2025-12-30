@@ -59,6 +59,7 @@ export interface Award {
 export interface PortfolioData {
   name: string;
   title: string;
+  summary: string;
   intro: string;
   headshot: string;
   socials: SocialLink[];
