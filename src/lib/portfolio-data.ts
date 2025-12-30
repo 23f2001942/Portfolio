@@ -12,8 +12,6 @@ export const portfolioData: PortfolioData = {
   socials: [
     { name: "linkedin", url: "https://www.linkedin.com/in/shamanthak/" },
     { name: "github", url: "https://github.com/23f2001942" },
-    { name: "kaggle", url: "https://www.kaggle.com/shamanthakreddymallu" },
-    { name: "instagram", url: "https://www.instagram.com/shamanthakreddy/" },
     { name: "email", url: "mailto:shamanthak.mallu@gmail.com" },
   ],
   experience: [
@@ -105,11 +103,7 @@ export const portfolioData: PortfolioData = {
     { skill: "OpenCV", type: "other" },
     { skill: "NumPy", type: "other" },
     { skill: "Matplotlib", type: "other" },
-    { skill: "Solidworks", type: "other" },
-    { skill: "Computer-Aided Design (CAD)", type: "other" },
-    { skill: "Embedded Systems", type: "other" },
-    { skill: "Artificial Intelligence (AI)", type: "other" },
-    { skill: "SQL", type: "other" }
+    { skill: "Solidworks", type: "other" }
   ],
   licenses: [
     {
