@@ -19,7 +19,7 @@ export default function Home() {
       </div>
 
       {/* Spacer for the fixed left panel on desktop */}
-      <div className="hidden md:block md:w-2/5" />
+      <div className="hidden md:block md:w-2/f" />
 
       {/* Right Panel (Scrollable) */}
       <div className="w-full md:w-3/5 md:ml-auto">
