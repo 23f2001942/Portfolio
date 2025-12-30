@@ -90,6 +90,7 @@ export const portfolioData: PortfolioData = {
     { skill: "MATLAB", type: "top" },
     
     // Other Skills
+    { skill: "Solidworks", type: "other"},
     { skill: "React", type: "other" },
     { skill: "Next.js", type: "other" },
     { skill: "Node.js", type: "other" },
