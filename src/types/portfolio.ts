@@ -20,6 +20,7 @@ export interface Education {
   description: string;
   logoUrl?: string;
   universityUrl?: string;
+  studentProfileUrl?: string;
 }
 
 export interface Qualification {

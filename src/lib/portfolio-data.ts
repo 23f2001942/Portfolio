@@ -59,7 +59,7 @@ export const portfolioData: PortfolioData = {
       degree: "B.E. Mechanical Engineering",
       institution: "BITS Pilani, Hyderabad Campus",
       period: "2024 - 2028",
-      description: "",
+      description: "Pursuing a comprehensive curriculum focused on Mechanical and Aerospace engineering. Student under BITS-UB 2+2 international collaboration program.",
       logoUrl: "/images/BITS_Logo.png",
       universityUrl: "https://www.bits-pilani.ac.in/"
     },
@@ -67,15 +67,16 @@ export const portfolioData: PortfolioData = {
       degree: "BS in Data Science and Applications",
       institution: "Indian Institute of Technology, Madras",
       period: "2023 - 2027",
-      description: "Online Degree: https://ds.study.iitm.ac.in/student/23F2001942",
+      description: "A rigorous remote degree program covering Programming, Machine Learning, and Application Development.",
       logoUrl: "/images/IITM_Logo.png",
-      universityUrl: "https://study.iitm.ac.in/ds/"
+      universityUrl: "https://study.iitm.ac.in/ds/",
+      studentProfileUrl: "https://ds.study.iitm.ac.in/student/23F2001942"
     },
     {
       degree: "B.S. Mechanical Engineering",
       institution: "University at Buffalo School of Engineering and Applied Sciences",
       period: "2024 - 2028",
-      description: "",
+      description: "Yet to move on-campus under BITS-UB 2+2 international collaboration program but took few remote courses from them during my time at BITS Pilani Hyderabad Campus.",
       logoUrl: "/images/UB_Logo.png",
       universityUrl: "https://www.buffalo.edu/"
     }
@@ -102,8 +103,7 @@ export const portfolioData: PortfolioData = {
     { skill: "PyTorch", type: "other" },
     { skill: "OpenCV", type: "other" },
     { skill: "NumPy", type: "other" },
-    { skill: "Matplotlib", type: "other" },
-    { skill: "Solidworks", type: "other" }
+    { skill: "Matplotlib", type: "other" }
   ],
   licenses: [
     {

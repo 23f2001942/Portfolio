@@ -1,39 +1,77 @@
+
+"use client";
+
 import { GraduationCap, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { Education } from "@/types/portfolio";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Section } from "@/components/section";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-
-const urlRegex = /(https?:\/\/[^\s]+)/g;
+import { Separator } from "./ui/separator";
 
 export default function EducationSection() {
-  return (
-    <Section
-      id="education"
-      title="Education"
-      icon={<GraduationCap className="h-8 w-8 text-primary" />}
-    >
-      <div className="space-y-6">
-        {portfolioData.education.map((edu, index) => {
-          const descriptionParts = edu.description.split(urlRegex);
-          const url = edu.description.match(urlRegex)?.[0];
+  const [selectedEducation, setSelectedEducation] = useState<Education | null>(null);
+  const iitmCerts = portfolioData.licenses.filter(l => l.type === 'iitm');
 
-          return (
-            <Card key={index}>
-              <CardHeader className="flex flex-row items-center gap-4">
-                  {edu.logoUrl && edu.universityUrl && (
-                    <Link href={edu.universityUrl} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
+  return (
+    <>
+      <Section
+        id="education"
+        title="Education"
+        icon={<GraduationCap className="h-8 w-8 text-primary" />}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {portfolioData.education.map((edu, index) => (
+            <Card
+              key={index}
+              className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg"
+              onClick={() => setSelectedEducation(edu)}
+            >
+              <div className="flex items-center gap-4 p-4">
+                {edu.logoUrl && (
+                  <Image
+                    src={edu.logoUrl}
+                    alt={`${edu.institution} logo`}
+                    width={48}
+                    height={48}
+                    className="rounded-md object-contain flex-shrink-0"
+                  />
+                )}
+                <div className="flex-grow">
+                  <p className="font-semibold text-primary text-base">{edu.degree}</p>
+                  <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{edu.period}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Dialog open={!!selectedEducation} onOpenChange={(isOpen) => !isOpen && setSelectedEducation(null)}>
+        <DialogContent className="max-w-2xl">
+          {selectedEducation && (
+            <>
+              <DialogHeader>
+                <div className="flex items-start gap-4">
+                  {selectedEducation.logoUrl && (
+                    <Link href={selectedEducation.universityUrl || '#'} target="_blank" rel="noopener noreferrer">
                       <Image
-                        src={edu.logoUrl}
-                        alt={`${edu.institution} logo`}
+                        src={selectedEducation.logoUrl}
+                        alt={`${selectedEducation.institution} logo`}
                         width={64}
                         height={64}
                         className="rounded-md object-contain"
@@ -41,36 +79,55 @@ export default function EducationSection() {
                     </Link>
                   )}
                   <div className="flex-grow">
-                    <div className="flex justify-between items-start gap-2">
-                      <div>
-                        <CardTitle className="text-lg font-semibold">{edu.degree}</CardTitle>
-                        <p className="text-sm font-medium text-primary">{edu.institution}</p>
-                      </div>
-                      <p className="text-sm text-muted-foreground whitespace-nowrap">{edu.period}</p>
-                    </div>
+                    <DialogTitle className="text-xl font-bold">{selectedEducation.degree}</DialogTitle>
+                    <p className="font-medium text-primary">{selectedEducation.institution}</p>
+                    <p className="text-sm text-muted-foreground">{selectedEducation.period}</p>
                   </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  {descriptionParts.map((part, i) =>
-                    urlRegex.test(part) ? null : (
-                      <span key={i}>{part.replace('Online Degree:', '').trim()}</span>
-                    )
-                  )}
-                </CardDescription>
-                {url && (
-                   <Button variant="outline" size="sm" asChild className="mt-2">
-                     <Link href={url} target="_blank">
-                       <ExternalLink />
-                       Student Profile
-                     </Link>
-                   </Button>
+                </div>
+              </DialogHeader>
+              <div className="py-4 space-y-4 text-muted-foreground">
+                <p>
+                  {selectedEducation.description}
+                </p>
+                {selectedEducation.studentProfileUrl && (
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={selectedEducation.studentProfileUrl} target="_blank">
+                      <ExternalLink />
+                      Student Profile
+                    </Link>
+                  </Button>
                 )}
-              </CardContent>
-            </Card>
-          )
-        })}
-      </div>
-    </Section>
+                
+                {selectedEducation.institution === "Indian Institute of Technology, Madras" && iitmCerts.length > 0 && (
+                  <div className="space-y-4 pt-4 border-t border-border">
+                    <h4 className="font-semibold text-primary">Associated Certifications</h4>
+                    <ul className="space-y-4">
+                      {iitmCerts.map((cert, index) => (
+                        <li key={index}>
+                           <div className="flex justify-between items-start gap-2">
+                              <div>
+                                <p className="font-semibold text-sm">{cert.name}</p>
+                                {cert.credentialUrl && (
+                                   <Button variant="link" size="sm" asChild className="p-0 h-auto">
+                                     <Link href={cert.credentialUrl} target="_blank" className="text-xs">
+                                       <ExternalLink className="mr-1 h-3 w-3" />
+                                       Show Credential
+                                     </Link>
+                                   </Button>
+                                )}
+                              </div>
+                           </div>
+                           {index < iitmCerts.length - 1 && <Separator className="mt-4" />}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
