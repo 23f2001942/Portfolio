@@ -62,6 +62,8 @@ export interface PortfolioData {
   summary: string;
   intro: string;
   headshot: string;
+  location: string;
+  about_summary: string;
   socials: SocialLink[];
   experience: Experience[];
   education: Education[];

@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-8 md:p-12">
-      <div className="max-w-4xl mx-auto">
-        <Button variant="outline" size="sm" asChild className="mb-8">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 sm:p-8 md:p-12">
+      <div className="max-w-6xl mx-auto w-full">
+        <Button variant="outline" size="sm" asChild className="absolute top-8 left-8">
           <Link href="/">
             <ArrowLeft />
             Back to Home

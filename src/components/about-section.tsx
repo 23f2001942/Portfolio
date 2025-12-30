@@ -1,32 +1,42 @@
+
 import { portfolioData } from "@/lib/portfolio-data";
-import { Section } from "./section";
-import { User } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { MapPin } from "lucide-react";
+import Image from "next/image";
 
 export default function AboutSection() {
   const headshot = getPlaceholderImage(portfolioData.headshot);
+
   return (
-    <Section
-      id="about"
-      title="About Me"
-      icon={<User className="h-8 w-8 text-primary" />}
-    >
-      <div className="flex flex-col md:flex-row items-start gap-8">
-        {headshot && (
-          <Avatar className="w-32 h-32 flex-shrink-0">
-            <AvatarImage src={headshot.imageUrl} alt={headshot.description} />
-            <AvatarFallback>{portfolioData.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-        )}
-        <div className="flex-1 space-y-4">
-          <h3 className="text-2xl font-bold text-primary">{portfolioData.name}</h3>
-          <h4 className="text-lg font-medium text-muted-foreground">{portfolioData.title}</h4>
-          <p className="text-lg text-muted-foreground max-w-prose leading-relaxed">
-            {portfolioData.intro}
-          </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="space-y-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary">{portfolioData.name}</h1>
+        <p className="text-lg md:text-xl text-primary/90 max-w-prose">
+          {portfolioData.about_summary}
+        </p>
+        <p className="text-md md:text-lg font-medium text-muted-foreground">{portfolioData.title}</p>
+        <div className="flex items-center text-muted-foreground">
+          <MapPin className="h-5 w-5 mr-2" />
+          <span>{portfolioData.location}</span>
         </div>
       </div>
-    </Section>
+      <div className="space-y-6">
+        {headshot && (
+          <div className="aspect-square relative rounded-lg overflow-hidden shadow-2xl">
+            <Image
+              src={headshot.imageUrl}
+              alt={headshot.description}
+              fill
+              className="object-cover"
+              data-ai-hint={headshot.imageHint}
+            />
+          </div>
+        )}
+        <p className="text-lg text-muted-foreground max-w-prose leading-relaxed">
+          {portfolioData.intro}
+        </p>
+      </div>
+    </div>
   );
 }
