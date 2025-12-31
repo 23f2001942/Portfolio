@@ -82,14 +82,13 @@ export const portfolioData: PortfolioData = {
     }
   ],
   qualifications: [
-    // Top Skills
     { skill: "Arduino", type: "top" },
     { skill: "Raspberry Pi", type: "top" },
     { skill: "Python", type: "top" },
-    { skill: "Pandas", type: "top" },
     { skill: "MATLAB", type: "top" },
-    
-    // Other Skills
+    { skill: "Pandas", type: "other" },
+    { skill: "NumPy", type: "other" },
+    { skill: "Matplotlib", type: "other" },
     { skill: "Solidworks", type: "other"},
     { skill: "React", type: "other" },
     { skill: "Next.js", type: "other" },
@@ -102,9 +101,7 @@ export const portfolioData: PortfolioData = {
     { skill: "Flask", type: "other" },
     { skill: "TensorFlow", type: "other" },
     { skill: "PyTorch", type: "other" },
-    { skill: "OpenCV", type: "other" },
-    { skill: "NumPy", type: "other" },
-    { skill: "Matplotlib", type: "other" }
+    { skill: "OpenCV", type: "other" }
   ],
   licenses: [
     {
