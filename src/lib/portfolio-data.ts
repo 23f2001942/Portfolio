@@ -8,7 +8,7 @@ export const portfolioData: PortfolioData = {
   intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online BS Degree from IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
   headshot: "headshot1",
   location: "Hyderabad, Telangana, India",
-  about_summary: "Innovating at the intersection of aerospace engineering and artificial intelligence. I build smart systems for the ground and the sky.",
+  about_summary: "Innovating at the intersection of aerospace engineering, machine learning and artificial intelligence. I build smart systems for the ground and the sky.",
   socials: [
     { name: "linkedin", url: "https://www.linkedin.com/in/shamanthak/" },
     { name: "github", url: "https://github.com/23f2001942" },
