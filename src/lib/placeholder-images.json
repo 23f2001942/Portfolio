@@ -3,7 +3,7 @@
     {
       "id": "headshot1",
       "description": "A professional headshot.",
-      "imageUrl": "https://images.unsplash.com/photo-1652471943570-f3590a4e52ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NTkzNjQ0OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/portfolio.png",
       "imageHint": "professional headshot"
     },
     {
