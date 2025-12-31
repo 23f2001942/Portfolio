@@ -49,33 +49,45 @@
       "imageHint": "parking car"
     },
     {
+      "id": "vendora",
+      "description": "Image for the Vendora e-commerce project.",
+      "imageUrl": "https://images.unsplash.com/photo-1688889716873-76cad41bb3b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZWNvbW1lcmNlJTIwZGFzaGJvYXJkfGVufDB8fHx8MTc2NzE3Mzc2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ecommerce dashboard"
+    },
+    {
+      "id": "ubits-gpa",
+      "description": "Image for the UBITS-GPA calculator project.",
+      "imageUrl": "https://images.unsplash.com/photo-1653074281018-c08f358059ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxjdWxhdG9yJTIwZGFzaGJvYXJkfGVufDB8fHx8MTc2NzE3Mzc2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "calculator dashboard"
+    },
+    {
       "id": "welcome",
       "description": "Abstract technology background for a welcome slide.",
-      "imageUrl": "https://picsum.photos/seed/welcome/1280/720",
+      "imageUrl": "https://images.unsplash.com/photo-1720962158937-7ea890052166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwdGVjaG5vbG9neXxlbnwwfHx8fDE3NjcxNzM3Njd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "futuristic technology"
     },
     {
       "id": "education",
       "description": "A university campus building.",
-      "imageUrl": "https://picsum.photos/seed/education/1280/720",
+      "imageUrl": "https://images.unsplash.com/photo-1663062121883-e77f66d2719d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx1bml2ZXJzaXR5JTIwYnVpbGRpbmd8ZW58MHx8fHwxNzY3MTU4MTM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "university building"
     },
     {
       "id": "experience",
       "description": "A modern office environment.",
-      "imageUrl": "https://picsum.photos/seed/experience/1280/720",
+      "imageUrl": "https://images.unsplash.com/photo-1580893207371-9ae163385856?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxlbmdpbmVlcmluZyUyMHdvcmtzaG9wfGVufDB8fHx8MTc2NzE3Mzc2OHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "engineering workshop"
     },
     {
       "id": "hardware-projects",
       "description": "A workbench with electronic components and tools.",
-      "imageUrl": "https://picsum.photos/seed/hardware/1280/720",
+      "imageUrl": "https://images.unsplash.com/photo-1581092334247-44dd684e3c82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxyb2JvdGljcyUyMHdvcmtzaG9wfGVufDB8fHx8MTc2NzA5MTc3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "robotics workshop"
     },
     {
       "id": "software-projects",
       "description": "Code on a computer screen.",
-      "imageUrl": "https://picsum.photos/seed/software/1280/720",
+      "imageUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2RlJTIwc2NyZWVufGVufDB8fHx8MTc2NzExMDcxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "code screen"
     }
   ]

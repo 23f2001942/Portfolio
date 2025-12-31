@@ -25,7 +25,6 @@ export default function ProjectsSection() {
         <Section
           id="hardware-projects"
           title="Hardware Projects"
-          icon={<Wrench className="h-8 w-8 text-primary" />}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hardwareProjects.map((project, index) => {
@@ -78,7 +77,6 @@ export default function ProjectsSection() {
         <Section
           id="software-projects"
           title="Software Projects"
-          icon={<FolderGit2 className="h-8 w-8 text-primary" />}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {softwareProjects.map((project, index) => {

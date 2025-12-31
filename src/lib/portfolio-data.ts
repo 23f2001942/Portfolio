@@ -336,19 +336,19 @@ export const portfolioData: PortfolioData = {
     {
       name: "Vendora",
       description: "A full-stack B2B2C e-commerce platform connecting Customers, Retailers, and Wholesalers in a seamless supply chain ecosystem. Features real-time order tracking with Google Maps integration, automated delivery simulation, role-based dashboards with analytics, and secure authentication.",
-      image: "",
+      image: "vendora",
       tags: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Google Maps API", "Edge Functions", "Recharts"],
       repoUrl: "https://github.com/23f2001942/Vendora",
-      webUrl: "https://vendora-sam.vercel.app",
+      liveUrl: "https://vendora-sam.vercel.app",
       type: "software"
     },
     {
       name: "UBITS-GPA",
       description: "A GPA calculator web app for BITS-UB 2+2 program students that automatically converts BITS Pilani grades to University at Buffalo equivalents, helping transfer students track their academic progress across both institutions.",
-      image: "",
+      image: "ubits-gpa",
       tags: ["React", "TypeScript", "Supabase", "Tailwind CSS", "PWA"],
       repoUrl: "https://github.com/23f2001942/bits-ub-gpa",
-      webUrl: "https://ubits-gpa.vercel.app/",
+      liveUrl: "https://ubits-gpa.vercel.app/",
       type: "software"
     }
   ],
