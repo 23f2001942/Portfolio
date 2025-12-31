@@ -17,7 +17,7 @@ export default function AboutSection() {
       {/* Header */}
       <div className="flex items-center gap-6">
         {headshot && (
-          <Avatar className="h-24 w-24">
+          <Avatar className="h-32 w-32">
             <AvatarImage src={headshot.imageUrl} alt={headshot.description} data-ai-hint={headshot.imageHint} />
             <AvatarFallback>{portfolioData.name.charAt(0)}</AvatarFallback>
           </Avatar>
