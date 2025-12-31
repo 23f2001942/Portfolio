@@ -22,7 +22,7 @@ export default function QualificationsSection() {
       {/* TOP SKILLS (Prominent) */}
       <div className="space-y-8">
         <h2 className="text-3xl font-bold font-headline text-primary">Top Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {topSkills.map((qual, index) => (
             <div key={index} className="flex items-center gap-3 p-3 border rounded-xl bg-card hover:bg-muted/50 transition-colors">
               <div className="h-8 w-8 flex items-center justify-center shrink-0">
