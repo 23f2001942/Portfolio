@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Briefcase, Linkedin } from "lucide-react";
+import { Briefcase, Linkedin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -40,10 +40,10 @@ export default function ExperienceSection() {
         {portfolioData.experience.map((job, index) => (
           <Card
             key={index}
-            className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg"
+            className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
             onClick={() => setSelectedJob(job)}
           >
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-4 p-4 relative">
               {job.logoUrl && (
                 <Image
                   src={job.logoUrl}
@@ -58,6 +58,7 @@ export default function ExperienceSection() {
                   <p className="text-sm text-muted-foreground">{job.company}</p>
                   <p className="text-xs text-muted-foreground mt-1">{job.period}</p>
               </div>
+               <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
             </div>
           </Card>
         ))}

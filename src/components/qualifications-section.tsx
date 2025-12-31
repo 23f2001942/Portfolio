@@ -20,8 +20,8 @@ export default function QualificationsSection() {
   return (
     <div className="space-y-12">
       {/* TOP SKILLS (Prominent) */}
-      <div className="space-y-6">
-        <h3 className="text-2xl font-bold tracking-tight">Top Skills</h3>
+      <div className="space-y-8">
+        <h2 className="text-3xl font-bold font-headline text-primary">Top Skills</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {topSkills.map((qual, index) => (
             <div key={index} className="flex items-center gap-3 p-3 border rounded-xl bg-card hover:bg-muted/50 transition-colors">
@@ -35,8 +35,8 @@ export default function QualificationsSection() {
       </div>
 
       {/* OTHER SKILLS (Grid) */}
-      <div className="space-y-6">
-        <h3 className="text-2xl font-bold tracking-tight">Other Skills</h3>
+      <div className="space-y-8">
+        <h2 className="text-3xl font-bold font-headline text-primary">Other Skills</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {otherSkills.map((qual, index) => (
             <div key={index} className="flex items-center gap-3 p-3 border rounded-xl bg-card hover:bg-muted/50 transition-colors">

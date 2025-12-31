@@ -6,7 +6,7 @@ interface SectionProps {
   title: string;
   children: ReactNode;
   className?: string;
-  icon?: ReactNode;
+  icon?: ReactNode; // Kept for type safety, but will not be rendered
 }
 
 export function Section({
@@ -19,7 +19,7 @@ export function Section({
   return (
     <section id={id} className={cn("scroll-mt-20", className)}>
       <div className="flex items-center gap-3 mb-8">
-        {icon}
+        {/* The icon is no longer rendered */}
         <h2 className="text-3xl font-bold font-headline text-primary">
           {title}
         </h2>

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { BookMarked, ExternalLink, GraduationCap, Server } from "lucide-react";
+import { BookMarked, ExternalLink, GraduationCap, Server, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import type { License } from "@/types/portfolio";
@@ -61,7 +61,7 @@ export default function LicensesSection() {
           {categories.map((category) => (
             <Card
               key={category.type}
-              className="p-4 flex items-center gap-4 cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg"
+              className="p-4 flex items-center gap-4 cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group relative"
               onClick={() => handleCardClick(category.type)}
             >
               {category.icon}
@@ -71,6 +71,7 @@ export default function LicensesSection() {
                   {portfolioData.licenses.filter(l => l.type === category.type).length} courses
                 </p>
               </div>
+              <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
             </Card>
           ))}
         </div>

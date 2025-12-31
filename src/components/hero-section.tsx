@@ -9,9 +9,8 @@ export default function HeroSection() {
       <Card className="h-full transition-all duration-300 group-hover:border-primary/60 group-hover:shadow-xl">
         <CardContent className="p-4 flex items-center gap-4 relative">
           <div className="flex-grow">
-            <h2 className="text-lg font-bold text-primary">{portfolioData.name}</h2>
-            <p className="text-sm text-muted-foreground">{portfolioData.title}</p>
-            <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{portfolioData.summary}</p>
+            <h2 className="text-2xl font-bold text-primary">{portfolioData.name}</h2>
+            <p className="text-md font-semibold text-muted-foreground">{portfolioData.title}</p>
           </div>
            <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:translate-x-1" />
         </CardContent>

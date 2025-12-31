@@ -1,7 +1,7 @@
 
 "use client";
 
-import { GraduationCap, ExternalLink } from "lucide-react";
+import { GraduationCap, ExternalLink, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,10 +37,10 @@ export default function EducationSection() {
           {portfolioData.education.map((edu, index) => (
             <Card
               key={index}
-              className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg"
+              className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
               onClick={() => setSelectedEducation(edu)}
             >
-              <div className="flex items-center gap-4 p-4">
+              <div className="flex items-center gap-4 p-4 relative">
                 {edu.logoUrl && (
                   <Image
                     src={edu.logoUrl}
@@ -55,6 +55,7 @@ export default function EducationSection() {
                   <p className="text-sm text-muted-foreground">{edu.institution}</p>
                   <p className="text-xs text-muted-foreground mt-1">{edu.period}</p>
                 </div>
+                 <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
               </div>
             </Card>
           ))}

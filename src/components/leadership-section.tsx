@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Users, MapPin } from "lucide-react";
+import { Users, MapPin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import type { LeadershipRole } from "@/types/portfolio";
@@ -34,10 +34,10 @@ export default function LeadershipSection() {
         {portfolioData.leadership.map((role, index) => (
           <Card
             key={index}
-            className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg"
+            className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
             onClick={() => setSelectedRole(role)}
           >
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-4 p-4 relative">
               {role.logo && (
                 <Image
                   src={role.logo}
@@ -52,6 +52,7 @@ export default function LeadershipSection() {
                   <p className="text-sm text-muted-foreground">{role.organization}</p>
                   <p className="text-xs text-muted-foreground mt-1">{role.date}</p>
               </div>
+              <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
             </div>
           </Card>
         ))}
