@@ -18,7 +18,7 @@ export default function ContactBar() {
   const emailLink = portfolioData.socials.find(s => s.name === 'email');
 
   return (
-    <div className="flex flex-col items-stretch justify-start gap-2 w-full">
+    <div className="grid grid-cols-2 gap-2">
       {socialLinks.map((social) => {
         const Icon = iconMap[social.name as keyof typeof iconMap];
         const socialName = socialNameMap[social.name as keyof typeof socialNameMap]
@@ -45,7 +45,7 @@ export default function ContactBar() {
         );
       })}
       {emailLink && (
-        <Button asChild size="lg" className="w-full h-12">
+        <Button asChild size="lg" className="w-full h-12 col-span-2">
            <Link href={emailLink.url}>
             <Mail className="h-6 w-6 mr-2" />
             Contact Me

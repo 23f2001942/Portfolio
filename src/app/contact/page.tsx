@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { Github, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { portfolioData } from "@/lib/portfolio-data";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export default function ContactPage() {
   const githubSocial = portfolioData.socials.find(s => s.name === "github");
+  const linkedinSocial = portfolioData.socials.find(s => s.name === "linkedin");
   const emailSocial = portfolioData.socials.find(s => s.name === "email");
 
   return (
@@ -29,11 +30,11 @@ export default function ContactPage() {
               </Link>
             </Button>
           )}
-          {emailSocial && (
+          {linkedinSocial && (
             <Button variant="secondary" className="h-16 justify-between px-6" asChild>
-              <Link href={emailSocial.url}>
-                <span>Email</span>
-                <Mail className="h-6 w-6" />
+              <Link href={linkedinSocial.url} target="_blank" rel="noopener noreferrer">
+                <span>LinkedIn</span>
+                <Linkedin className="h-6 w-6" />
               </Link>
             </Button>
           )}
