@@ -4,6 +4,13 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Readex_Pro } from "next/font/google";
+
+// Initialize the font
+const readexPro = Readex_Pro({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Shamanthak Reddy Mallu",
@@ -21,22 +28,8 @@ export default function RootLayout({
       lang="en"
       className="dark !scroll-smooth"
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
     >
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={cn("min-h-screen bg-background font-body antialiased")}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", readexPro.variable)}>
         <main>{children}</main>
         <Toaster />
         <Analytics />
