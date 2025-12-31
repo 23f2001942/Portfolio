@@ -1,7 +1,7 @@
 
 "use client";
 
-import { BookMarked, ExternalLink, GraduationCap, Server, ArrowRight } from "lucide-react";
+import { BookMarked, ExternalLink, GraduationCap, Server, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import type { License } from "@/types/portfolio";
@@ -55,7 +55,6 @@ export default function LicensesSection() {
       <Section
         id="licenses"
         title="Certifications"
-        icon={<BookMarked className="h-8 w-8 text-primary" />}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {categories.map((category) => (
@@ -71,7 +70,7 @@ export default function LicensesSection() {
                   {portfolioData.licenses.filter(l => l.type === category.type).length} courses
                 </p>
               </div>
-              <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
+              <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
             </Card>
           ))}
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, ExternalLink, ArrowRight } from "lucide-react";
+import { Award, ExternalLink, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -33,7 +33,6 @@ export default function AwardsSection() {
       <Section
         id="awards"
         title="Awards"
-        icon={<Award className="h-8 w-8 text-primary" />}
       >
         <Card
           className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
@@ -58,7 +57,7 @@ export default function AwardsSection() {
                 {portfolioData.awards.map(a => a.date).join(', ')}
               </p>
             </div>
-            <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
+            <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
           </div>
         </Card>
       </Section>

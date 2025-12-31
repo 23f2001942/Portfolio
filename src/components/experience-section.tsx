@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Briefcase, Linkedin, ArrowRight } from "lucide-react";
+import { Briefcase, Linkedin, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,8 +10,6 @@ import { portfolioData } from "@/lib/portfolio-data";
 import { Section } from "@/components/section";
 import {
   Card,
-  CardContent,
-  CardHeader,
 } from "@/components/ui/card";
 import {
   Dialog,
@@ -34,7 +32,6 @@ export default function ExperienceSection() {
     <Section
       id="experience"
       title="Work Experience"
-      icon={<Briefcase className="h-8 w-8 text-primary" />}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {portfolioData.experience.map((job, index) => (
@@ -58,7 +55,7 @@ export default function ExperienceSection() {
                   <p className="text-sm text-muted-foreground">{job.company}</p>
                   <p className="text-xs text-muted-foreground mt-1">{job.period}</p>
               </div>
-               <ArrowRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" />
+               <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
             </div>
           </Card>
         ))}
