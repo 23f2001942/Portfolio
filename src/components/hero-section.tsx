@@ -14,7 +14,7 @@ export default function HeroSection() {
             <p className="text-lg font-semibold text-muted-foreground">{portfolioData.title}</p>
             <p className="text-sm text-muted-foreground pt-2">{portfolioData.about_summary}</p>
           </div>
-           <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
+           <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
         </CardContent>
       </Card>
     </Link>

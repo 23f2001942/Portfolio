@@ -25,37 +25,39 @@ export default function LeadershipSection() {
   }
 
   return (
-    <Section
-      id="leadership-roles"
-      title="Leadership Roles"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {portfolioData.leadership.map((role, index) => (
-          <Card
-            key={index}
-            className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
-            onClick={() => setSelectedRole(role)}
-          >
-            <div className="flex items-center gap-4 p-4 relative">
-              {role.logo && (
-                <Image
-                  src={role.logo}
-                  alt={`${role.organization} logo`}
-                  width={48}
-                  height={48}
-                  className="rounded-md object-contain flex-shrink-0"
-                />
-              )}
-              <div className="flex-grow">
-                  <p className="font-semibold text-primary text-base">{role.role}</p>
-                  <p className="text-sm text-muted-foreground">{role.organization}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{role.date}</p>
+    <>
+      <Section
+        id="leadership-roles"
+        title="Leadership Roles"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {portfolioData.leadership.map((role, index) => (
+            <Card
+              key={index}
+              className="p-0 overflow-hidden cursor-pointer transition-all hover:border-primary/60 hover:shadow-lg group"
+              onClick={() => setSelectedRole(role)}
+            >
+              <div className="flex items-center gap-4 p-4 relative">
+                {role.logo && (
+                  <Image
+                    src={role.logo}
+                    alt={`${role.organization} logo`}
+                    width={48}
+                    height={48}
+                    className="rounded-md object-contain flex-shrink-0"
+                  />
+                )}
+                <div className="flex-grow">
+                    <p className="font-semibold text-primary text-base">{role.role}</p>
+                    <p className="text-sm text-muted-foreground">{role.organization}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{role.date}</p>
+                </div>
+                <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
               </div>
-              <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
 
       <Dialog open={!!selectedRole} onOpenChange={(isOpen) => !isOpen && setSelectedRole(null)}>
         <DialogContent className="max-w-2xl">
@@ -95,6 +97,6 @@ export default function LeadershipSection() {
           )}
         </DialogContent>
       </Dialog>
-    </Section>
+    </>
   );
 }

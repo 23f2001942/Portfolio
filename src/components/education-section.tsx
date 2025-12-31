@@ -52,7 +52,7 @@ export default function EducationSection() {
                   <p className="text-sm text-muted-foreground">{edu.institution}</p>
                   <p className="text-xs text-muted-foreground mt-1">{edu.period}</p>
                 </div>
-                 <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
+                 <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
               </div>
             </Card>
           ))}

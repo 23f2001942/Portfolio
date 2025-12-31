@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Award, ExternalLink, ArrowUpRight } from "lucide-react";
@@ -57,7 +58,7 @@ export default function AwardsSection() {
                 {portfolioData.awards.map(a => a.date).join(', ')}
               </p>
             </div>
-            <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4" />
+            <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
           </div>
         </Card>
       </Section>
