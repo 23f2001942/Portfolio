@@ -8,7 +8,7 @@ export default function Navbar() {
     { name: "About", href: "/about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -29,9 +29,7 @@ export default function Navbar() {
                 href={item.href}
                 className={cn(
                   "text-sm font-medium transition-colors px-3 py-2 rounded-md",
-                  item.href.startsWith("#")
-                    ? "text-white/80 hover:text-white hover:bg-white/10"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                  "text-white/80 hover:text-white hover:bg-white/10"
                 )}
               >
                 {item.name}

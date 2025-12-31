@@ -27,6 +27,9 @@ export default function Home() {
         <div className="p-4 sm:p-6 md:p-8 space-y-16">
           <div id="home" className="scroll-mt-24">
             <HeroSection />
+            <div className="mt-6">
+              <ContactBar />
+            </div>
           </div>
 
           <div id="skills" className="space-y-6 scroll-mt-24">
@@ -49,7 +52,8 @@ export default function Home() {
           </div>
 
           <div id="contact" className="pt-12 pb-8 border-t scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Let's Connect</h2>
+            <h2 className="text-2xl font-bold mb-4">Let's Work Together</h2>
+            <p className="text-muted-foreground mb-6">Have a project in mind or just want to chat about technology? Feel free to reach out. I'm always interested in hearing about new opportunities.</p>
             <ContactBar />
           </div>
         </div>
