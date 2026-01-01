@@ -18,7 +18,7 @@ import { ArrowRight } from "lucide-react";
 import type { Project } from "@/types/portfolio";
 
 const featuredProjectNames = [
-  "SkyOne", // Special case
+  "Drones", // Special case
   "Smart Milk Froth Monitor",
   "Vendora",
   "UBITS-GPA",
@@ -43,7 +43,7 @@ export default function ProjectCarousel() {
     const combinedDrones: Project = {
       name: "SkyOne & SkyTwo",
       description: "My foundational drone projects, from basic flight controllers to advanced autonomous systems with live video streaming.",
-      image: "", // Not used, will be overridden
+      image: "/images/first.png", 
       tags: [...new Set([...skyOne.tags, ...skyTwo.tags])],
       type: "hardware",
       detailsUrl: "/projects/skyone"
