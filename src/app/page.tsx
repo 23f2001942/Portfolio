@@ -15,8 +15,14 @@ export default function Home() {
     <div className="flex min-h-screen flex-col md:flex-row">
       {/* Left Panel (Fixed on Desktop) */}
       <div className="w-full md:w-2/5 md:fixed md:inset-y-0 md:left-0 md:flex md:flex-col bg-black relative overflow-hidden h-[50vh] md:h-auto">
-        <Navbar />
-        <ProjectCarousel />
+        {/* CHANGE 1: Absolute positioning forces Navbar to overlay the image */}
+        <div className="absolute top-0 left-0 w-full z-50">
+           <Navbar />
+        </div>
+        {/* CHANGE 2: Carousel fills the entire space, sitting BEHIND the navbar */}
+        <div className="w-full h-full">
+           <ProjectCarousel />
+        </div>
       </div>
 
       {/* Spacer for desktop layout */}

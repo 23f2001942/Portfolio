@@ -12,37 +12,38 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-10 bg-transparent text-white">
-      <nav className="container mx-auto flex items-center justify-between p-4 md:p-6">
-        {/* Brand Name */}
-        <Link href="/" className="text-xl font-bold tracking-tight transition-colors hover:opacity-80">
-          Shamanthak
-        </Link>
+    <nav className="flex items-center justify-between py-2 px-8 w-full bg-black/10 backdrop-blur-sm border-b border-white/10 transition-all duration-300">
+      
+      {/* Brand Name */}
+      <Link href="/" className="text-xl font-bold tracking-tight text-white hover:text-white/80 transition-colors">
+        Shamanthak
+      </Link>
 
-        {/* Navigation Links & Toggle */}
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors px-3 py-2 rounded-md",
-                  "text-white/80 hover:text-white hover:bg-white/10"
-                )}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-
-          <div className="w-px h-6 bg-white/20 hidden md:block" />
-          
-          {/* Theme Toggle */}
-          <ThemeToggle />
+      {/* Navigation Links & Toggle */}
+      <div className="flex items-center gap-6">
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                "text-white/70 hover:text-white"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
-      </nav>
-    </header>
+
+        <div className="w-px h-5 bg-white/20 hidden md:block" />
+        
+        {/* Theme Toggle - Wrapped in white text to inherit color */}
+        <div className="text-white">
+           <ThemeToggle />
+        </div>
+      </div>
+    </nav>
   );
 }
