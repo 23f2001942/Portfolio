@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Readex_Pro } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Initialize the font
 const readexPro = Readex_Pro({
@@ -26,14 +27,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="dark !scroll-smooth"
       suppressHydrationWarning
     >
       <body className={cn("min-h-screen bg-background font-sans antialiased", readexPro.variable)}>
-        <main>{children}</main>
-        <Toaster />
-        <Analytics />
-        <SpeedInsights />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main>{children}</main>
+          <Toaster />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );
