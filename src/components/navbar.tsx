@@ -12,10 +12,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="flex items-center justify-between py-2 px-8 w-full bg-black/10 backdrop-blur-sm border-b border-white/10 transition-all duration-300">
+    <nav className="flex items-center justify-between py-2 px-8 w-full bg-background/80 backdrop-blur-sm border-b border-border transition-all duration-300">
       
       {/* Brand Name */}
-      <Link href="/" className="text-xl font-bold tracking-tight text-white hover:text-white/80 transition-colors">
+      <Link href="/" className="text-xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors">
         Shamanthak
       </Link>
 
@@ -29,7 +29,7 @@ export default function Navbar() {
               href={item.href}
               className={cn(
                 "text-sm font-medium transition-colors",
-                "text-white/70 hover:text-white"
+                "text-muted-foreground hover:text-foreground"
               )}
             >
               {item.name}
@@ -37,10 +37,10 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="w-px h-5 bg-white/20 hidden md:block" />
+        <div className="w-px h-5 bg-border hidden md:block" />
         
-        {/* Theme Toggle - Wrapped in white text to inherit color */}
-        <div className="text-white">
+        {/* Theme Toggle */}
+        <div>
            <ThemeToggle />
         </div>
       </div>
