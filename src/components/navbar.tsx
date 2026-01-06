@@ -28,7 +28,7 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:flex items-center gap-4">
+      <div className="hidden xl:flex items-center gap-4">
         {navItems.map((item) => (
           <Link
             key={item.name}
@@ -46,7 +46,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="lg:hidden">
+      <div className="xl:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
