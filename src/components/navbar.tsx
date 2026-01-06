@@ -14,8 +14,8 @@ export default function Navbar() {
 
   const navItems = [
     { name: "About", href: "/about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#projects" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -28,7 +28,7 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-6">
+      <div className="hidden lg:flex items-center gap-4">
         {navItems.map((item) => (
           <Link
             key={item.name}
@@ -46,7 +46,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
