@@ -278,6 +278,22 @@ export const portfolioData: PortfolioData = {
   ],
   projects: [
     {
+      name: "Dum-E",
+      description: "Dum-E is a self-designed 6-DOF robotic arm built around the XIAO ESP32 S3, featuring a WiFi-hosted web UI for real-time servo control and a custom glove controller using ESP-NOW wireless communication, an MPU6050 IMU, and flex sensors for intuitive gesture-based operation.",
+      image: "dum-e",
+      tags: ["ESP32", "Robotics", "3D Printing", "ESP-NOW", "IMU", "Servo Control"],
+      detailsUrl: "/projects/dum-e",
+      type: "hardware"
+    },
+    {
+      name: "Smart Milk Froth Monitor",
+      description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility.",
+      image: "milkfroth",
+      tags: ["Arduino", "Sensors", "ESP32", "Android App", "PCB Design"],
+      detailsUrl: "/projects/smart-milk-froth-monitor",
+      type: "hardware"
+    },
+    {
       name: "SkyOne",
       description: "My first drone, built with the APM 2.8 flight controller. SkyOne introduced me to the fundamentals of drone technology — from components to flight principles — and gave me a hands-on foundation in UAV design.",
       image: "skyone",
@@ -299,14 +315,6 @@ export const portfolioData: PortfolioData = {
       image: "airlink",
       tags: ["Arduino", "Communication", "PCB Design", "Sensors"],
       detailsUrl: "/projects/airlink",
-      type: "hardware"
-    },
-    {
-      name: "Smart Milk Froth Monitor",
-      description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility.",
-      image: "milkfroth",
-      tags: ["Arduino", "Sensors", "ESP32", "Android App", "PCB Design"],
-      detailsUrl: "/projects/smart-milk-froth-monitor",
       type: "hardware"
     },
     {

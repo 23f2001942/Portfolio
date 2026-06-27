@@ -51,3 +51,6 @@ firestore-debug.log
 # Local agents and config
 .agents/
 studio.json
+
+# Claude Code
+.claude/

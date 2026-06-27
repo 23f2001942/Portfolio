@@ -7,6 +7,12 @@
       "imageHint": "professional headshot"
     },
     {
+      "id": "dum-e",
+      "description": "Image of the Dum-E robotic arm project",
+      "imageUrl": "/images/Dum-E.png",
+      "imageHint": "robotic arm"
+    },
+    {
       "id": "skyone",
       "description": "Image of the SkyOne drone project",
       "imageUrl": "/images/SkyOne.png",
