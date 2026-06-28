@@ -19,6 +19,7 @@ import { ArrowRight } from "lucide-react";
 import type { Project } from "@/types/portfolio";
 
 const featuredProjectNames = [
+  "Dum-E",
   "SkyOne", // This will be treated as the combined drone project
   "Smart Milk Froth Monitor",
   "Vendora",
@@ -27,10 +28,11 @@ const featuredProjectNames = [
 
 // Hardcoded image mapping
 const imageMap: { [key: string]: string } = {
-  "SkyOne": "/images/first.png",
-  "Smart Milk Froth Monitor": "/images/second.png",
-  "Vendora": "/images/third.png",
-  "UBITS-GPA": "/images/fourth.png",
+  "Dum-E": "/carousel/first.png",
+  "SkyOne": "/carousel/second.png",
+  "Smart Milk Froth Monitor": "/carousel/third.png",
+  "Vendora": "/carousel/fourth.png",
+  "UBITS-GPA": "/carousel/fifth.png",
 };
 
 export default function ProjectCarousel() {
@@ -72,7 +74,7 @@ export default function ProjectCarousel() {
           return (
             <CarouselItem key={index} className="relative h-full w-full">
               <Image
-                src={imageMap[project.name] || '/images/default.png'}
+                src={imageMap[project.name] || '/carousel/first.png'}
                 alt={project.description}
                 fill
                 className="object-cover"
