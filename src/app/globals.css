@@ -82,6 +82,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-size: 15px;
+    font-size: 16.5px;
   }
 }
