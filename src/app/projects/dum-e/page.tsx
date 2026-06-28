@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
+
+const DumEModelViewer = dynamic(() => import("@/components/dum-e-viewer"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full aspect-[4/3] md:aspect-[16/9] rounded-xl border border-border bg-[hsl(216,28%,8%)] flex items-center justify-center">
+      <p className="text-xs text-muted-foreground">Loading 3D viewer...</p>
+    </div>
+  ),
+});
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Clock, Circle } from "lucide-react";
@@ -10,6 +20,7 @@ import Image from "next/image";
 const sections = [
   { id: "overview",    label: "Overview",         indent: false },
   { id: "components",  label: "Components & BOM", indent: false },
+  { id: "hardware-model", label: "Hardware Model",  indent: false },
   { id: "stage-1",     label: "Stage 1",          indent: false },
   { id: "stage-2",     label: "Stage 2",          indent: false },
   { id: "stage-3",     label: "Stage 3",          indent: false },
@@ -332,6 +343,13 @@ export default function DumEPage() {
                 ["WiFi.h",                 "WiFi stack on S3"],
                 ["MPU6050 library",        "IMU raw data access on C3"],
               ]} />
+            </section>
+
+            {/* HARDWARE MODEL */}
+            <section>
+              <SectionHeading id="hardware-model" title="Hardware Model" />
+              <Para>Interactive 3D view of each 3D-printed component. Select a part below to inspect it — drag to rotate, scroll to zoom.</Para>
+              <DumEModelViewer />
             </section>
 
             {/* STAGE 1 */}
