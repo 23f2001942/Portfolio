@@ -10,7 +10,7 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme } = useTheme();
 
   const navItems = [
     { name: "About", href: "/about" },
@@ -20,61 +20,62 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="flex items-center justify-between py-2 px-4 md:px-8 w-full bg-background/80 backdrop-blur-sm border-b border-border transition-all duration-300">
-      
-      {/* Brand Name */}
-      <Link href="/" className="text-xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors">
-        Shamanthak
-      </Link>
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-2 px-4 md:px-8 w-full bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/10 transition-all duration-300">
 
-      {/* Desktop Navigation */}
-      <div className="hidden xl:flex items-center gap-4">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className={cn(
-              "text-sm font-medium transition-colors",
-              "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {item.name}
-          </Link>
-        ))}
-        <div className="w-px h-5 bg-border" />
-        <ThemeToggle />
-      </div>
+        {/* Brand Name */}
+        <Link href="/" className="text-xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors">
+          Shamanthak
+        </Link>
 
-      {/* Mobile Navigation */}
-      <div className="xl:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-full max-w-xs">
-            <SheetHeader>
-              <SheetTitle>
-                 <Link href="/" className="text-xl font-bold tracking-tight text-primary">
+        {/* Desktop Navigation */}
+        <div className="hidden xl:flex items-center gap-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div className="w-px h-5 bg-border" />
+          <ThemeToggle />
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="xl:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full max-w-xs">
+              <SheetHeader>
+                <SheetTitle>
+                  <Link href="/" className="text-xl font-bold tracking-tight text-primary">
                     Shamanthak
-                </Link>
-              </SheetTitle>
-            </SheetHeader>
-            <div className="flex flex-col h-full py-8">
-              <div className="flex flex-col gap-6 flex-grow">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="text-lg font-medium text-foreground/80 hover:text-foreground"
-                  >
-                    {item.name}
                   </Link>
-                ))}
-              </div>
-              <div className="flex justify-between items-center p-4 rounded-lg bg-muted/50">
+                </SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col h-full py-8">
+                <div className="flex flex-col gap-6 flex-grow">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="text-lg font-medium text-foreground/80 hover:text-foreground"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center p-4 rounded-lg bg-muted/50">
                   <span className="text-sm font-medium">Switch Theme</span>
                   <Button
                     variant="ghost"
@@ -86,11 +87,13 @@ export default function Navbar() {
                     <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                     <span className="sr-only">Toggle theme</span>
                   </Button>
+                </div>
               </div>
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </nav>
+      <div className="h-[53px]" />
+    </>
   );
 }
