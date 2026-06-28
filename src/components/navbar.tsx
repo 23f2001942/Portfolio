@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-2 px-4 md:px-8 w-full bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/10 transition-all duration-300">
+      <nav className="fixed top-0 left-0 right-0 z-[9999] flex items-center justify-between py-2 px-4 md:px-8 w-full bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/10 transition-all duration-300">
 
         {/* Brand Name */}
         <Link href="/" className="text-xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors">

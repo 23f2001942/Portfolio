@@ -13,15 +13,14 @@ import ContactBar from "@/components/contact-bar";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
-      {/* Left Panel (Fixed on Desktop) */}
-      <div className="w-full md:w-2/5 md:fixed md:inset-y-0 md:left-0 md:flex md:flex-col bg-black relative overflow-hidden h-[50vh] md:h-auto">
-        {/* CHANGE 1: Absolute positioning forces Navbar to overlay the image */}
-        <div className="absolute top-0 left-0 w-full z-50">
-           <Navbar />
-        </div>
-        {/* CHANGE 2: Carousel fills the entire space, sitting BEHIND the navbar */}
+
+      {/* Navbar — lives at root, completely outside both panels */}
+      <Navbar />
+
+      {/* Left Panel (Fixed on Desktop) — carousel only, no navbar inside */}
+      <div className="w-full md:w-2/5 md:fixed md:inset-y-0 md:left-0 md:flex md:flex-col bg-black overflow-hidden h-[50vh] md:h-auto">
         <div className="w-full h-full">
-           <ProjectCarousel />
+          <ProjectCarousel />
         </div>
       </div>
 
@@ -30,7 +29,7 @@ export default function Home() {
 
       {/* Right Panel (Scrollable Content) */}
       <div className="w-full md:w-3/5 md:ml-auto bg-background">
-        <div className="p-4 sm:p-6 md:p-8 space-y-16">
+        <div className="p-4 pt-20 sm:p-6 sm:pt-20 md:p-8 md:pt-20 space-y-16">
           <div id="home" className="scroll-mt-24">
             <HeroSection />
             <div className="mt-6">
