@@ -6,67 +6,71 @@
   :root {
     --radius: 0.625rem;
 
-    /* REFERENCE LIGHT THEME (Clean White) */
-    --background: 0 0% 100%;       /* #ffffff */
-    --foreground: 0 0% 9%;         /* #171717 */
-    --card: 0 0% 98%;              /* #fafafa */
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;         /* #f5f5f5 */
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;  /* #737373 */
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    /* LIGHT THEME — Ghost Navy (#EFF3F8) */
+    --background: 214 40% 95%;       /* #EFF3F8 — ghost navy */
+    --foreground: 216 40% 10%;       /* deep navy text */
+    --card: 214 35% 91%;
+    --card-foreground: 216 40% 10%;
+    --popover: 214 35% 91%;
+    --popover-foreground: 216 40% 10%;
+    --primary: 216 45% 10%;          /* deep navy */
+    --primary-foreground: 214 40% 95%;
+    --secondary: 214 28% 86%;
+    --secondary-foreground: 216 40% 10%;
+    --muted: 214 28% 86%;
+    --muted-foreground: 214 18% 42%;
+    --accent: 214 28% 86%;
+    --accent-foreground: 216 40% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;            /* #e5e5e5 */
-    --input: 0 0% 90%;
-    --ring: 0 0% 9%;
+    --border: 214 22% 80%;
+    --input: 214 22% 80%;
+    --ring: 210 65% 40%;
 
-    /* --- Accent / Highlight --- */
-    --highlight: 217 91% 55%;
+    /* --- Deep Ocean Blue Highlight --- */
+    --highlight: 210 70% 28%;
+    /* --- Forest Teal Subheading --- */
+    --highlight-sub: 171 55% 26%;
 
     /* --- Charts --- */
-    --chart-1: 220 70% 50%;
+    --chart-1: 189 80% 35%;
     --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
+    --chart-3: 216 70% 50%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
 
   .dark {
-    /* REFERENCE DARK THEME (Deep Premium Black) */
-    --background: 0 0% 4%;         /* #0a0a0a */
-    --foreground: 0 0% 98%;        /* #fafafa */
-    --card: 0 0% 9%;               /* #171717 */
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 15%;         /* #262626 */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;  /* #a3a3a3 */
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
+    /* DARK THEME — Deep Navy + Cyan */
+    --background: 216 28% 7%;        /* #0D1117 */
+    --foreground: 195 25% 92%;       /* cool off-white */
+    --card: 216 22% 11%;             /* #161B22 */
+    --card-foreground: 195 25% 92%;
+    --popover: 216 22% 11%;
+    --popover-foreground: 195 25% 92%;
+    --primary: 195 25% 92%;
+    --primary-foreground: 216 28% 7%;
+    --secondary: 215 18% 17%;
+    --secondary-foreground: 195 25% 92%;
+    --muted: 215 18% 17%;
+    --muted-foreground: 210 15% 55%;
+    --accent: 215 18% 17%;
+    --accent-foreground: 195 25% 92%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%;            /* #404040 */
-    --input: 0 0% 25%;
-    --ring: 0 0% 64%;
+    --border: 215 16% 22%;
+    --input: 215 16% 22%;
+    --ring: 189 94% 52%;
 
-    /* --- Accent / Highlight --- */
-    --highlight: 217 91% 62%;
+    /* --- Cyan Highlight (#22D3EE range) --- */
+    --highlight: 189 94% 52%;
+    /* --- Teal Subheading --- */
+    --highlight-sub: 171 65% 56%;
 
     /* --- Charts --- */
-    --chart-1: 220 70% 50%;
+    --chart-1: 189 94% 52%;
     --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
+    --chart-3: 216 70% 60%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }

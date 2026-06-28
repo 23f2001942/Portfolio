@@ -112,7 +112,7 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
         <thead>
           <tr className="bg-[hsl(var(--highlight)/0.08)] border-b border-[hsl(var(--highlight)/0.2)]">
             {headers.map((h) => (
-              <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-[hsl(var(--highlight))]">{h}</th>
+              <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-[hsl(var(--highlight-sub))]">{h}</th>
             ))}
           </tr>
         </thead>
@@ -157,7 +157,7 @@ function CodeBlock({ code, lang = "cpp", label }: { code: string; lang?: string;
 function StageHeading({ id, num, title, status }: { id?: string; num: string; title: string; status: "done" | "progress" }) {
   return (
     <div id={id} className="flex items-center gap-3 mt-6 mb-2 scroll-mt-24">
-      <h3 className="text-base font-semibold text-[hsl(var(--highlight))]">{num}: {title}</h3>
+      <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))]">{num}: {title}</h3>
       {status === "done"
         ? <Badge variant="secondary" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">Completed</Badge>
         : <Badge variant="secondary" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-xs">In Progress</Badge>
@@ -167,7 +167,7 @@ function StageHeading({ id, num, title, status }: { id?: string; num: string; ti
 }
 
 function SubHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-base font-semibold text-[hsl(var(--highlight))] mt-6 mb-2">{children}</h3>;
+  return <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))] mt-6 mb-2">{children}</h3>;
 }
 
 function Para({ children }: { children: React.ReactNode }) {
@@ -590,7 +590,7 @@ export default function DumEPage() {
                 },
               ].map(({ stage, items }) => (
                 <div key={stage} className="mb-10">
-                  <h3 className="text-base font-semibold text-[hsl(var(--highlight))] mt-6 mb-2">{stage}</h3>
+                  <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))] mt-6 mb-2">{stage}</h3>
                   <div className="space-y-4">
                     {items.map(([title, desc]) => (
                       <div key={title} className="flex gap-3">
