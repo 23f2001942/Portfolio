@@ -923,57 +923,27 @@ void loop() {
             {/* 5. WHAT I LEARNED */}
             <section>
               <SectionHeading id="learned" title="What I Learned" />
-              {[
-                {
-                  category: "Embedded Systems & Firmware",
-                  items: [
-                    ["Non-blocking is foundational, not optional", "Any project combining servo control with a network stack must use millis()-based timing from day one. Retrofitting it later is painful; building it in from Stage 2 made everything after much cleaner."],
-                    ["Physical and software state must be explicitly synchronised", "Assuming the arm is where the firmware thinks it is causes dangerous, unpredictable motion. The startup snap sequence is critical to safety and correctness."],
-                    ["Calibration constants deserve permanent status", "SERVOMIN and SERVOMAX were physically validated once in Stage 1 and never touched again. Recalculating calibration is a source of regressions, not improvements."],
-                    ["Per-servo tuning matters more than expected", "Identical STEP_DELAY across different servo models produces very different motion quality. The stiction insight — that PWM update rate controls whether static friction re-engages between steps — was the most surprising discovery of the project."],
-                  ],
-                },
-                {
-                  category: "Sensor Integration",
-                  items: [
-                    ["Know your sensor's limitations before mapping it to control", "Yaw drift on the MPU6050 was caught during design analysis before any yaw-based firmware was written. Designing around a known hardware constraint early is far less costly than discovering it during integration."],
-                    ["The complementary filter is underrated", "For human-scale motion control, the complementary filter gives 90% of a Kalman filter's stability with 10% of the implementation complexity."],
-                    ["ADC delta is a wiring diagnostic", "A flex sensor delta under 100 counts almost certainly indicates a wiring fault, not a bad sensor. The 47 kΩ substitution rule is a concrete, actionable diagnostic."],
-                  ],
-                },
-                {
-                  category: "System Architecture & Protocol Selection",
-                  items: [
-                    ["ESP-NOW is exceptional for local peer-to-peer control", "No pairing, no router dependency, ~1–3 ms latency, native to ESP32. For two ESP32 nodes exchanging data with minimal overhead, ESP-NOW is almost always the right choice over Bluetooth serial."],
-                    ["Design sensor-to-servo mappings before writing firmware", "The glove mode toggle design — two modes from one IMU and two flex sensors covering five joints — was worked out on paper before a single line of transmitter firmware was written. That clarity made the firmware straightforward."],
-                    ["HTTP server and motion engine coexist cleanly when both are non-blocking", "The web dashboard works flawlessly during arm motion because neither subsystem uses delay(). Any concurrent subsystem can be added as long as it respects the non-blocking contract."],
-                  ],
-                },
-                {
-                  category: "Project Management & Process",
-                  items: [
-                    ["Stage-by-stage confirmation is the right discipline for hardware", "Every stage was confirmed fully working before the next began. When something broke in a new stage, the root cause search was bounded to what changed — not the entire system."],
-                    ["Physical testing overrides theoretical calculation", "STEP_DELAY, STEP_SIZE, and servo limits were all determined by observing and listening to the arm, not computing from datasheets. Real hardware has tolerances and mechanical quirks that theory doesn't capture."],
-                    ["Dropping a feature cleanly is a good engineering decision", "Yaw was cut. The decision was made quickly, with clear rationale, without a workaround. Knowing when to remove scope is as important as knowing what to build."],
-                    ["Document calibration constants as you discover them", "SERVOMIN, SERVOMAX, per-joint limits, STEP_DELAY values — all were written down as they were confirmed. A project with undocumented constants is one hard drive failure away from starting calibration from scratch."],
-                  ],
-                },
-              ].map(({ category, items }) => (
-                <div key={category} className="mb-8">
-                  <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))] mt-6 mb-2">{category}</h3>
-                  <div className="space-y-3">
-                    {items.map(([title, desc]) => (
-                      <div key={title} className="flex gap-3">
-                        <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0">→</span>
-                        <div>
-                          <span className="text-sm font-medium text-primary">{title}. </span>
-                          <span className="text-sm text-muted-foreground">{desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              <ul className="space-y-4">
+                {[
+                  "Adding a web server to a blocking motion loop kills the server completely — requests just time out while a servo is moving. I had to rebuild the entire motion engine around millis() to fix it, which was more work mid-project than it would have been to design it that way from the start.",
+                  "The arm doesn't know where it is — only the firmware's currentAngle[] does. If those two ever diverge (which they will on cold boot if you don't handle it), the first command causes a violent snap to wherever the arm thinks it should be. The startup snap sequence exists entirely to prevent that.",
+                  "Once you physically validate PWM calibration constants, don't touch them again. SERVOMIN and SERVOMAX have been the same since Stage 1. Recalibrating is how you introduce regressions, not improvements.",
+                  "The stiction problem on MG995 servos surprised me most. I expected smoother to mean slower — but it's the opposite. Update PWM too infrequently and the motor fully settles between steps, then has to break static friction each time. It lurches. Update frequently enough and it never settles — it just flows. Finding that sweet spot per-servo through physical testing was the most hands-on debugging I did.",
+                  "Checking sensor drift on the MPU6050 before writing any control code saved a lot of time. Yaw drifts badly without a magnetometer — I caught that early and removed it from the design before a single line of yaw-based firmware was written.",
+                  "The complementary filter handles Pitch and Roll better than I expected for something so simple. I was going to use a Kalman filter, but the complementary filter is stable enough for human-speed arm control and takes about ten lines of code.",
+                  "When a flex sensor shows less than 100 ADC counts between straight and fully bent, it's almost never the sensor — it's the wiring. Bad solder joint, wrong resistor value, something like that. I learned to check the circuit first before assuming the sensor is broken.",
+                  "Drawing out the sensor-to-servo mapping on paper before writing any transmitter code made the firmware straightforward. The two-mode glove design came from constraints on paper, not from debugging firmware.",
+                  "ESP-NOW is genuinely good. No pairing, no router, ~2 ms round trip. Bluetooth had been unreliable in a previous project under servo load, so I switched — and it just works.",
+                  "Finishing each stage completely before starting the next one saved me a lot of debugging. When something broke in Stage 3, I knew it was a Stage 3 problem. The search space was small.",
+                  "Datasheets don't capture mechanical reality. STEP_DELAY values, joint limits, home positions — all of them came from looking at and listening to the arm, not from any calculation.",
+                  "Cutting yaw cleanly was the right call. The decision took five minutes. I didn't try to work around it or replace it with something equivalent. Knowing when to just remove scope is a skill.",
+                ].map((point, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0 text-sm">→</span>
+                    <p className="text-[0.9rem] text-muted-foreground leading-relaxed">{point}</p>
+                  </li>
+                ))}
+              </ul>
             </section>
 
           </main>
