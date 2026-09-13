@@ -57,6 +57,16 @@ export interface Award {
   awardUrl?: string;
 }
 
+export interface Research {
+  title: string;
+  supervisor: string;
+  institution: string;
+  period?: string;
+  description: string;
+  skills: string[];
+  logoUrl?: string;
+}
+
 export interface LeadershipRole {
   role: string;
   organization: string;
@@ -75,6 +85,7 @@ export interface PortfolioData {
   about_summary: string;
   socials: SocialLink[];
   experience: Experience[];
+  research: Research[];
   education: Education[];
   qualifications: Qualification[];
   licenses: License[];

@@ -53,6 +53,15 @@ export const portfolioData: PortfolioData = {
       description: "Project Internship in Product Design of Electric Bike"
     }
   ],
+  research: [
+    {
+      title: "Developing a 2D/3D Computational Fluid Dynamics (CFD) Solver",
+      supervisor: "Prof. Supradeepan K",
+      institution: "BITS Pilani, Hyderabad Campus",
+      description: "Building a custom CFD solver from first principles in C++, currently focused on a 2D implementation with 3D extension planned as the next phase. The project involves implementing core numerical methods for solving fluid flow equations — including grid/mesh handling, discretization schemes, and iterative solvers — without relying on commercial or pre-built CFD packages. This project deepens hands-on understanding of computational methods in fluid mechanics, numerical analysis, and low-level scientific software development in C++.",
+      skills: ["C++", "Computational Fluid Dynamics", "Numerical Methods", "Finite Volume/Difference Methods"]
+    }
+  ],
   education: [
     {
       degree: "B.E. Mechanical Engineering",

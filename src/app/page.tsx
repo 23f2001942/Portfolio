@@ -6,6 +6,7 @@ import LeadershipSection from "@/components/leadership-section";
 import LicensesSection from "@/components/licenses-section";
 import ProjectsSection from "@/components/projects-section";
 import QualificationsSection from "@/components/qualifications-section";
+import ResearchSection from "@/components/research-section";
 import ProjectCarousel from "@/components/project-carousel";
 import Navbar from "@/components/navbar";
 import ContactBar from "@/components/contact-bar";
@@ -43,6 +44,7 @@ export default function Home() {
 
           <div id="experience" className="space-y-6 scroll-mt-24">
             <ExperienceSection />
+            <ResearchSection />
             <LeadershipSection />
           </div>
 
