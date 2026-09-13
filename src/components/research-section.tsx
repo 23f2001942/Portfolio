@@ -2,6 +2,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import type { Research } from "@/types/portfolio";
 import { portfolioData } from "@/lib/portfolio-data";
@@ -38,10 +39,21 @@ export default function ResearchSection() {
               onClick={() => setSelectedResearch(item)}
             >
               <div className="p-4 relative">
-                <div className="pr-6">
-                  <p className="font-semibold text-primary text-base">{item.title}</p>
-                  <p className="text-sm text-muted-foreground">{item.supervisor}, {item.institution}</p>
-                  {item.period && <p className="text-xs text-muted-foreground mt-1">{item.period}</p>}
+                <div className="flex items-start gap-4 pr-6">
+                  {item.logoUrl && (
+                    <Image
+                      src={item.logoUrl}
+                      alt={`${item.institution} logo`}
+                      width={48}
+                      height={48}
+                      className="rounded-md object-contain flex-shrink-0"
+                    />
+                  )}
+                  <div className="flex-grow">
+                    <p className="font-semibold text-primary text-base">{item.title}</p>
+                    <p className="text-sm text-muted-foreground">{item.supervisor}, {item.institution}</p>
+                    {item.period && <p className="text-xs text-muted-foreground mt-1">{item.period}</p>}
+                  </div>
                 </div>
                 <ArrowUpRight className="h-5 w-5 text-muted-foreground absolute top-4 right-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -62,9 +74,22 @@ export default function ResearchSection() {
           {selectedResearch && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-xl font-bold">{selectedResearch.title}</DialogTitle>
-                <p className="font-medium text-primary">{selectedResearch.supervisor}, {selectedResearch.institution}</p>
-                {selectedResearch.period && <p className="text-sm text-muted-foreground">{selectedResearch.period}</p>}
+                <div className="flex items-start gap-4">
+                  {selectedResearch.logoUrl && (
+                    <Image
+                      src={selectedResearch.logoUrl}
+                      alt={`${selectedResearch.institution} logo`}
+                      width={64}
+                      height={64}
+                      className="rounded-md object-contain"
+                    />
+                  )}
+                  <div className="flex-grow">
+                    <DialogTitle className="text-xl font-bold">{selectedResearch.title}</DialogTitle>
+                    <p className="font-medium text-primary">{selectedResearch.supervisor}, {selectedResearch.institution}</p>
+                    {selectedResearch.period && <p className="text-sm text-muted-foreground">{selectedResearch.period}</p>}
+                  </div>
+                </div>
               </DialogHeader>
               <div className="py-4 space-y-4 text-muted-foreground max-h-[60vh] overflow-y-auto no-scrollbar">
                 <p>
