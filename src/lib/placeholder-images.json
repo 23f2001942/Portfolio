@@ -1,12 +1,6 @@
 {
   "placeholderImages": [
     {
-      "id": "headshot1",
-      "description": "A professional headshot.",
-      "imageUrl": "/images/portfolio.png",
-      "imageHint": "professional headshot"
-    },
-    {
       "id": "dum-e",
       "description": "Image of the Dum-E robotic arm project",
       "imageUrl": "/images/Dum-E.png",

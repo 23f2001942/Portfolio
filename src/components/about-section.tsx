@@ -1,32 +1,20 @@
 import { portfolioData } from "@/lib/portfolio-data";
-import { getPlaceholderImage } from "@/lib/placeholder-images";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Github, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function AboutSection() {
-  const headshot = getPlaceholderImage(portfolioData.headshot);
   const githubSocial = portfolioData.socials.find(s => s.name === "github");
   const emailSocial = portfolioData.socials.find(s => s.name === "email");
 
   return (
     <div className="flex flex-col gap-12">
       {/* Header */}
-      <div className="flex items-center gap-6">
-        {headshot && (
-          <Avatar className="h-40 w-40">
-            <AvatarImage src={headshot.imageUrl} alt={headshot.description} data-ai-hint={headshot.imageHint} />
-            <AvatarFallback>{portfolioData.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-        )}
-        <div className="flex-grow">
-          <h1 className="text-4xl font-bold text-primary">{portfolioData.name}</h1>
-          <p className="text-lg text-primary/90">{portfolioData.title}</p>
-          <p className="mt-2 text-muted-foreground">{portfolioData.about_summary}</p>
-        </div>
+      <div>
+        <h1 className="text-4xl font-bold text-primary">{portfolioData.name}</h1>
+        <p className="text-lg text-primary/90">{portfolioData.title}</p>
+        <p className="mt-2 text-muted-foreground">{portfolioData.about_summary}</p>
       </div>
 
       {/* Links Grid */}

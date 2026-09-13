@@ -71,7 +71,6 @@ export interface PortfolioData {
   title: string;
   summary: string;
   intro: string;
-  headshot: string;
   location: string;
   about_summary: string;
   socials: SocialLink[];
