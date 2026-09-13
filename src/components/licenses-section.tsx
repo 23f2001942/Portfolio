@@ -1,7 +1,7 @@
 
 "use client";
 
-import { BookMarked, ExternalLink, GraduationCap, Server, ArrowUpRight } from "lucide-react";
+import { BookMarked, ExternalLink, GraduationCap, Server, ArrowUpRight, Box } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import type { License } from "@/types/portfolio";
@@ -17,7 +17,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-type CertificateType = 'mooc' | 'nptel';
+type CertificateType = 'mooc' | 'nptel' | 'solidworks';
 
 interface CertCategory {
   type: CertificateType;
@@ -28,6 +28,7 @@ interface CertCategory {
 const categories: CertCategory[] = [
   { type: 'nptel', title: 'NPTEL Certifications (SWAYAM)', icon: <GraduationCap className="h-6 w-6 text-primary/80" /> },
   { type: 'mooc', title: 'MOOCs', icon: <Server className="h-6 w-6 text-primary/80" /> },
+  { type: 'solidworks', title: 'SolidWorks (Tata Technologies)', icon: <Box className="h-6 w-6 text-primary/80" /> },
 ];
 
 export default function LicensesSection() {
@@ -81,7 +82,7 @@ export default function LicensesSection() {
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">{dialogTitle}</DialogTitle>
           </DialogHeader>
-          <div className="py-4 max-h-[60vh] overflow-y-auto">
+          <div className="py-4 max-h-[60vh] overflow-y-auto no-scrollbar">
             <ul className="space-y-4">
               {filteredCerts.map((cert, index) => (
                 <li key={index}>

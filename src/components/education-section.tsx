@@ -83,7 +83,7 @@ export default function EducationSection() {
                   </div>
                 </div>
               </DialogHeader>
-              <div className="py-4 space-y-4 text-muted-foreground max-h-[60vh] overflow-y-auto">
+              <div className="py-4 space-y-4 text-muted-foreground max-h-[60vh] overflow-y-auto no-scrollbar">
                 <p>
                   {selectedEducation.description}
                 </p>

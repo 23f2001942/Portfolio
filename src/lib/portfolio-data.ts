@@ -210,6 +210,34 @@ export const portfolioData: PortfolioData = {
       credentialUrl: "https://app.onlinedegree.iitm.ac.in/document_verification/8a6f0a3f1a1fed74af1e3053c965a4f359f880bf904920ab523129ad881574fc"
     },
     {
+      name: "SOLIDWORKS 2025 Basics & User Interface",
+      issuer: "Tata Technologies",
+      date: "Jun 2026",
+      type: "solidworks",
+      credentialId: "IGI-649631-19537"
+    },
+    {
+      name: "SOLIDWORKS 2025 Sketching",
+      issuer: "Tata Technologies",
+      date: "Aug 2026",
+      type: "solidworks",
+      credentialId: "IGI-649631-19542"
+    },
+    {
+      name: "SOLIDWORKS 2025 Assemblies",
+      issuer: "Tata Technologies",
+      date: "Aug 2026",
+      type: "solidworks",
+      credentialId: "IGI-649631-19540"
+    },
+    {
+      name: "SOLIDWORKS 2024 Motion Fundamentals",
+      issuer: "Tata Technologies",
+      date: "Aug 2026",
+      type: "solidworks",
+      credentialId: "IGI-649631-18494"
+    },
+    {
       name: "Achieving Personal and Professional Success Specilization",
       issuer: "University of Pennsylvania",
       date: "May 2025",
