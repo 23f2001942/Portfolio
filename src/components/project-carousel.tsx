@@ -23,7 +23,6 @@ const featuredProjectNames = [
   "SkyOne", // This will be treated as the combined drone project
   "Smart Milk Froth Monitor",
   "Vendora",
-  "UBITS-GPA",
 ];
 
 // Hardcoded image mapping
@@ -32,7 +31,6 @@ const imageMap: { [key: string]: string } = {
   "SkyOne": "/carousel/second.png",
   "Smart Milk Froth Monitor": "/carousel/third.png",
   "Vendora": "/carousel/fourth.png",
-  "UBITS-GPA": "/carousel/fifth.png",
 };
 
 export default function ProjectCarousel() {
