@@ -3,15 +3,15 @@ import type { PortfolioData } from '@/types/portfolio';
 
 export const portfolioData: PortfolioData = {
   name: "Shamanthak Reddy Mallu",
-  title: "AI & Web Development | Aerospace, Drones & UAV Enthusiast",
+  title: "Aspiring Aerospace Engineer | Propulsion, Structures & CFD | AI/ML",
   summary: "Currently pursuing a dual degree in Mechanical Engineering and studying AI, I am passionate about combining aerospace engineering with AI to innovate new technologies.",
-  intro: "Currently pursuing a dual degree in Mechanical Engineering from BITS Pilani and the University at Buffalo, while also studying AI and Data Science through an online BS Degree from IIT Madras. I am passionate about combining aerospace engineering with AI to innovate new technologies. I'm actively involved in technical clubs, developing custom hardware for a Mars Rover, and building my own autonomous drones. I also enjoy playing the guitar and learning new languages.",
+  intro: "I'm a third-year Mechanical Engineering student at BITS Pilani, Hyderabad, in the BITS Pilani – University at Buffalo 2+2 program, and I also hold a BSc in Programming and Data Science from IIT Madras, where I'm continuing toward the full BS.\n\nMy interest in aerospace started in 2017, watching ISRO's PSLV-C37 carry 104 satellites into orbit, and grew through years of following NASA missions, Chandrayaan-2 and 3, and SpaceX's reusable boosters. Today I learn it by doing: I'm working on a CFD research project under Prof. Supradeepan K and contribute to airframe design and structural simulation in Aeolus, our fixed-wing UAV club. Earlier, I supported PCB development in Project Vanguard, our Mars Rover team.\n\nOutside coursework, I build: the Sky Series drones, Dum-E (a 6-DOF robotic arm), and a custom RC system, and I take NPTEL aerospace courses to learn beyond my curriculum. Away from engineering, I'm a Trinity-certified guitarist, a cricket and F1 fan, and a beginner in Japanese, Spanish and German.",
   location: "Hyderabad, Telangana, India",
-  about_summary: "Innovating at the intersection of aerospace engineering, machine learning and artificial intelligence. I build smart systems for the ground and the sky.",
+  about_summary: "Mechanical Engineering student at BITS Pilani, learning aerospace engineering by building: from drones and robotic arms to CFD. Aiming for a future in reusable launch vehicles.",
   socials: [
     { name: "linkedin", url: "https://www.linkedin.com/in/shamanthak/" },
     { name: "github", url: "https://github.com/23f2001942" },
-    { name: "email", url: "mailto:shamanthak.mallu@gmail.com" },
+    { name: "email", url: "mailto:shamanthakreddy@gmail.com" },
   ],
   experience: [
     {
@@ -28,8 +28,8 @@ export const portfolioData: PortfolioData = {
     {
       role: "Associate Electronics Subdivision",
       company: "Project Vanguard (formerly Mars Rover Team)",
-      period: "Mar 2025 - Present",
-      description: "Contributing to the design and development of a custom PCB to support efficient power distribution to motors and a range of onboard sensors for a Mars Rover.",
+      period: "Mar 2025 - May 2026",
+      description: "Assisted in developing a custom power-distribution PCB for the rover's drive motors and sensors, supporting schematic work and PCB layout under senior team members and learning hands-on hardware design along the way.",
       logoUrl: "/images/VanguardLogo.png",
       socials: [
         { name: "instagram", url: "https://www.instagram.com/vanguard_bphc/" }
@@ -55,11 +55,12 @@ export const portfolioData: PortfolioData = {
   ],
   research: [
     {
-      title: "Developing a 2D/3D Computational Fluid Dynamics (CFD) Solver",
+      title: "CFD Solver Development (Research Project)",
       supervisor: "Prof. Supradeepan K",
       institution: "BITS Pilani, Hyderabad Campus",
-      description: "Building a custom CFD solver from first principles in C++, currently focused on a 2D implementation with 3D extension planned as the next phase. The project involves implementing core numerical methods for solving fluid flow equations — including grid/mesh handling, discretization schemes, and iterative solvers — without relying on commercial or pre-built CFD packages. This project deepens hands-on understanding of computational methods in fluid mechanics, numerical analysis, and low-level scientific software development in C++.",
-      skills: ["C++", "Computational Fluid Dynamics", "Numerical Methods", "Finite Volume/Difference Methods"],
+      period: "Jul 2026 - Present",
+      description: "Learning to build a CFD solver in C++ under faculty guidance, starting with a 2D implementation and planning a 3D extension. Currently studying the fundamentals of Computational Fluid Dynamics and the Finite Volume Method, with a focus on unstructured meshes, and implementing core solver components as I learn the underlying numerical methods. The project is written from scratch rather than on commercial CFD packages, and it is steadily building my understanding of fluid mechanics, numerical analysis and scientific programming in C++.",
+      skills: ["C++", "Computational Fluid Dynamics", "Finite Volume Method", "Unstructured Meshes", "Numerical Methods"],
       logoUrl: "/images/BITS_Logo.png"
     }
   ],
@@ -91,26 +92,37 @@ export const portfolioData: PortfolioData = {
     }
   ],
   qualifications: [
-    { skill: "Arduino", type: "top" },
-    { skill: "Raspberry Pi", type: "top" },
-    { skill: "Python", type: "top" },
-    { skill: "MATLAB", type: "top" },
-    { skill: "Pandas", type: "other" },
-    { skill: "NumPy", type: "other" },
-    { skill: "Matplotlib", type: "other" },
-    { skill: "Solidworks", type: "other"},
-    { skill: "React", type: "other" },
-    { skill: "Next.js", type: "other" },
-    { skill: "Node.js", type: "other" },
-    { skill: "Vue.js", type: "other" },
-    { skill: "TypeScript", type: "other" },
-    { skill: "JavaScript", type: "other" },
-    { skill: "HTML", type: "other" },
-    { skill: "CSS", type: "other" },
-    { skill: "Flask", type: "other" },
-    { skill: "TensorFlow", type: "other" },
-    { skill: "PyTorch", type: "other" },
-    { skill: "OpenCV", type: "other" }
+    { skill: "Python", category: "top" },
+    { skill: "C++", category: "top" },
+    { skill: "MATLAB", category: "top" },
+    { skill: "Solidworks", category: "top" },
+
+    { skill: "Solidworks", category: "cad" },
+    { skill: "CATIA", category: "cad" },
+    { skill: "Structural Simulation", category: "cad" },
+
+    { skill: "Arduino", category: "hardware" },
+    { skill: "ESP32", category: "hardware" },
+    { skill: "Raspberry Pi", category: "hardware" },
+    { skill: "Pixhawk", category: "hardware" },
+    { skill: "3D Printing", category: "hardware" },
+    { skill: "KiCad", category: "hardware" },
+
+    { skill: "Python", category: "programming" },
+    { skill: "C++", category: "programming" },
+    { skill: "MATLAB", category: "programming" },
+    { skill: "NumPy", category: "programming" },
+    { skill: "Pandas", category: "programming" },
+    { skill: "Matplotlib", category: "programming" },
+    { skill: "PyTorch", category: "programming" },
+    { skill: "TensorFlow", category: "programming" },
+    { skill: "OpenCV", category: "programming" },
+
+    { skill: "React", category: "web" },
+    { skill: "Next.js", category: "web" },
+    { skill: "TypeScript", category: "web" },
+    { skill: "Flask", category: "web" },
+    { skill: "Vue.js", category: "web" }
   ],
   licenses: [
     {
@@ -128,11 +140,11 @@ export const portfolioData: PortfolioData = {
       credentialUrl: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/101/noc25-ae30/Course/NPTEL25AE30S115820792210846767.pdf"    
     },
     {
-      name: "A Story of Economics: A Principles Tale Specilization",
-      issuer: "Rice University",
-      date: "Jul 2025",
+      name: "16.00x: Introduction to Aerospace Engineering: Astronautics and Human Spaceflight",
+      issuer: "MITx Courses",
+      date: "Jul 2020",
       type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/6Q9JUX0SM0XB"
+      credentialUrl: "https://courses.edx.org/certificates/ff48f74788ad42e59a27002bdff38f67"
     },
     {
       name: "Raspberry Pi Projects Specialization",
@@ -140,6 +152,62 @@ export const portfolioData: PortfolioData = {
       date: "Jul 2025",
       type: "mooc",
       credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/certificate/XRH84RBLSAPS"
+    },
+    {
+      name: "Embedding Sensors and Motors",
+      issuer: "University of Colorado Boulder",
+      date: "May 2025",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/certificate/LKL4IE8Y9M40"
+    },
+    {
+      name: "Essential Computer-Aided Design (CAD) and Essential CATIA",
+      issuer: "CADD Centre Training Services Pvt Ltd.",
+      date: "Jul 2021",
+      type: "mooc",
+      credentialUrl: "https://www.caddcentre.com/caddVerification.php?ddac=OTAwODc3"
+    },
+    {
+      name: "Certified C and C++",
+      issuer: "Tata Consultancy Services",
+      date: "Sep 2016",
+      type: "mooc",
+      credentialId: "5801616170043"
+    },
+    {
+      name: "Achieving Personal and Professional Success Specilization",
+      issuer: "University of Pennsylvania",
+      date: "May 2025",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/AC16XFWBSQZ6"
+    },
+    {
+      name: "Professional Skills for the Workplace Specilization",
+      issuer: "University of California, Davis",
+      date: "May 2025",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/SZPQT2OZMBGF"
+    },
+    {
+      name: "Generative AI Fundamentals Specialization",
+      issuer: "IBM",
+      date: "Dec 2024",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/TXITSAF06H4X"
+    },
+    {
+      name: "IBM AI Engineering Professional Certificate",
+      issuer: "IBM",
+      date: "Jan 2025",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/HWNNGTLKPNH0"
+    },
+    {
+      name: "A Story of Economics: A Principles Tale Specilization",
+      issuer: "Rice University",
+      date: "Jul 2025",
+      type: "mooc",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/6Q9JUX0SM0XB"
     },
     {
       name: "Applied Data Science Specialization",
@@ -245,62 +313,6 @@ export const portfolioData: PortfolioData = {
       date: "Aug 2026",
       type: "solidworks",
       credentialId: "IGI-649631-18494"
-    },
-    {
-      name: "Achieving Personal and Professional Success Specilization",
-      issuer: "University of Pennsylvania",
-      date: "May 2025",
-      type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/AC16XFWBSQZ6"
-    },
-    {
-      name: "Embedding Sensors and Motors",
-      issuer: "University of Colorado Boulder",
-      date: "May 2025",
-      type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/certificate/LKL4IE8Y9M40"
-    },
-    {
-      name: "Professional Skills for the Workplace Specilization",
-      issuer: "University of California, Davis",
-      date: "May 2025",
-      type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/SZPQT2OZMBGF"
-    },
-    {
-      name: "IBM AI Engineering Professional Certificate",
-      issuer: "IBM",
-      date: "Jan 2025",
-      type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/HWNNGTLKPNH0"
-    },
-    {
-      name: "Generative AI Fundamentals Specialization",
-      issuer: "IBM",
-      date: "Dec 2024",
-      type: "mooc",
-      credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/TXITSAF06H4X"
-    },
-    {
-      name: "Essential Computer-Aided Design (CAD) and Essential CATIA",
-      issuer: "CADD Centre Training Services Pvt Ltd.",
-      date: "Jul 2021",
-      type: "mooc",
-      credentialUrl: "https://www.caddcentre.com/caddVerification.php?ddac=OTAwODc3"
-    },
-    {
-      name: "16.00x: Introduction to Aerospace Engineering: Astronautics and Human Spaceflight",
-      issuer: "MITx Courses",
-      date: "Jul 2020",
-      type: "mooc",
-      credentialUrl: "https://courses.edx.org/certificates/ff48f74788ad42e59a27002bdff38f67"
-    },
-    {
-      name: "Certified C and C++",
-      issuer: "Tata Consultancy Services",
-      date: "Sep 2016",
-      type: "mooc",
-      credentialId: "5801616170043"
     }
   ],
   leadership: [
@@ -320,11 +332,12 @@ export const portfolioData: PortfolioData = {
       image: "dum-e",
       tags: ["ESP32", "Robotics", "3D Printing", "ESP-NOW", "IMU", "Servo Control"],
       detailsUrl: "/projects/dum-e",
-      type: "hardware"
+      type: "hardware",
+      status: "in-progress"
     },
     {
       name: "Smart Milk Froth Monitor",
-      description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility.",
+      description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility. Now being redesigned as WatchOutMilk (V2) with a XIAO ESP32-C3, OLED display, and 3D-printed enclosure; custom PCB in progress.",
       image: "milkfroth",
       tags: ["Arduino", "Sensors", "ESP32", "Android App", "PCB Design"],
       detailsUrl: "/projects/smart-milk-froth-monitor",
@@ -336,7 +349,8 @@ export const portfolioData: PortfolioData = {
       image: "skyone",
       tags: [],
       detailsUrl: "/projects/skyone",
-      type: "hardware"
+      type: "hardware",
+      status: "in-progress"
     },
     {
       name: "SkyTwo",
@@ -344,7 +358,8 @@ export const portfolioData: PortfolioData = {
       image: "skytwo",
       tags: [],
       detailsUrl: "/projects/skytwo",
-      type: "hardware"
+      type: "hardware",
+      status: "in-progress"
     },
     {
       name: "AirLink",

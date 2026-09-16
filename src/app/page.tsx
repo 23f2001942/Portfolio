@@ -59,7 +59,7 @@ export default function Home() {
           </div>
 
           <div id="contact" className="pt-12 pb-8 border-t scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Let's Work Together</h2>
+            <h2 className="text-2xl font-bold mb-4">Open to aerospace internships & research opportunities.</h2>
             <p className="text-muted-foreground mb-6">Have a project in mind or just want to chat about technology? Feel free to reach out. I'm always interested in hearing about new opportunities.</p>
             <ContactBar />
           </div>

@@ -44,7 +44,19 @@ export default function ProjectsSection() {
                     </div>
                   )}
                   <CardHeader>
-                    <CardTitle>{project.name}</CardTitle>
+                    <div className="flex items-start justify-between gap-2">
+                      <CardTitle>{project.name}</CardTitle>
+                      {project.status === "in-progress" && (
+                        <Badge variant="secondary" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-xs shrink-0">
+                          In Progress
+                        </Badge>
+                      )}
+                      {project.status === "completed" && (
+                        <Badge variant="secondary" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs shrink-0">
+                          Completed
+                        </Badge>
+                      )}
+                    </div>
                     <CardDescription>{project.description}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
@@ -76,7 +88,8 @@ export default function ProjectsSection() {
       {softwareProjects.length > 0 && (
         <Section
           id="software-projects"
-          title="Software Projects"
+          title="Software & Data"
+          size="sm"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {softwareProjects.map((project, index) => {

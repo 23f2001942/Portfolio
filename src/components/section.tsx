@@ -7,6 +7,7 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   icon?: ReactNode; // Kept for type safety, but will not be rendered
+  size?: 'default' | 'sm';
 }
 
 export function Section({
@@ -15,12 +16,16 @@ export function Section({
   children,
   className,
   icon,
+  size = 'default',
 }: SectionProps) {
   return (
     <section id={id} className={cn("scroll-mt-20", className)}>
       <div className="flex items-center gap-3 mb-8">
         {/* The icon is no longer rendered */}
-        <h2 className="text-3xl font-bold font-headline text-primary">
+        <h2 className={cn(
+          "font-bold font-headline text-primary",
+          size === 'sm' ? "text-xl" : "text-3xl"
+        )}>
           {title}
         </h2>
       </div>

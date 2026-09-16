@@ -14,9 +14,9 @@ const readexPro = Readex_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Shamanthak Reddy Mallu",
+  title: "Shamanthak Reddy Mallu | Aerospace & Mechanical Engineering",
   description:
-    "A modern and professional portfolio website to showcase my work and skills.",
+    "Mechanical Engineering student at BITS Pilani, learning aerospace engineering by building: from drones and robotic arms to CFD. Aiming for a future in reusable launch vehicles.",
 };
 
 export default function RootLayout({

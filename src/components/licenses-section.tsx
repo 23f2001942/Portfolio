@@ -23,10 +23,11 @@ interface CertCategory {
   type: CertificateType;
   title: string;
   icon: React.ReactNode;
+  note?: string;
 }
 
 const categories: CertCategory[] = [
-  { type: 'nptel', title: 'NPTEL Certifications (SWAYAM)', icon: <GraduationCap className="h-6 w-6 text-primary/80" /> },
+  { type: 'nptel', title: 'NPTEL Certifications (SWAYAM)', icon: <GraduationCap className="h-6 w-6 text-primary/80" />, note: "Currently enrolled in several NPTEL aerospace courses to learn beyond my curriculum." },
   { type: 'mooc', title: 'MOOCs', icon: <Server className="h-6 w-6 text-primary/80" /> },
   { type: 'solidworks', title: 'SolidWorks (Tata Technologies)', icon: <Box className="h-6 w-6 text-primary/80" /> },
 ];
@@ -83,6 +84,11 @@ export default function LicensesSection() {
             <DialogTitle className="text-xl font-bold">{dialogTitle}</DialogTitle>
           </DialogHeader>
           <div className="py-4 max-h-[60vh] overflow-y-auto no-scrollbar">
+            {selectedType && categories.find(c => c.type === selectedType)?.note && (
+              <p className="text-sm text-muted-foreground italic mb-4 pb-4 border-b border-border">
+                {categories.find(c => c.type === selectedType)?.note}
+              </p>
+            )}
             <ul className="space-y-4">
               {filteredCerts.map((cert, index) => (
                 <li key={index}>

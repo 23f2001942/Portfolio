@@ -61,7 +61,7 @@ export default function ContactPage() {
           
           {/* Let's work together */}
           <Card className="p-6 text-center">
-            <h2 className="text-2xl font-bold mb-2">Let's work together</h2>
+            <h2 className="text-2xl font-bold mb-2">Open to aerospace internships & research opportunities.</h2>
             <p className="text-muted-foreground mb-4">
               Whether you have a project in mind or just want to chat about technology, feel free to reach out. I'm always interested in hearing about new opportunities.
             </p>

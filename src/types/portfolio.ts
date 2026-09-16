@@ -25,7 +25,7 @@ export interface Education {
 
 export interface Qualification {
   skill: string;
-  type: 'top' | 'other';
+  category: 'top' | 'cad' | 'hardware' | 'programming' | 'web';
 }
 
 export interface License {
@@ -46,6 +46,7 @@ export interface Project {
   liveUrl?: string;
   repoUrl?: string;
   detailsUrl?: string;
+  status?: 'completed' | 'in-progress';
 }
 
 export interface Award {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Boxes } from "lucide-react";
 import { SolidworksIcon, RaspberryPiIcon } from "@/components/custom-icons";
 
 type SkillIconProps = {
@@ -13,10 +14,35 @@ export default function SkillIcon({ name, className }: SkillIconProps) {
   if (skillKey.includes("solidworks")) return <SolidworksIcon className={className} />;
   if (skillKey.includes("raspberry")) return <RaspberryPiIcon className={className} />;
 
+  // 1b. LOCAL LOGOS (black-on-transparent — wrapped in a white badge so they stay visible in dark mode)
+  if (skillKey.includes("pixhawk")) {
+    return (
+      <div className={`bg-white rounded-md p-1 flex items-center justify-center ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/pixhawk.ico" alt={name} className="w-full h-full" style={{ objectFit: "contain" }} />
+      </div>
+    );
+  }
+  if (skillKey.includes("3d printing")) {
+    return (
+      <div className={`bg-white rounded-md p-1 flex items-center justify-center ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/3d-printing.ico" alt={name} className="w-full h-full" style={{ objectFit: "contain" }} />
+      </div>
+    );
+  }
+
+  // 1c. GENERIC ICONS (no real logo exists for these — concept/standard, not a brand)
+  if (skillKey.includes("structural simulation")) return <Boxes className={className} />;
+
   // 2. SKILLICONS IMAGES (Standard Web/Software Stack)
   let iconUrl = "";
 
-  if (skillKey.includes("html")) iconUrl = "https://skillicons.dev/icons?i=html";
+  if (skillKey.includes("esp32")) iconUrl = "https://cdn.simpleicons.org/espressif";
+  else if (skillKey.includes("kicad")) iconUrl = "https://cdn.simpleicons.org/kicad";
+  else if (skillKey.includes("catia")) iconUrl = "https://cdn.simpleicons.org/dassaultsystemes";
+  else if (skillKey.includes("c++") || skillKey.includes("cpp")) iconUrl = "https://skillicons.dev/icons?i=cpp";
+  else if (skillKey.includes("html")) iconUrl = "https://skillicons.dev/icons?i=html";
   else if (skillKey.includes("css")) iconUrl = "https://skillicons.dev/icons?i=css";
   else if (skillKey.includes("react")) iconUrl = "https://skillicons.dev/icons?i=react";
   else if (skillKey.includes("vue")) iconUrl = "https://skillicons.dev/icons?i=vue";
