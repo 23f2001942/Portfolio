@@ -54,3 +54,4 @@ studio.json
 
 # Claude Code
 .claude/
+!.claude/session-notes.md
