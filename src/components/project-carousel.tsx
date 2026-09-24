@@ -22,7 +22,7 @@ const featuredProjectNames = [
   "SkyOne", // This will be treated as the combined drone project
   "Dum-E",
   "AirLink",
-  "Smart Milk Froth Monitor",
+  "SpillSense",
 ];
 
 // Hardcoded image mapping
@@ -30,7 +30,7 @@ const imageMap: { [key: string]: string } = {
   "SkyOne": "/carousel/second.png",
   "Dum-E": "/carousel/first.png",
   "AirLink": "/images/AirLink.png",
-  "Smart Milk Froth Monitor": "/carousel/third.png",
+  "SpillSense": "/carousel/third.png",
 };
 
 export default function ProjectCarousel() {

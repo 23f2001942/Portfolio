@@ -336,12 +336,14 @@ export const portfolioData: PortfolioData = {
       status: "in-progress"
     },
     {
-      name: "Smart Milk Froth Monitor",
-      description: "A low-cost IoT system developed during the COVID-19 lockdown to prevent boiling milk overflow using temperature sensing, Arduino/ESP microcontrollers, and Android app alerts. This project integrates thermocouples, buzzers, and Bluetooth communication, evolving into an ESP-based smart household utility. Now being redesigned as WatchOutMilk (V2) with a XIAO ESP32-C3, OLED display, and 3D-printed enclosure; custom PCB in progress.",
+      name: "SpillSense",
+      description: "A smart milk froth monitor that warns before boiling milk spills over. V1 paired an Arduino Nano with a K-type thermocouple, MAX6675, buzzer, and LED bar on a custom PCB, tested on real milk. V2 is being redesigned around a XIAO ESP32-C3 with a KiCad PCB and 3D-printed enclosure.",
       image: "milkfroth",
-      tags: ["Arduino", "Sensors", "ESP32", "Android App", "PCB Design"],
-      detailsUrl: "/projects/smart-milk-froth-monitor",
-      type: "hardware"
+      tags: ["Arduino", "ESP32", "Sensors", "PCB Design", "KiCad"],
+      detailsUrl: "/projects/spillsense",
+      repoUrl: "https://github.com/23f2001942/SpillSense",
+      type: "hardware",
+      status: "in-progress"
     },
     {
       name: "SkyOne",

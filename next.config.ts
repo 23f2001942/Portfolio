@@ -2,6 +2,15 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/projects/smart-milk-froth-monitor',
+        destination: '/projects/spillsense',
+        permanent: true,
+      },
+    ];
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

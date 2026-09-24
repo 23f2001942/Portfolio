@@ -1,5 +1,5 @@
 # Portfolio Session Notes
-*Last updated: 2026-09-18*
+*Last updated: 2026-09-24*
 
 ## Project Overview
 Next.js 15 App Router + TypeScript + Tailwind CSS + Shadcn/ui portfolio site.
@@ -71,12 +71,12 @@ All shadcn `Dialog` overlay/content (`src/components/ui/dialog.tsx`) were bumped
 ---
 
 ## Project Carousel (src/components/project-carousel.tsx)
-- Featured order (as of 2026-09-16): **SkyOne & SkyTwo → Dum-E → AirLink → Smart Milk Froth Monitor**. Vendora was removed from the carousel only (still listed under Software & Data).
+- Featured order (as of 2026-09-16): **SkyOne & SkyTwo → Dum-E → AirLink → SpillSense** (formerly Smart Milk Froth Monitor). Vendora was removed from the carousel only (still listed under Software & Data).
 - `imageMap` pairs each project name to its actual photo — **the image files are NOT interchangeable/positional**, each one is a real photo of that specific project:
   - `"SkyOne": "/carousel/second.png"`
   - `"Dum-E": "/carousel/first.png"`
   - `"AirLink": "/images/AirLink.png"` (reused from its existing project-card image — AirLink never had a dedicated `/carousel/` file)
-  - `"Smart Milk Froth Monitor": "/carousel/third.png"`
+  - `"SpillSense": "/carousel/third.png"` (AI-generated concept render, kept as-is per user)
   - `fourth.png` (old Vendora slot) was deleted as unused.
   - **Gotcha hit once already:** don't reassign carousel image files by raw position/order — always verify what's actually pictured in each file before remapping, or you'll show the wrong project's photo.
 - SkyOne is special-cased in the component to render as the combined "SkyOne & SkyTwo" slide (merged tags/description, two buttons) — independent of the plain per-project mapping.
@@ -179,7 +179,17 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 ---
 
 ## Pending / Future Work
-- Other hardware project pages (SkyOne, SkyTwo, AirLink, VitalLink) still show "Coming Soon" (Smart Milk Froth Monitor now has its own detail page)
+- Other hardware project pages (SkyOne, SkyTwo, AirLink, VitalLink) still show "Coming Soon"
 - Stage 4 glove controller firmware still in development (not a website task)
 - "Download CV" button was requested in the aerospace repositioning pass but skipped — no CV PDF exists yet in the repo; add it once the user provides one
-- Smart Milk Froth Monitor's V2/WatchOutMilk redesign note was added to the project card description only, NOT to its dedicated detail page (`src/app/projects/smart-milk-froth-monitor/page.tsx`) — ask if that page should be updated too
+- SpillSense: no V2 images/code yet — add them to Stages 5/6 when the user provides them
+
+---
+
+## SpillSense Project Page (src/app/projects/spillsense/page.tsx)
+- **Renamed (2026-09-24):** "Smart Milk Froth Monitor" / "WatchOutMilk" → **SpillSense** (user-chosen). "Smart Milk Froth Monitor" survives only as the page subtitle. Route is `/projects/spillsense`; `next.config.ts` has a permanent redirect from the old `/projects/smart-milk-froth-monitor`. Repo: https://github.com/23f2001942/SpillSense (renamed from WatchOutMilk). Local repo folder may still be `D:\WatchOutMilk`.
+- `name` is a lookup key: `portfolio-data.ts` name AND both `featuredProjectNames` + `imageMap` keys in `project-carousel.tsx` must match — rename all together.
+- Hero image `/carousel/third.png` — user explicitly said keep it. Same image is used for the carousel slide AND the homepage card (`milkfroth` entry in `placeholder-images.json` now points to `/carousel/third.png`, Unsplash placeholder removed). Card description kept to Dum-E length (~290 chars) so card heights match.
+- All project assets live in top-level `public/spillsense/` (user's choice — NOT under `public/images/`): `V1_Schematic.png` (early LCD+HC-05 wiring, in Stage 1), `V1_App.png` (App Inventor screen, Stage 3), `V1_PCB.jpg` (bare board top+bottom, Stage 4). Rendered via inline `Figure` helper.
+- Same shell/helpers as Dum-E, plus: `VersionHeading` (Version 1 / Version 2 group cards, sidebar non-indented with indented stages under them) and an `"abandoned"` badge/status variant (red, used for Stage 3 Bluetooth app).
+- Source of facts: user's draft MD + `D:\WatchOutMilk` repo sketches. V2 is entirely under development — no V2 code/images/measurements; don't invent any. R1–R4 = 220 Ω.

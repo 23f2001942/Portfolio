@@ -26,9 +26,9 @@
     },
     {
       "id": "milkfroth",
-      "description": "Image of the Smart Milk Froth Monitor project",
-      "imageUrl": "https://images.unsplash.com/photo-1670597744104-8addd86301ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2ZmZWUlMjBraXRjaGVufGVufDB8fHx8MTc1ODg3NDM1MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "coffee kitchen"
+      "description": "SpillSense thermocouple dipped in milk heating on the stove",
+      "imageUrl": "/carousel/third.png",
+      "imageHint": "milk thermocouple"
     },
     {
       "id": "vitallink",
