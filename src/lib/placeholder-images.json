@@ -33,8 +33,8 @@
     {
       "id": "vitallink",
       "description": "Image of the VitalLink project",
-      "imageUrl": "https://images.unsplash.com/photo-1597765654534-e42ea47ab66a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWVkaWNhbCUyMGRldmljZXxlbnwwfHx8fDE3NTg5NDQ3NTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "medical device"
+      "imageUrl": "/images/VitalLink.png",
+      "imageHint": "breadboard sensors"
     },
     {
       "id": "vendora",

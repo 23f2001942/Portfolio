@@ -1,5 +1,5 @@
 # Portfolio Session Notes
-*Last updated: 2026-09-24*
+*Last updated: 2026-09-26*
 
 ## Project Overview
 Next.js 15 App Router + TypeScript + Tailwind CSS + Shadcn/ui portfolio site.
@@ -111,8 +111,8 @@ Full detail page — the most complex file in the project.
 Styled with cyan border + bg: `bg-[hsl(var(--highlight)/0.06)] border-[hsl(var(--highlight)/0.3)]`
 Label format: **"What Stage X fixes:"** in cyan, then plain text. No arrow icon.
 
-### IntersectionObserver scrollspy
-`rootMargin: "-20% 0px -70% 0px"` — tracks topmost visible section
+### Scrollspy — shared hook `src/hooks/use-scroll-spy.ts` (2026-09-26)
+Used by Dum-E, SpillSense and VitalLink (pass a module-level `sectionIds` const so the effect doesn't re-run every render). The last section whose heading is above 140px from the top is active; at page bottom the last section is active. A sidebar click locks the highlight until the smooth scroll settles (150 ms with no scroll events). This replaced the old IntersectionObserver (`rootMargin -20%/-70%`), which highlighted the wrong section after sidebar jumps. Use this hook for any new project page.
 
 ### What I Learned section
 Flat bullet list, no categories, no bold titles — plain conversational first-person points.
@@ -179,7 +179,7 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 ---
 
 ## Pending / Future Work
-- Other hardware project pages (SkyOne, SkyTwo, AirLink, VitalLink) still show "Coming Soon"
+- Other hardware project pages (SkyOne, SkyTwo, AirLink) still show "Coming Soon"
 - Stage 4 glove controller firmware still in development (not a website task)
 - "Download CV" button was requested in the aerospace repositioning pass but skipped — no CV PDF exists yet in the repo; add it once the user provides one
 - SpillSense: no V2 images/code yet — add them to Stages 5/6 when the user provides them
@@ -193,3 +193,14 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 - All project assets live in top-level `public/spillsense/` (user's choice — NOT under `public/images/`): `V1_Schematic.png` (early LCD+HC-05 wiring, in Stage 1), `V1_App.png` (App Inventor screen, Stage 3), `V1_PCB.jpg` (bare board top+bottom, Stage 4). Rendered via inline `Figure` helper.
 - Same shell/helpers as Dum-E, plus: `VersionHeading` (Version 1 / Version 2 group cards, sidebar non-indented with indented stages under them) and an `"abandoned"` badge/status variant (red, used for Stage 3 Bluetooth app).
 - Source of facts: user's draft MD + `D:\WatchOutMilk` repo sketches. V2 is entirely under development — no V2 code/images/measurements; don't invent any. R1–R4 = 220 Ω.
+
+---
+
+## VitalLink Project Page (src/app/projects/vitallink/page.tsx) — added 2026-09-26
+- BITS F235 (Digital Fundamentals) course project, Apr–May 2025, **Completed** (as a course prototype). XIAO ESP32-C3 + MAX30102 + MLX90614 on shared 100 kHz I2C → Wi-Fi/TCP :5050 → MATLAB App Designer dashboard (R2024b only). Repo: https://github.com/23f2001942/VitalLink, local `D:\VitalLink`.
+- Shell/helpers copied from SpillSense, flat sidebar (no VersionHeading): Overview, Components, Architecture, Stages 1–5 (all Completed), Results & Status, What I Learned. The red "not a medical device" disclaimer box sits **just below the hero image, above Overview** (user's choice), not in Results.
+- Code snippets are copied from the real repo files (App.mlapp code was read by unzipping it → `matlab/document.xml`). Escape `\n` as `\\n` inside template-literal CodeBlocks.
+- Hero + homepage card image: `/images/VitalLink.png`, an **AI-enhanced** version of the user's prototype photo (some pin labels are garbled), so don't use it as a wiring reference. `vitallink` in placeholder-images.json points to it; card has `status: 'completed'` + repoUrl.
+- Assets in `public/vitallink/`: `XIAO_Pinout.png` (Seeed), `MAX30102.png` / `MLX90614.png` (Last Minute Engineers; captions credit the sources), and 4 GUI screenshots `Waiting_to_Start`, `Server_Running`, `Finger_Detection` (actually shows "Stabilizing..." with 96 / 32.13 still on screen), `Connection_Lost`.
+- Honesty constraints: accuracy never validated, update rate (~5–6 s) is calculated not measured, 32.13 °C is skin temperature. Don't claim more.
+- User considers the project **fully done**: no "planned / not done" rows, and no "never started" future-work lines. Don't re-add a future-work list.

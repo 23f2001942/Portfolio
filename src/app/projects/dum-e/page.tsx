@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 
@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Clock, Circle } from "lucide-react";
 import Image from "next/image";
+import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
 const sections = [
   { id: "overview",    label: "Overview",         indent: false },
@@ -28,6 +29,8 @@ const sections = [
   { id: "results",     label: "Results & Status", indent: false },
   { id: "learned",     label: "What I Learned",   indent: false },
 ];
+
+const sectionIds = sections.map(s => s.id);
 
 const specRows = [
   ["Axes of Motion", "6"],
@@ -205,28 +208,11 @@ function ArrowDown({ label }: { label: string }) {
 }
 
 export default function DumEPage() {
-  const [activeSection, setActiveSection] = useState("overview");
+  const { activeId: activeSection, scrollTo: spyScrollTo } = useScrollSpy(sectionIds);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    const sectionEls = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter(e => e.isIntersecting);
-        if (visible.length > 0) {
-          const topmost = visible.reduce((a, b) => a.boundingClientRect.top < b.boundingClientRect.top ? a : b);
-          setActiveSection(topmost.target.id);
-        }
-      },
-      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-    );
-    sectionEls.forEach(el => observerRef.current?.observe(el!));
-    return () => observerRef.current?.disconnect();
-  }, []);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    spyScrollTo(id);
     setMobileOpen(false);
   };
 

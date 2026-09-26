@@ -373,11 +373,13 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "VitalLink",
-      description: "VitalLink is a compact wireless health monitoring system built with the XIAO ESP32-C3 microcontroller. It measures SpO₂ (blood oxygen saturation) and non-contact body temperature in real time, transmitting data seamlessly to a MATLAB dashboard for live visualisation.",
+      description: "A wireless SpO₂ and temperature monitor built for my Digital Fundamentals (BITS F235) course. A XIAO ESP32-C3 reads a MAX30102 and an MLX90614 over a shared I2C bus and streams the readings over Wi-Fi/TCP to a live MATLAB App Designer dashboard with connection-loss detection.",
       image: "vitallink",
-      tags: ["ESP32", "Arduino", "Sensors", "MATLAB"],
+      tags: ["ESP32-C3", "Arduino", "MATLAB", "I2C", "TCP/Wi-Fi"],
       detailsUrl: "/projects/vitallink",
-      type: "hardware"
+      repoUrl: "https://github.com/23f2001942/VitalLink",
+      type: "hardware",
+      status: "completed"
     },
     {
       name: "Sponnect",

@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Navbar from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Clock, Circle, Github } from "lucide-react";
 import Image from "next/image";
+import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
 const REPO_URL = "https://github.com/23f2001942/SpillSense";
 
@@ -24,6 +25,8 @@ const sections = [
   { id: "results",      label: "Results & Status",         indent: false },
   { id: "learned",      label: "What I Learned",           indent: false },
 ];
+
+const sectionIds = sections.map(s => s.id);
 
 const timelineRows = [
   ["Oct 2020",            "Idea during the COVID-19 lockdown (10th grade), after milk boiled over at home one too many times"],
@@ -289,28 +292,11 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 export default function SpillSensePage() {
-  const [activeSection, setActiveSection] = useState("overview");
+  const { activeId: activeSection, scrollTo: spyScrollTo } = useScrollSpy(sectionIds);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    const sectionEls = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter(e => e.isIntersecting);
-        if (visible.length > 0) {
-          const topmost = visible.reduce((a, b) => a.boundingClientRect.top < b.boundingClientRect.top ? a : b);
-          setActiveSection(topmost.target.id);
-        }
-      },
-      { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-    );
-    sectionEls.forEach(el => observerRef.current?.observe(el!));
-    return () => observerRef.current?.disconnect();
-  }, []);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    spyScrollTo(id);
     setMobileOpen(false);
   };
 
