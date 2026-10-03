@@ -1,5 +1,5 @@
 # Portfolio Session Notes
-*Last updated: 2026-09-26*
+*Last updated: 2026-10-04*
 
 ## Project Overview
 Next.js 15 App Router + TypeScript + Tailwind CSS + Shadcn/ui portfolio site.
@@ -179,7 +179,8 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 ---
 
 ## Pending / Future Work
-- Other hardware project pages (SkyOne, SkyTwo, AirLink) still show "Coming Soon"
+- Other hardware project pages (SkyTwo, AirLink) still show "Coming Soon"
+- SkyOne: flight photos/video not provided yet (page says "Media: not available yet") — add to Test Flights when given
 - Stage 4 glove controller firmware still in development (not a website task)
 - "Download CV" button was requested in the aerospace repositioning pass but skipped — no CV PDF exists yet in the repo; add it once the user provides one
 - SpillSense: no V2 images/code yet — add them to Stages 5/6 when the user provides them
@@ -204,3 +205,12 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 - Assets in `public/vitallink/`: `XIAO_Pinout.png` (Seeed), `MAX30102.png` / `MLX90614.png` (Last Minute Engineers; captions credit the sources), and 4 GUI screenshots `Waiting_to_Start`, `Server_Running`, `Finger_Detection` (actually shows "Stabilizing..." with 96 / 32.13 still on screen), `Connection_Lost`.
 - Honesty constraints: accuracy never validated, update rate (~5–6 s) is calculated not measured, 32.13 °C is skin temperature. Don't claim more.
 - User considers the project **fully done**: no "planned / not done" rows, and no "never started" future-work lines. Don't re-add a future-work list.
+
+---
+
+## SkyOne Project Page (src/app/projects/skyone/page.tsx) — added 2026-10-04
+- F450 + APM 2.8 (ArduCopter 3.2.1) quadcopter, all parts off the shelf (user did NOT design it). Status: flies but **grounded** (Oct 2026) — card stays `in-progress`. No repo link.
+- Source of facts: user's `SkyOne_Portfolio_Draft.md`. Don't invent flight time, payload, range, or media.
+- Shell/helpers copied from VitalLink, flat sidebar: Overview, Components, System Overview, Assembly, Configuration, Test Flights, Results, What I Learned. Extra helpers: `AssemblyStep` (photo left / text right), `Note` (Skill / red Gotcha), `FlightCard`, and an `"open"` red badge (Unresolved).
+- Assets in `public/skyone/`: `quad_x_layout.svg` (Quad X diagram, white bg, rendered `unoptimized`) and `assembly/<step>-<substep>.jpg` (1-1 … 4-3, large 2–4k JPGs, next/image optimizes them).
+- Hero = existing `/images/SkyOne.png`. Flight 6 root cause unconfirmed, Flight 7 unresolved — keep that honesty.
