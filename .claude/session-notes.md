@@ -214,3 +214,13 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 - Shell/helpers copied from VitalLink, flat sidebar: Overview, Components, System Overview, Assembly, Configuration, Test Flights, Results, What I Learned. Extra helpers: `AssemblyStep` (photo left / text right), `Note` (Skill / red Gotcha), `FlightCard`, and an `"open"` red badge (Unresolved).
 - Assets in `public/skyone/`: `quad_x_layout.svg` (Quad X diagram, white bg, rendered `unoptimized`) and `assembly/<step>-<substep>.jpg` (1-1 … 4-3, large 2–4k JPGs, next/image optimizes them).
 - Hero = existing `/images/SkyOne.png`. Flight 6 root cause unconfirmed, Flight 7 unresolved — keep that honesty.
+
+---
+
+## SkyTwo Project Page (src/app/projects/skytwo/page.tsx) — added 2026-10-04
+- F450 + Pixhawk 2.4.8 (ArduCopter 4.6.3, QGC) + M8N GPS. All parts off the shelf (user did NOT design it). Status: flies, **In Progress** (tuning toward autonomy). No repo link.
+- Source of facts: user's `SkyTwo_Portfolio_Draft.md`. Shell copied from SkyOne (same sidebar ids); extra `Pending` helper (dashed camera box) used for the two placeholders.
+- **Pending:** Assembly section (photos not taken yet; only the safety note + placeholder) and Test Flights media. When photos arrive, port SkyOne's `AssemblyStep` helper and use `public/skytwo/assembly/<step>-<sub>.jpg`.
+- Assets: `public/skytwo/quad_x_layout.svg` (743×743, rendered `unoptimized`). Hero = `/images/SkyTwo.png`. Arm colours: black = FR/BL (CCW), red = FL/BR (CW).
+- Card description in portfolio-data.ts rewritten: old one falsely claimed Raspberry Pi, video streaming and CV. RPi is only planned.
+- Honesty: `BATT_AMP_PERVLT` 24.5 unverified in flight, telemetry dropouts unresolved, ~13 min endurance is an estimate, payload/range not measured. Pitch/yaw AutoTune not done.

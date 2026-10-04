@@ -356,7 +356,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "SkyTwo",
-      description: "An advanced evolution of SkyOne, equipped with Pixhawk, Raspberry Pi, GPS, and telemetry. SkyTwo experiments with live video streaming and basic computer vision, pushing toward autonomous flight and smarter aerial capabilities.",
+      description: "My upgrade to SkyOne: the same F450 frame rebuilt around a Pixhawk 2.4.8 with GPS and telemetry. SkyTwo flies in Loiter and returns home on its own with RTL, and I'm now tuning it with log analysis and AutoTune as groundwork for autonomous flight.",
       image: "skytwo",
       tags: [],
       detailsUrl: "/projects/skytwo",
