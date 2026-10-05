@@ -235,3 +235,14 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 
 ## List markers (all project pages) — 2026-10-05
 - `src/components/list-markers.tsx`: `Diamond` (plain bullets, ArchNode items), `BullsEye` (What I Learned only — user's pick), `SpecRow` (labelled points: label column + content, divider between consecutive rows via `[&+.spec-row]`). Each page's `Challenge` helper now just renders `SpecRow`. User disliked "→" bullets; don't reintroduce them ("→" inside sentences meaning direction is fine).
+
+---
+
+## Adding future SkyTwo flights — added 2026-10-05
+- Use the project skill `.claude/skills/skytwo-flight-log/SKILL.md` (auto-loads on "new flight" / a shared .bin). It holds the full workflow and the settled rules.
+- Extractor: `tools/skytwo/extract_flight.py --flight <n> --bin <log>` writes `src/app/projects/skytwo/analysis/data/flight-<n>.json` and prints a report summary. It's generalised from the Flight 4–12 scratchpad script but **not yet run as this exact file**, so sanity-check its output on first use.
+
+## Next up: restructure SkyOne (planned for a new chat)
+- Bring `src/app/projects/skyone/page.tsx` in line with SkyTwo where it makes sense: one card per flight, Detailed Log Analysis / Media dialogs, the shared list markers (already applied), and analysis built from the same `analysis/` system (types/renderer/charts) if SkyOne logs are available.
+- SkyOne runs APM 2.8 / ArduCopter 3.2.1 with **no GPS**, so there's no map and no position data. Its logs (if any) are an older format and the extractor won't work as-is; ask the user what logs/media exist before planning.
+- Keep SkyOne's honesty constraints (see the SkyOne section above): grounded, Flight 6 root cause unconfirmed, Flight 7 unresolved.
