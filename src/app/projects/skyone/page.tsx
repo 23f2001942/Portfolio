@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Circle, ShieldAlert, Wrench, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import { Diamond, BullsEye, SpecRow } from "@/components/list-markers";
 
 const sections = [
   { id: "overview",   label: "Overview" },
@@ -133,15 +134,7 @@ function Code({ children }: { children: React.ReactNode }) {
 }
 
 function Challenge({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex gap-3 mb-3">
-      <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0 text-sm font-bold">→</span>
-      <div>
-        <span className="text-sm font-semibold text-primary">{title} — </span>
-        <span className="text-sm text-muted-foreground leading-relaxed">{children}</span>
-      </div>
-    </div>
-  );
+  return <SpecRow title={title}>{children}</SpecRow>;
 }
 
 function NextBox({ label, children }: { label: string; children: React.ReactNode }) {
@@ -160,7 +153,7 @@ function ArchNode({ title, subtitle, items, accent = false }: { title: string; s
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="text-xs text-muted-foreground flex items-start gap-1.5">
-            <span className={cn("mt-0.5 flex-shrink-0", accent ? "text-[hsl(var(--highlight))]" : "text-muted-foreground")}>→</span>
+            <Diamond muted={!accent} />
             {item}
           </li>
         ))}
@@ -196,7 +189,7 @@ function BulletList({ items }: { items: string[] }) {
     <ul className="space-y-2 text-sm text-muted-foreground mb-4">
       {items.map(item => (
         <li key={item} className="flex gap-2">
-          <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0">→</span>
+          <Diamond />
           <span>{item}</span>
         </li>
       ))}
@@ -637,7 +630,7 @@ export default function SkyOnePage() {
                   "A flight controller only works as well as its sensors. A faulty barometer was enough to take altitude hold off the table completely.",
                 ].map((point, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0 text-sm">→</span>
+                    <BullsEye />
                     <p className="text-[0.9rem] text-muted-foreground leading-relaxed">{point}</p>
                   </li>
                 ))}

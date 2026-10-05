@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Clock, Circle } from "lucide-react";
 import Image from "next/image";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import { Diamond, BullsEye, SpecRow } from "@/components/list-markers";
 
 const sections = [
   { id: "overview",    label: "Overview",         indent: false },
@@ -168,15 +169,7 @@ function StageHeading({ id, title, status }: { id: string; title: string; status
 }
 
 function Challenge({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex gap-3 mb-4">
-      <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0 text-sm font-bold">→</span>
-      <div>
-        <span className="text-sm font-semibold text-primary">{title} — </span>
-        <span className="text-sm text-muted-foreground leading-relaxed">{children}</span>
-      </div>
-    </div>
-  );
+  return <SpecRow title={title}>{children}</SpecRow>;
 }
 
 function ArchNode({ title, subtitle, items, accent = false }: { title: string; subtitle?: string; items: string[]; accent?: boolean }) {
@@ -187,7 +180,7 @@ function ArchNode({ title, subtitle, items, accent = false }: { title: string; s
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="text-xs text-muted-foreground flex items-start gap-1.5">
-            <span className={cn("mt-0.5 flex-shrink-0", accent ? "text-[hsl(var(--highlight))]" : "text-muted-foreground")}>→</span>
+            <Diamond muted={!accent} />
             {item}
           </li>
         ))}
@@ -306,7 +299,7 @@ export default function DumEPage() {
                   ["Confirmed calibration", "PWM constants (SERVOMIN=125, SERVOMAX=625) were physically validated once in Stage 1 and have never been recalculated."],
                 ].map(([title, desc]) => (
                   <li key={title as string} className="flex gap-2">
-                    <span className="text-[hsl(var(--highlight))] mt-0.5">→</span>
+                    <Diamond />
                     <span><span className="text-primary font-medium">{title}.</span> {desc}</span>
                   </li>
                 ))}
@@ -700,7 +693,7 @@ analogSetAttenuation(ADC_11db);  // full 3.3V input range
                   <div key={m.mode} className="border border-border rounded-lg p-4 bg-card">
                     <p className="font-semibold text-primary text-sm mb-1">{m.mode}</p>
                     <p className="text-xs text-muted-foreground mb-2">{m.condition}</p>
-                    <ul className="space-y-1">{m.mappings.map(mp => <li key={mp} className="text-xs text-muted-foreground">→ {mp}</li>)}</ul>
+                    <ul className="space-y-1">{m.mappings.map(mp => <li key={mp} className="text-xs text-muted-foreground flex items-start gap-1.5"><Diamond />{mp}</li>)}</ul>
                   </div>
                 ))}
               </div>
@@ -899,7 +892,7 @@ void loop() {
                   "Web UI retains S1 (Waist): slider control unaffected by glove input",
                 ].map(item => (
                   <li key={item} className="flex gap-2">
-                    <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0">→</span>
+                    <Diamond />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -925,7 +918,7 @@ void loop() {
                   "Cutting yaw cleanly was the right call. The decision took five minutes. I didn't try to work around it or replace it with something equivalent. Knowing when to just remove scope is a skill.",
                 ].map((point, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0 text-sm">→</span>
+                    <BullsEye />
                     <p className="text-[0.9rem] text-muted-foreground leading-relaxed">{point}</p>
                   </li>
                 ))}

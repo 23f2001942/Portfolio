@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, CheckCircle2, Clock, Circle, Github, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import { Diamond, BullsEye, SpecRow } from "@/components/list-markers";
 
 const REPO_URL = "https://github.com/23f2001942/VitalLink";
 
@@ -168,15 +169,7 @@ function Code({ children }: { children: React.ReactNode }) {
 }
 
 function Challenge({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex gap-3 mb-4">
-      <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0 text-sm font-bold">→</span>
-      <div>
-        <span className="text-sm font-semibold text-primary">{title} — </span>
-        <span className="text-sm text-muted-foreground leading-relaxed">{children}</span>
-      </div>
-    </div>
-  );
+  return <SpecRow title={title}>{children}</SpecRow>;
 }
 
 function NextBox({ label, children }: { label: string; children: React.ReactNode }) {
@@ -195,7 +188,7 @@ function ArchNode({ title, subtitle, items, accent = false }: { title: string; s
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="text-xs text-muted-foreground flex items-start gap-1.5">
-            <span className={cn("mt-0.5 flex-shrink-0", accent ? "text-[hsl(var(--highlight))]" : "text-muted-foreground")}>→</span>
+            <Diamond muted={!accent} />
             {item}
           </li>
         ))}
@@ -231,7 +224,7 @@ function BulletList({ items }: { items: string[] }) {
     <ul className="space-y-2 text-sm text-muted-foreground mb-4">
       {items.map(item => (
         <li key={item} className="flex gap-2">
-          <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0">→</span>
+          <Diamond />
           <span>{item}</span>
         </li>
       ))}
@@ -748,7 +741,7 @@ end`} />
                   "Getting a number on the screen isn't the same as getting a correct number. I never checked mine against a real oximeter, and that's the next thing I'd do.",
                 ].map((point, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0 text-sm">→</span>
+                    <BullsEye />
                     <p className="text-[0.9rem] text-muted-foreground leading-relaxed">{point}</p>
                   </li>
                 ))}

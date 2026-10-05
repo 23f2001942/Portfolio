@@ -4,9 +4,14 @@ import { useState } from "react";
 import Navbar from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ChevronDown, CheckCircle2, Circle, ShieldAlert, AlertTriangle, Camera } from "lucide-react";
+import { ChevronDown, CheckCircle2, Circle, ShieldAlert, AlertTriangle, Camera, FileText, Film } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import { Diamond, BullsEye, SpecRow } from "@/components/list-markers";
+
+const FlightAnalysisLoader = dynamic(() => import("./analysis/FlightAnalysisLoader"), { ssr: false });
 
 const sections = [
   { id: "overview",   label: "Overview" },
@@ -61,29 +66,17 @@ const motorRows = [
   ["4", "Back Right",  "CW",  "Red"],
 ];
 
-const flightRows = [
-  ["1", "5 Sep 2025",  "2025-09-05",        "First flight (ArduCopter 3.6.8)", "7 short hops; drifted back-left on every one",           "Addressed by 2026 rework"],
-  ["—", "29 Sep 2026", "Bench (props off)", "Check motor response",            "Uneven motor outputs at one throttle point",             "Resolved (not a fault)"],
-  ["2", "1 Oct 2026",  "27", "First flight on 4.6.3",          "Tilted and yawed on lift-off; cut within seconds",               "Resolved"],
-  ["3", "1 Oct 2026",  "28", "Stabilize, AltHold, Loiter",     "Loiter held position within 40 cm; several hard landings",       "Resolved"],
-  ["4", "2 Oct 2026",  "31", "Loiter flight",                  "7.1 min in Loiter, soft landing with the Land switch",          "Passed"],
-  ["5", "2 Oct 2026",  "32", "Mode tour and RTL tests",        "9.4 min flight; RTL landed itself",                              "Passed (one firm Stabilize touchdown)"],
-  ["6", "2 Oct 2026",  "33", "Short flight",                   "Flew fine, but took off before GPS lock",                        "Passed, habit to fix"],
-  ["7", "2 Oct 2026",  "34", "Loiter and harder manoeuvring",  "Two good flights; disarmed in the air after an RTL",             "Habit fixed"],
-  ["8", "3 Oct 2026",  "35", "Hover vibration data + roll AutoTune", "AutoTune failed; battery run too low",                     "Resolved"],
-  ["9", "3 Oct 2026",  "37", "Notch filter + roll AutoTune",   "AutoTune succeeded; vibration much lower",                      "Passed"],
-];
-
 const workingRows = [
-  "All five modes I use work in flight: Stabilize, AltHold, Loiter, RTL and Land. Loiter held position to 13–17 cm RMS (log 28)",
+  "All five modes I use work in flight: Stabilize, AltHold, Loiter, RTL and Land. Loiter held position to 13–17 cm RMS (Flight 3)",
   "I can take off and land in Loiter, and land hands-off with the Land switch or RTL, at about 0.5 m/s",
-  "RTL has been tested several times: it climbs to 15 m, returns home and lands itself",
+  "RTL has been tested many times: it climbs to 15 m, returns home and lands itself",
   "The radio failsafe (RTL) has been tested on the ground by switching off the transmitter",
-  "The battery failsafes (capacity-based RTL and Land) and the geofence are set up",
-  "The battery voltage reading matches my multimeter, and arming is blocked on a tired pack",
-  "The GPS and external compass are healthy (up to 22 satellites, HDOP around 0.5–0.7)",
+  "The capacity battery failsafe has triggered RTL in flight exactly as planned (Flights 10–12)",
+  "The geofence works: Loiter stops short of it, and a breach in AltHold triggers RTL",
+  "Battery voltage matches my multimeter, and the corrected current reading matches the charger to about 1%",
+  "The GPS and external compass are healthy (up to 24 satellites, HDOP under 0.8)",
   "The harmonic notch filter removed the 80 Hz motor vibration from the roll axis",
-  "Roll AutoTune is complete",
+  "AutoTune is complete on all three axes, and the tune holds attitude to about 1° RMS while flying hard",
 ];
 
 type BadgeKind = "done" | "progress" | "open";
@@ -142,15 +135,7 @@ function Code({ children }: { children: React.ReactNode }) {
 }
 
 function Challenge({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex gap-3 mb-3">
-      <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0 text-sm font-bold">→</span>
-      <div>
-        <span className="text-sm font-semibold text-primary">{title} — </span>
-        <span className="text-sm text-muted-foreground leading-relaxed">{children}</span>
-      </div>
-    </div>
-  );
+  return <SpecRow title={title}>{children}</SpecRow>;
 }
 
 function NextBox({ label, children }: { label: string; children: React.ReactNode }) {
@@ -178,7 +163,7 @@ function ArchNode({ title, subtitle, items, accent = false }: { title: string; s
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="text-xs text-muted-foreground flex items-start gap-1.5">
-            <span className={cn("mt-0.5 flex-shrink-0", accent ? "text-[hsl(var(--highlight))]" : "text-muted-foreground")}>→</span>
+            <Diamond muted={!accent} />
             {item}
           </li>
         ))}
@@ -214,7 +199,7 @@ function BulletList({ items }: { items: React.ReactNode[] }) {
     <ul className="space-y-2 text-sm text-muted-foreground mb-4">
       {items.map((item, i) => (
         <li key={i} className="flex gap-2">
-          <span className="text-[hsl(var(--highlight))] mt-0.5 flex-shrink-0">→</span>
+          <Diamond />
           <span>{item}</span>
         </li>
       ))}
@@ -231,12 +216,46 @@ function Gotcha({ children }: { children: React.ReactNode }) {
   );
 }
 
-function FlightCard({ title, badge, badgeLabel, rows, children }: { title: string; badge: BadgeKind; badgeLabel: string; rows: [string, React.ReactNode][]; children?: React.ReactNode }) {
+function FlightDialog({ title, label, icon, children }: { title: string; label: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-5 mb-5 shadow-sm">
-      <div className="flex flex-wrap items-center gap-3 mb-3">
-        <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))]">{title}</h3>
-        <StatusBadge badge={badge} label={badgeLabel} />
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border bg-background text-xs font-medium text-muted-foreground hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight)/0.5)] hover:bg-[hsl(var(--highlight)/0.06)] transition-colors">
+          {icon}{label}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-5xl w-[calc(100vw-2rem)] h-[85vh] p-0 gap-0 flex flex-col overflow-hidden rounded-xl">
+        <DialogHeader className="px-5 py-3 border-b border-border text-left">
+          <DialogTitle className="text-base text-primary pr-8">{title} · <span className="text-[hsl(var(--highlight-sub))] font-medium">{label}</span></DialogTitle>
+        </DialogHeader>
+        <div className="flex-1 min-h-0">{children}</div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function FlightCard({ flight, title, badge, badgeLabel, rows, children }: { flight?: number; title: string; badge: BadgeKind; badgeLabel: string; rows: [string, React.ReactNode][]; children?: React.ReactNode }) {
+  const short = title.split(" — ")[0];
+  return (
+    <div id={flight ? `flight-${flight}` : undefined} className="rounded-xl border border-border bg-card p-5 mb-5 shadow-sm scroll-mt-24">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+        <div className="flex flex-wrap items-center gap-3">
+          <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))]">{title}</h3>
+          <StatusBadge badge={badge} label={badgeLabel} />
+        </div>
+        {flight && (
+          <div className="flex flex-wrap gap-2">
+            <FlightDialog title={short} label="Detailed Log Analysis" icon={<FileText className="w-3.5 h-3.5" />}>
+              <div className="h-full overflow-y-auto"><FlightAnalysisLoader flight={flight} /></div>
+            </FlightDialog>
+            <FlightDialog title={short} label="Media" icon={<Film className="w-3.5 h-3.5" />}>
+              <div className="h-full flex flex-col items-center justify-center gap-3 p-8 text-center">
+                <Camera className="w-8 h-8 text-muted-foreground/60" />
+                <p className="text-sm text-muted-foreground max-w-sm">Photos and video for this flight are being collected and will be added soon.</p>
+              </div>
+            </FlightDialog>
+          </div>
+        )}
       </div>
       {rows.map(([label, body]) => (
         <Challenge key={label} title={label}>{body}</Challenge>
@@ -457,7 +476,7 @@ export default function SkyTwoPage() {
               <Para>The Pixhawk&apos;s safety switch is in use, so I have to press it before the drone can arm.</Para>
               <Table headers={["Switch", "Channel", "Function"]} rows={[
                 ["SB", "CH5 (3-position)", "Flight mode: up Stabilize, middle AltHold, down Loiter"],
-                ["SA", "CH6",              "Normally Land. Temporarily set to trigger AutoTune (RC6_OPTION = 17) while I tune"],
+                ["SA", "CH6",              "Land (RC6_OPTION = 18). It was temporarily set to AutoTune (RC6_OPTION = 17) while I tuned"],
                 ["SC", "CH7",              "RTL when fully down"],
                 ["SD", "CH8",              "Arm / disarm"],
               ]} />
@@ -466,7 +485,7 @@ export default function SkyTwoPage() {
               <SubHeading>Failsafes & Safety Limits</SubHeading>
               <Challenge title="Radio">The throttle failsafe is on at 975 PWM and is set to always RTL. I tested it by switching off the transmitter: the failsafe triggered, and it cleared when I turned the transmitter back on.</Challenge>
               <Challenge title="Battery">The failsafe is based on remaining capacity. RTL triggers at 2000 mAh left (<Code>BATT_LOW_MAH</Code>), and Land at 1500 mAh left (<Code>BATT_CRT_MAH</Code>). The voltage source is set to sag-compensated voltage.</Challenge>
-              <Challenge title="Geofence">A circle of 60 m radius with a 30 m altitude limit. Breaching it triggers RTL.</Challenge>
+              <Challenge title="Geofence">A circle with a 30 m altitude limit. Breaching it triggers RTL. The radius was 60 m until Flight 11, and is now 40 m (<Code>FENCE_RADIUS 40</Code>, <Code>FENCE_MARGIN 2</Code>). With <Code>AVOID_ENABLE 3</Code>, Loiter slows and stops short of the fence instead of crossing it. AltHold has no avoidance, so there the fence only reacts after it&apos;s crossed.</Challenge>
               <Challenge title="RTL altitude">15 m.</Challenge>
               <Challenge title="Other">The GCS failsafe is off, and the EKF and dead-reckoning failsafes are at their defaults. Crash check and the vibration failsafe are on.</Challenge>
 
@@ -474,27 +493,36 @@ export default function SkyTwoPage() {
               <BulletList items={[
                 "The monitor is set to analog voltage and current on the standard Pixhawk pins (2/3), with capacity 6200 mAh.",
                 <>I calibrated <Code>BATT_VOLT_MULT</Code> to 10.975, so QGC&apos;s voltage matches my multimeter.</>,
-                <>Current needed correcting, which I worked out from the charger. After the Oct 3 evening flights the flight controller had counted about 3,609 mAh, but the IMAX B6 put back 5,268 mAh. That means the sensor was under-reading by about 31%, so I changed <Code>BATT_AMP_PERVLT</Code> from 17 to 24.5. I haven&apos;t verified this in a flight yet.</>,
+                <>Current needed correcting, which I worked out from the charger. After the Oct 3 evening flights the flight controller had counted about 3,609 mAh, but the IMAX B6 put back 5,268 mAh. That means the sensor was under-reading by about 31%, so I changed <Code>BATT_AMP_PERVLT</Code> from 17 to 24.5.</>,
+                "The correction holds: hover current now reads 19–21 A, and after Flight 11 the charger put back 4,301 mAh against 4,351 logged (about 1% apart).",
               ]} />
 
               <SubHeading>Vibration & the Notch Filter</SubHeading>
               <BulletList items={[
-                <>I turned on high-rate IMU logging (<Code>INS_LOG_BAT_MASK = 1</Code>) and logged a 2-minute hover (log 35). The data showed a strong motor-noise peak at 80 Hz, with harmonics at 160 and 240 Hz, and it was about 9× stronger on roll than on pitch.</>,
+                <>I turned on high-rate IMU logging (<Code>INS_LOG_BAT_MASK = 1</Code>) and logged a 2-minute hover (Flight 8). The data showed a strong motor-noise peak at 80 Hz, with harmonics at 160 and 240 Hz, and it was about 9× stronger on roll than on pitch.</>,
                 <>Based on that, I set up ArduPilot&apos;s throttle-based harmonic notch filter (<Code>INS_HNTCH_MODE = 1</Code>): 80 Hz at a reference hover throttle of 0.41, bandwidth 40 Hz, attenuation 40 dB, covering the 1st to 3rd harmonics.</>,
-                "The next flight (log 37) was logged with the filter on, before and after filtering. The 80 Hz roll peak dropped by more than 99%, and the 160/240 Hz peaks disappeared. Median vertical vibration fell from about 12 to about 9 m/s².",
+                "The next session (Flight 9) was logged with the filter on, before and after filtering. The 80 Hz roll peak dropped by more than 99%, and the 160/240 Hz peaks disappeared. Median vertical vibration fell from about 12 to about 9 m/s².",
               ]} />
 
-              <SubHeading>AutoTune (Roll)</SubHeading>
+              <SubHeading>AutoTune</SubHeading>
               <BulletList items={[
-                "My first roll AutoTune (log 35, before the notch filter) failed within 6 seconds with \"Failed to level\". Vibration was making the roll rate too noisy.",
-                "With the notch filter on, the second attempt (log 37) finished in about 4 minutes. The main changes were roll rate D from 0.0036 to 0.0059, and roll angle P from 4.5 to 16.67.",
-                <>The gains didn&apos;t save automatically, because I switched to RTL during AutoTune, so I entered them by hand in QGC. QGC limits <Code>ATC_ANG_RLL_P</Code> to 3–12, so I set it to 10.</>,
-                "Pitch and yaw AutoTune are still to do.",
+                "Roll: my first attempt (Flight 8, before the notch filter) failed within 6 seconds with \"Failed to level\". Vibration was making the roll rate too noisy.",
+                "Roll: with the notch filter on, the second attempt (Flight 9) finished in about 4 minutes. The main changes were roll rate D from 0.0036 to 0.0059, and roll angle P from 4.5 to 16.67.",
+                <>The roll gains didn&apos;t save automatically, because I switched to RTL during AutoTune, so I entered them by hand in QGC (angle P at first set to 10, inside QGC&apos;s 3–12 range).</>,
+                "Pitch: failed to level twice in gusty air (Flight 10), then succeeded and saved in calm morning air (Flight 11).",
+                "Yaw: succeeded in Flight 11, but I kept hovering in AutoTune until the battery failsafe triggered RTL, which cancelled the save. I entered the gains by hand.",
+                <>Roll angle P was then set to 14.4 to match pitch, following ArduPilot developer practice of using the lower of the two results. Values above QGC&apos;s ranges were force-saved; the ranges are guidance and the firmware doesn&apos;t clamp them.</>,
+              ]} />
+
+              <Table headers={["Axis", "Rate P / I / D", "Angle P", "Max accel"]} rows={[
+                ["Roll",  "0.137 / 0.137 / 0.0059",   "14.4",  "93285"],
+                ["Pitch", "0.178 / 0.178 / 0.00795",  "14.40", "95895"],
+                ["Yaw",   "0.734 / 0.073 / 0",        "4.849", "13648"],
               ]} />
 
               <SubHeading>Other Parameter Changes</SubHeading>
               <Table headers={["Parameter", "Value", "Why"]} rows={[
-                ["MOT_THST_HOVER", "0.41", "0.25 at first, then 0.38. After it learned 0.534 from a nearly flat battery in log 35, I reset it to 0.41."],
+                ["MOT_THST_HOVER", "0.41", "0.25 at first, then 0.38. After it learned 0.534 from a nearly flat battery in Flight 8, I reset it to 0.41. Hover learning now keeps it around 0.41–0.43."],
                 ["PILOT_SPEED_DN", "100",  "Slower pilot-commanded descent."],
               ]} />
             </section>
@@ -502,34 +530,37 @@ export default function SkyTwoPage() {
             {/* TEST FLIGHTS */}
             <section>
               <SectionHeading id="flights" title="Test Flights" />
-              <Para>All flights were at the BITS Hyderabad campus New Football Ground.</Para>
-              <Table headers={["#", "Date", "Log", "Goal", "Outcome", "Status"]} rows={flightRows} />
+              <Para>
+                All flights were at the BITS Hyderabad campus New Football Ground. Each flight has a <span className="font-medium text-primary">Detailed Log Analysis</span> built from its flight-controller log, and a <span className="font-medium text-primary">Media</span> view for photos and video.
+              </Para>
               <SubHeading>Timing & Conditions</SubHeading>
               <BulletList items={[
                 "1 Oct: light S–SW breeze.",
-                "2 Oct: morning (logs start at 07:14, 07:27, 09:31 and 09:42).",
-                "3 Oct: log 35 in the morning, log 37 in the evening.",
+                "2 Oct: morning (flights start at 07:14, 07:27, 09:31 and 09:42).",
+                "3 Oct: Flight 8 in the morning, Flight 9 in the evening.",
+                "4 Oct: evening, gusty air.",
+                "5 Oct: Flight 11 in calm early-morning air, Flight 12 at midday.",
               ]} />
-              <Pending><span className="font-medium text-primary">Media:</span> not available yet. Photos and video will be added later.</Pending>
 
               <SubHeading>2025: First Flight</SubHeading>
-              <FlightCard title="Flight 1 — 5 Sep 2025 (ArduCopter 3.6.8)" badge="done" badgeLabel="Addressed by 2026 rework" rows={[
+              <FlightCard flight={1} title="Flight 1 — 5 Sep 2025, 17:09 (ArduCopter 3.6.8)" badge="done" badgeLabel="Addressed by 2026 rework" rows={[
                 ["Testing", "First flight of SkyTwo. Throttle only, with no roll, pitch or yaw inputs."],
                 ["What happened", "11 arm cycles and 7 short hops of 2–4 m, all in Stabilize. It drifted back-left on every hop, by 1–14 m."],
-                ["Root cause", "The drift itself was never pinned down; it was either wind or a 1–2° level bias. The log also showed several setup problems:"],
-              ]}>
-                <div className="pl-6">
-                  <BulletList items={[
-                    "The battery monitor was mis-wired in the parameters (wrong pins, voltage only). Its voltage reading rose under load.",
-                    "The CW motors ran about 180 µs higher than the CCW pair, which is a yaw imbalance.",
-                    "Hover throttle was set wrong, at 0.35 against an actual ~0.23.",
-                    "Every landing was hard.",
-                    "Loiter wasn't on the mode switch.",
-                    "The internal compass picked up motor interference.",
-                  ]} />
-                </div>
-                <Challenge title="Fix">I stopped working on the drones after this flight. When I came back in September 2026, I upgraded the firmware to 4.6.3 and redid the whole configuration, which fixed every item above (see Configuration &amp; Calibration).</Challenge>
-              </FlightCard>
+                ["Root cause", <>
+                  The drift itself was never pinned down; it was either wind or a 1–2° level bias. The log also showed several setup problems:
+                  <div className="mt-2">
+                    <BulletList items={[
+                      "The battery monitor was mis-wired in the parameters (wrong pins, voltage only). Its voltage reading rose under load.",
+                      "The CW motors ran about 180 µs higher than the CCW pair, which is a yaw imbalance.",
+                      "Hover throttle was set wrong, at 0.35 against an actual ~0.23.",
+                      "Every landing was hard.",
+                      "Loiter wasn't on the mode switch.",
+                      "The internal compass picked up motor interference.",
+                    ]} />
+                  </div>
+                </>],
+                ["Fix", "I stopped working on the drones after this flight. When I came back in September 2026, I upgraded the firmware to 4.6.3 and redid the whole configuration, which fixed every item above (see Configuration & Calibration)."],
+              ]} />
 
               <NextBox label="Stepping away:">After this flight I stepped away from both drones to learn more about UAVs, and came back in September 2026.</NextBox>
 
@@ -538,39 +569,39 @@ export default function SkyTwoPage() {
                 ["Issue", "At one throttle setting, the four motors weren't responding equally."],
                 ["Root cause", "It wasn't a hardware fault. On a table, the drone can't actually level itself. The flight controller read about 1.5° right roll and 2.8° nose-up, and kept building up correction (I-term windup). Stick tests showed every output was mapped correctly."],
               ]} />
-              <FlightCard title="Flight 2 — 1 Oct 2026, log 27" badge="done" badgeLabel="Resolved" rows={[
+              <FlightCard flight={2} title="Flight 2 — 1 Oct 2026, 08:47" badge="done" badgeLabel="Resolved" rows={[
                 ["Testing", "First flight after the 4.6.3 upgrade."],
                 ["What happened", "As throttle came up, it tilted nose-up and left, and yawed clockwise from 199° to 270°. The flight controller pushed the back-left motor hard and pinned the front-right motor at minimum. I cut it within seconds, after it had risen only about 0.7 m."],
                 ["Root cause", "A reversed prop on a CCW motor (back left)."],
                 ["Fix", "Put the correct prop on."],
               ]} />
-              <FlightCard title="Flight 3 — 1 Oct 2026, log 28" badge="done" badgeLabel="Resolved" rows={[
+              <FlightCard flight={3} title="Flight 3 — 1 Oct 2026, 09:27" badge="done" badgeLabel="Resolved" rows={[
                 ["Testing", "Stabilize, AltHold and Loiter."],
                 ["What happened", "7 arm cycles, about 4 minutes in the air. Loiter held position to 13–17 cm RMS (worst 40 cm), and altitude hold was within 4–6 cm RMS. GPS had 19–22 satellites, vibration was well under limits, and the CW/CCW imbalance from 2025 was down to 1–41 µs. But four of the landings were hard, the last one at over 5 m/s."],
                 ["Root cause", <>Every hard landing started when I switched from AltHold, Loiter or RTL to Stabilize to land. I thought landing required Stabilize. <Code>MOT_THST_HOVER</Code> was still 0.25 when SkyTwo actually needed 0.33–0.42, so mid-stick in Stabilize gave only 60–75% of hover thrust, and the drone dropped.</>],
                 ["Fix", <>Set <Code>MOT_THST_HOVER</Code> to 0.38 and <Code>PILOT_SPEED_DN</Code> to 100. Changed my habit: I now take off and land in Loiter, or land with the Land switch or RTL, instead of switching to Stabilize.</>],
               ]} />
-              <FlightCard title="Flight 4 — 2 Oct 2026, log 31" badge="done" badgeLabel="Passed" rows={[
+              <FlightCard flight={4} title="Flight 4 — 2 Oct 2026, 07:14" badge="done" badgeLabel="Passed" rows={[
                 ["Testing", "A full flight in Loiter."],
                 ["What happened", "Armed and took off in Loiter, and flew for 7.1 minutes (up to 70 m away and 5.5 m high). Landed with the Land switch at 0.6 m/s, with zero accelerometer clipping. Used 1,635 mAh."],
               ]} />
-              <FlightCard title="Flight 5 — 2 Oct 2026, log 32" badge="done" badgeLabel="Passed (one firm Stabilize touchdown)" rows={[
+              <FlightCard flight={5} title="Flight 5 — 2 Oct 2026, 07:27" badge="done" badgeLabel="Passed (one firm Stabilize touchdown)" rows={[
                 ["Testing", "Flight modes and RTL."],
                 ["What happened", "A short Stabilize hop first. The throttle was slightly below hover, so it sank and touched down firmly at about 1.6 m/s. Then a 9.4-minute flight: Stabilize → AltHold → RTL → back to AltHold → RTL. Both RTLs climbed to 15 m and came home. I cancelled the first one with the mode switch, and the second landed itself at about 0.5 m/s."],
                 ["Battery", "Raw voltage dipped to 9.79 V under load, but the sag-compensated reading stayed at 10.98 V, so the failsafe correctly didn't trigger. After landing, the arming-voltage check stopped me from flying again on a tired pack."],
               ]} />
-              <FlightCard title="Flight 6 — 2 Oct 2026, log 33" badge="progress" badgeLabel="Passed, habit to fix" rows={[
+              <FlightCard flight={6} title="Flight 6 — 2 Oct 2026, 09:31" badge="progress" badgeLabel="Passed, habit to fix" rows={[
                 ["Testing", "A short flight, after recharging the battery."],
                 ["What happened", "Flew for 1.6 minutes, up to 21.3 m in Stabilize and AltHold. Landed with the Land switch at 0.5 m/s. I took off 7 seconds after power-up, about 80 seconds before the GPS was in use. During that window there was no Loiter, and a radio failsafe would have meant Land instead of RTL."],
                 ["Fix", "Wait for GPS lock and a home position before taking off."],
               ]} />
-              <FlightCard title="Flight 7 — 2 Oct 2026, log 34" badge="done" badgeLabel="Habit fixed" rows={[
+              <FlightCard flight={7} title="Flight 7 — 2 Oct 2026, 09:42" badge="done" badgeLabel="Habit fixed" rows={[
                 ["Testing", "Loiter flights and harder manoeuvring."],
                 ["What happened", "Two Loiter flights, each ended by RTL (7.8 minutes total, up to 15.8 m). In the second flight I used full stick: up to 32° pitch, motors near their ceiling. Pitch overshot by up to about 11° on fast reversals, so the default tune was loose at the edges. After the first RTL touched down, I switched to Stabilize with the throttle still at mid. It hopped back up to about 0.5 m, and I disarmed it in the air, so it dropped."],
                 ["Root cause", "The same Stabilize-at-mid-throttle habit."],
                 ["Fix", "After touchdown, stay in RTL, Land or Loiter with the throttle at minimum and let it disarm itself. The overshoot is one reason I moved on to AutoTune."],
               ]} />
-              <FlightCard title="Flight 8 — 3 Oct 2026 (morning), log 35" badge="done" badgeLabel="Resolved" rows={[
+              <FlightCard flight={8} title="Flight 8 — 3 Oct 2026, 06:55" badge="done" badgeLabel="Resolved" rows={[
                 ["Testing", "A 2-minute hover with high-rate IMU logging for vibration analysis, plus a roll AutoTune attempt."],
                 ["What happened", "3 flights, about 17.8 minutes in the air. Roll AutoTune failed after 6 seconds with \"Failed to level\". I ran the battery down to 9.06 V under load; it lost thrust at the end and touched down hard, at about 3–4 m/s. Telemetry to the laptop kept disconnecting and reconnecting once the drone was airborne."],
                 ["Root cause", "The vibration data showed a strong 80 Hz motor peak, plus harmonics, that made the roll rate too noisy for AutoTune. The hard landing came from running the pack too low. That flat pack also made the hover-throttle learning save a wrong value, 0.534."],
@@ -578,10 +609,31 @@ export default function SkyTwoPage() {
               ]}>
                 <Gotcha><span className="font-semibold text-red-400">Still open: </span>the telemetry dropouts are unresolved.</Gotcha>
               </FlightCard>
-              <FlightCard title="Flight 9 — 3 Oct 2026 (evening), log 37" badge="done" badgeLabel="Passed" rows={[
+              <FlightCard flight={9} title="Flight 9 — 3 Oct 2026, 20:42" badge="done" badgeLabel="Passed" rows={[
                 ["Testing", "The notch filter, and a second roll AutoTune."],
                 ["What happened", "2 flights, about 15.3 minutes, up to 14.7 m and 57.8 m from home, with 18–19 satellites. The 80 Hz roll peak dropped by more than 99%, and median vertical vibration fell from about 12 to about 9 m/s². Roll AutoTune completed in about 4 minutes. Both touchdowns were soft, at about 0.5–0.7 m/s."],
-                ["Notes", "Because I switched to RTL during AutoTune, the gains didn't save, so I entered them manually afterwards. Log 36 that evening was only a battery pre-arm error. In log 38 I couldn't fly after a power cycle because the battery voltage was too low."],
+                ["Notes", "Because I switched to RTL during AutoTune, the gains didn't save, so I entered them manually afterwards. An earlier attempt that evening was stopped by a battery pre-arm error, and after a later power cycle I couldn't fly because the battery voltage was too low."],
+              ]} />
+              <FlightCard flight={10} title="Flight 10 — 4 Oct 2026, 17:06" badge="done" badgeLabel="Resolved" rows={[
+                ["Testing", "Pitch AutoTune, and the corrected current sensor."],
+                ["What happened", "3 flights on one battery, about 13.2 minutes in the air, up to 27.6 m and 58.1 m from home. Pitch AutoTune was tried twice from Loiter. The first attempt failed to level after 20 s; the second worked for about six minutes, then failed to level just before completing. In the third flight the capacity failsafe triggered RTL at exactly 4,201 mAh used, as planned, and landed SkyTwo softly at 0.6 m/s."],
+                ["Root cause", "Before both failures, the target heading swung about 90–155° with the yaw stick centred, which AutoTune can't tolerate. Gusty air is the most likely contributor. No pitch gains were saved."],
+                ["Also confirmed", <>With <Code>BATT_AMP_PERVLT</Code> at 24.5, hover current now reads 19–21 A, as the charger comparison predicted.</>],
+                ["Fix", "Retry pitch in calm early-morning air."],
+              ]}>
+                <Gotcha><span className="font-semibold text-red-400">Still open: </span>telemetry was marginal; I had to follow SkyTwo with the laptop to keep the link.</Gotcha>
+              </FlightCard>
+              <FlightCard flight={11} title="Flight 11 — 5 Oct 2026, 06:51" badge="done" badgeLabel="Passed" rows={[
+                ["Testing", "Pitch and yaw AutoTune."],
+                ["What happened", "2 flights in calm morning air, about 13 minutes in the air on one battery. Pitch AutoTune reported Success and saved its gains when I landed and disarmed in AutoTune. Yaw AutoTune also reported Success after about 7 minutes. Vibration was the lowest yet, with no clipping."],
+                ["Issue", "After yaw Success I kept hovering in AutoTune for about 50 s, until the capacity failsafe triggered RTL. That stopped AutoTune and restored the old yaw gains. Separately, a parameter write between flights reset pitch rate P and I back to 0.137."],
+                ["Fix", "Entered all gains by hand and verified them in the parameter file, so all three axes now carry AutoTune gains. Set switch SA back to Land. Habit: land as soon as the twitching stops."],
+              ]} />
+              <FlightCard flight={12} title="Flight 12 — 5 Oct 2026, 11:03" badge="done" badgeLabel="Passed" rows={[
+                ["Testing", "First flight on the full AutoTune, with the geofence reduced to 40 m."],
+                ["What happened", "One 12.4-minute flight on a full battery, flying briskly at up to 11.3 m/s. Roll and pitch errors were about 1° RMS, the best of any flight so far, with no rocking or motor stutter. In Loiter, SkyTwo stopped short of the fence like an invisible wall. In AltHold, a fast dash crossed the fence; the breach triggered RTL, but momentum carried it to about 59.6 m before it turned back, and I took over in Loiter. I ended with RTL from switch SC, and the capacity failsafe also triggered at 4,200 mAh during that RTL."],
+                ["Why", "AltHold doesn't use fence avoidance, so the fence only reacts after it's crossed, and at 10 m/s SkyTwo needs about 20 m to stop. Afterwards it refused to arm, correctly: the battery failsafe stays latched until reboot, and the pack rested below the 11.4 V arming voltage."],
+                ["Lesson", "Keep the fence well inside the safe area, and remember the AltHold overshoot."],
               ]} />
             </section>
 
@@ -599,24 +651,20 @@ export default function SkyTwoPage() {
               </div>
 
               <SubHeading>Still To Do</SubHeading>
-              <Challenge title="Tuning">Pitch and yaw AutoTune aren&apos;t done yet.</Challenge>
-              <Challenge title="Telemetry">The link to the laptop keeps disconnecting and reconnecting while the drone is in the air.</Challenge>
-              <Challenge title="Current sensor">The correction (<Code>BATT_AMP_PERVLT</Code> from 17 to 24.5) is set, but I haven&apos;t verified it in a flight yet.</Challenge>
-              <Challenge title="Switch SA">Temporarily set to AutoTune. Its normal job is Land, and I&apos;ll set it back after tuning.</Challenge>
-              <Challenge title="Autonomy">I haven&apos;t tried autonomous missions yet, and the Raspberry Pi isn&apos;t integrated.</Challenge>
+              <Challenge title="Telemetry">The link to the laptop is still unreliable while the drone is in the air. It needs fixing before autonomous flight.</Challenge>
+              <Challenge title="Autonomy">Next is Phase 1: RTL from Loiter at a distance, then Guided mode from QGC. I haven&apos;t tried autonomous missions yet, and the Raspberry Pi isn&apos;t integrated.</Challenge>
+              <Challenge title="Motor balance">The CW motors run about 35–38 µs busier than the CCW pair. It&apos;s steady, not getting worse, but I want to check motor alignment.</Challenge>
 
               <SubHeading>Measured Results (from flight logs)</SubHeading>
               <Table headers={["Measurement", "Value"]} rows={[
-                ["Longest single flight",          "9.4 min (log 32, 2 Oct)"],
-                ["Longest session on one battery", "≈ 17.8 min over 3 flights (log 35). That session ran the pack too low, so I don't treat it as normal endurance."],
-                ["Highest altitude",               "21.3 m (log 33)"],
-                ["Furthest distance from home",    "87 m (log 32)"],
-                ["Hover current",                  "≈ 19–22 A, after correcting the current sensor against the charger"],
+                ["Longest single flight",          "12.4 min (Flight 12, 5 Oct)"],
+                ["Air time per pack",              "≈ 12.4–13.2 min to the capacity failsafe at 4,200 mAh used (Flights 10–12)"],
+                ["Highest altitude",               "27.6 m (Flight 10)"],
+                ["Furthest distance from home",    "87 m (Flight 5)"],
+                ["Top speed",                      "11.3 m/s (Flight 12)"],
+                ["Hover current",                  "≈ 19–21 A, after correcting the current sensor against the charger"],
+                ["Attitude tracking (full tune)",  "Roll and pitch error ≈ 1° RMS while flying hard (Flight 12)"],
               ]} />
-              <div className="flex items-start gap-3 text-sm text-muted-foreground mb-2">
-                <Circle className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 mt-0.5" />
-                <span><span className="font-medium text-primary">Estimated (not measured):</span> about 13 minutes of usable flight per 6200 mAh pack, from the corrected hover current of roughly 330 mAh per minute.</span>
-              </div>
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Circle className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 mt-0.5" />
                 <span><span className="font-medium text-primary">Not measured:</span> payload, range.</span>
@@ -634,11 +682,12 @@ export default function SkyTwoPage() {
                   "I had a wrong habit. I thought I had to land in Stabilize. Once I learned I could take off and land in Loiter, or let Land and RTL do it, my landings became soft.",
                   "Vibration analysis is worth doing before tuning. My first AutoTune failed in seconds. After I found the 80 Hz motor peak in the logs and set up a notch filter, it worked.",
                   "My flight controller's battery readings aren't automatically right. Comparing its mAh count with what the charger put back showed the current sensor was under-reading by about 31%.",
+                  "AutoTune only keeps its gains if I land and disarm while still in AutoTune. Switching to RTL, or letting the battery failsafe take over, threw away two good results, and calm air made the difference between a failed and a successful pitch tune.",
                   "Running a pack too low has real consequences. It cost me thrust and a hard landing, and it even made the flight controller learn a wrong hover value.",
                   "Writing up every flight from its log made each session teach me something specific, instead of just \"it flew\" or \"it crashed.\"",
                 ].map((point, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="text-[hsl(var(--highlight))] mt-1 flex-shrink-0 text-sm">→</span>
+                    <BullsEye />
                     <p className="text-[0.9rem] text-muted-foreground leading-relaxed">{point}</p>
                   </li>
                 ))}
