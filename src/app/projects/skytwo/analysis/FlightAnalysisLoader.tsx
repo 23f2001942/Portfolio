@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
-import FlightAnalysisView from "./FlightAnalysisView";
-import type { FlightAnalysis } from "./types";
+import FlightReport, { type DataRegistry, type ReportRegistry } from "@/components/flight-analysis/FlightReport";
 
-// Each report's text is its own chunk, loaded only when its dialog opens.
-const reports: Record<number, () => Promise<{ default: FlightAnalysis }>> = {
+// Each report's text and chart data are their own chunks, loaded only when the dialog opens.
+const reports: ReportRegistry = {
   1: () => import("./flights/flight-1"),
   2: () => import("./flights/flight-2"),
   3: () => import("./flights/flight-3"),
@@ -21,13 +18,13 @@ const reports: Record<number, () => Promise<{ default: FlightAnalysis }>> = {
   12: () => import("./flights/flight-12"),
 };
 
+const data: DataRegistry = {
+  1: () => import("./data/flight-1.json"), 2: () => import("./data/flight-2.json"), 3: () => import("./data/flight-3.json"),
+  4: () => import("./data/flight-4.json"), 5: () => import("./data/flight-5.json"), 6: () => import("./data/flight-6.json"),
+  7: () => import("./data/flight-7.json"), 8: () => import("./data/flight-8.json"), 9: () => import("./data/flight-9.json"),
+  10: () => import("./data/flight-10.json"), 11: () => import("./data/flight-11.json"), 12: () => import("./data/flight-12.json"),
+};
+
 export default function FlightAnalysisLoader({ flight }: { flight: number }) {
-  const [analysis, setAnalysis] = useState<FlightAnalysis | null>(null);
-  useEffect(() => {
-    let live = true;
-    reports[flight]?.().then(m => live && setAnalysis(m.default));
-    return () => { live = false; };
-  }, [flight]);
-  if (!analysis) return <div className="h-full flex items-center justify-center text-muted-foreground"><Loader2 className="w-6 h-6 animate-spin" /></div>;
-  return <FlightAnalysisView analysis={analysis} />;
+  return <FlightReport flight={flight} reports={reports} data={data} />;
 }

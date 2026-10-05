@@ -1,4 +1,4 @@
-import type { FlightAnalysis } from "../types";
+import type { FlightAnalysis } from "@/components/flight-analysis/types";
 import { chartsSection, FULL_HEADERS, TABLE_NOTE_FULL } from "../presets";
 
 const flight11: FlightAnalysis = {

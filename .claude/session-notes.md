@@ -1,5 +1,5 @@
 # Portfolio Session Notes
-*Last updated: 2026-10-04*
+*Last updated: 2026-10-05*
 
 ## Project Overview
 Next.js 15 App Router + TypeScript + Tailwind CSS + Shadcn/ui portfolio site.
@@ -242,7 +242,11 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 - Use the project skill `.claude/skills/skytwo-flight-log/SKILL.md` (auto-loads on "new flight" / a shared .bin). It holds the full workflow and the settled rules.
 - Extractor: `tools/skytwo/extract_flight.py --flight <n> --bin <log>` writes `src/app/projects/skytwo/analysis/data/flight-<n>.json` and prints a report summary. It's generalised from the Flight 4–12 scratchpad script but **not yet run as this exact file**, so sanity-check its output on first use.
 
-## Next up: restructure SkyOne (planned for a new chat)
-- Bring `src/app/projects/skyone/page.tsx` in line with SkyTwo where it makes sense: one card per flight, Detailed Log Analysis / Media dialogs, the shared list markers (already applied), and analysis built from the same `analysis/` system (types/renderer/charts) if SkyOne logs are available.
-- SkyOne runs APM 2.8 / ArduCopter 3.2.1 with **no GPS**, so there's no map and no position data. Its logs (if any) are an older format and the extractor won't work as-is; ask the user what logs/media exist before planning.
-- Keep SkyOne's honesty constraints (see the SkyOne section above): grounded, Flight 6 root cause unconfirmed, Flight 7 unresolved.
+## SkyOne Test Flights restructure — done 2026-10-05
+- Same pattern as SkyTwo: no summary table, one `FlightCard` per flight with top-right dialogs. Flights 1–4 have **Media only** (no logs were saved); Flights 5–7 also have **Detailed Log Analysis**. Bench session card has no buttons. Card titles are date only (APM has no clock without GPS).
+- **Shared engine** moved to `src/components/flight-analysis/` (`types.ts`, `charts.tsx`, `FlightAnalysisView.tsx` with a `loadData` prop, `FlightReport.tsx` generic loader, `TrackMap.tsx`, `useTokenColor.ts`). Each project keeps `analysis/FlightAnalysisLoader.tsx` (its own `reports` + `data` registries), `flights/`, `data/`, `presets.ts`.
+- Engine additions: coloured `shade` entries, `bands: "faults"` (reads `data.faults`, plus Land as a faint strip), generic `scatter` and `bars` SpecialCharts, `quad` with `src` (values + highlighted motor), and a `legend` block.
+- SkyOne reports `skyone/analysis/flights/flight-{5,6,7}.ts` port the user's HTML reports (same content; log numbers removed; chat/doc corrections reworded neutrally; browser-only bits dropped). Flight 5 times are **seconds since logging began** (`--shift 14.137`), matching its report; Flights 6–7 are seconds since boot.
+- Extractor: `tools/skyone/extract_flight.py --flight <n> --bin <log> [--shift s] [--tmax s] [--motor-window a b]`. Runs used: F5 `--shift 14.137`, F6 none, F7 `--tmax 70 --motor-window 59.0 65.8`. Checked against the reports: F5 12 take-offs / 1,043 mAh / AltHold at 1050.39; F6 failsafes 84.95 & 262.42; F7 6.8 s freeze, M4 3.4 s at max, 73 mAh. RC fault classes (throttle-low / corrupted / frozen / placeholder A / B) follow the reports' definitions; "frozen" is tied to the APM's ERR 2/2.
+- `.bin` logs were read from Downloads, never copied into the repo. Flight 5's own drift averages recompute slightly differently from the report (0.85/0.7 vs 1.1/1.2°), so the report's numbers stay in text and the chart shows the attitude trace instead.
+- Card text for Flights 5–7 was rewritten from the analyses; Flight 6 still "Root cause not confirmed", Flight 7 still "Unresolved". Results & Status gained receiver-connection, Land-failsafe/barometer, back-right corner and vibration items.

@@ -1,4 +1,4 @@
-import type { FlightAnalysis, TimeChart } from "../types";
+import type { FlightAnalysis, TimeChart } from "@/components/flight-analysis/types";
 
 const X = { min: 55, max: 748 };
 const t = (c: Omit<TimeChart, "kind" | "x" | "bands"> & { x?: TimeChart["x"]; bands?: TimeChart["bands"] }): TimeChart =>

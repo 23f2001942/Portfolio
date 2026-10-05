@@ -4,10 +4,14 @@ import { useState } from "react";
 import Navbar from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ChevronDown, CheckCircle2, Circle, ShieldAlert, Wrench, AlertTriangle } from "lucide-react";
+import { ChevronDown, CheckCircle2, Circle, ShieldAlert, Wrench, AlertTriangle, Camera, FileText, Film } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { Diamond, BullsEye, SpecRow } from "@/components/list-markers";
+
+const FlightAnalysisLoader = dynamic(() => import("./analysis/FlightAnalysisLoader"), { ssr: false });
 
 const sections = [
   { id: "overview",   label: "Overview" },
@@ -55,17 +59,6 @@ const motorRows = [
   ["2", "Back Left",   "CCW", "Red"],
   ["3", "Front Left",  "CW",  "White"],
   ["4", "Back Right",  "CW",  "White"],
-];
-
-const flightRows = [
-  ["1", "Jul 5, 2025",  "House terrace",                       "First flight of the first build",       "Uncontrolled yaw spin",                                   "Resolved"],
-  ["2", "Jul 13, 2025", "BITS Hyderabad, New Football Ground", "Basic stable flight",                   "9 takeoffs; 10th crashed in a strong gust",               "Issue found"],
-  ["3", "Aug 8, 2025",  "BITS Hyderabad, New Football Ground", "Try AltHold and Land",                  "Overcorrected; crashed after a dragonfly hit a prop",     "Issue found"],
-  ["4", "Sep 7, 2025",  "BITS Hyderabad, New Football Ground", "Flight by my brother",                  "Lost control at height, crashed",                         "Issue found"],
-  ["—", "Sep 2026",     "Bench (props off)",                   "Motor output checks",                   "Output 1 cutting out; tilted FC; output cap",             "Resolved"],
-  ["5", "Sep 27, 2026", "BITS Hyderabad, New Football Ground", "First flight after the restart",        "12 takeoffs, then a crash after switching to AltHold",    "Resolved"],
-  ["6", "Sep 29, 2026", "BITS Hyderabad, New Football Ground", "Stabilize-only flight after repairs",   "Heavy wobble, motors \"choking\"",                        "Not confirmed"],
-  ["7", "Sep 30, 2026", "BITS Hyderabad, New Football Ground", "Stabilize flight",                      "Signal loss, flew off, flipped",                          "Unresolved"],
 ];
 
 const workingRows = [
@@ -227,12 +220,49 @@ function AssemblyStep({ img, title, alt, width, height, caption, children }: { i
   );
 }
 
-function FlightCard({ title, badge, badgeLabel, rows, children }: { title: string; badge: BadgeKind; badgeLabel: string; rows: [string, React.ReactNode][]; children?: React.ReactNode }) {
+function FlightDialog({ title, label, icon, children }: { title: string; label: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-5 mb-5 shadow-sm">
-      <div className="flex flex-wrap items-center gap-3 mb-3">
-        <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))]">{title}</h3>
-        <StatusBadge badge={badge} label={badgeLabel} />
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border bg-background text-xs font-medium text-muted-foreground hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight)/0.5)] hover:bg-[hsl(var(--highlight)/0.06)] transition-colors">
+          {icon}{label}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-5xl w-[calc(100vw-2rem)] h-[85vh] p-0 gap-0 flex flex-col overflow-hidden rounded-xl">
+        <DialogHeader className="px-5 py-3 border-b border-border text-left">
+          <DialogTitle className="text-base text-primary pr-8">{title} · <span className="text-[hsl(var(--highlight-sub))] font-medium">{label}</span></DialogTitle>
+        </DialogHeader>
+        <div className="flex-1 min-h-0">{children}</div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// `flight` adds the Media dialog; `log` also adds the Detailed Log Analysis (only Flights 5–7 have logs).
+function FlightCard({ flight, log = false, title, badge, badgeLabel, rows, children }: { flight?: number; log?: boolean; title: string; badge: BadgeKind; badgeLabel: string; rows: [string, React.ReactNode][]; children?: React.ReactNode }) {
+  const short = title.split(" — ")[0];
+  return (
+    <div id={flight ? `flight-${flight}` : undefined} className="rounded-xl border border-border bg-card p-5 mb-5 shadow-sm scroll-mt-24">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+        <div className="flex flex-wrap items-center gap-3">
+          <h3 className="text-base font-semibold text-[hsl(var(--highlight-sub))]">{title}</h3>
+          <StatusBadge badge={badge} label={badgeLabel} />
+        </div>
+        {flight && (
+          <div className="flex flex-wrap gap-2">
+            {log && (
+              <FlightDialog title={short} label="Detailed Log Analysis" icon={<FileText className="w-3.5 h-3.5" />}>
+                <div className="h-full overflow-y-auto"><FlightAnalysisLoader flight={flight} /></div>
+              </FlightDialog>
+            )}
+            <FlightDialog title={short} label="Media" icon={<Film className="w-3.5 h-3.5" />}>
+              <div className="h-full flex flex-col items-center justify-center gap-3 p-8 text-center">
+                <Camera className="w-8 h-8 text-muted-foreground/60" />
+                <p className="text-sm text-muted-foreground max-w-sm">Photos and video for this flight are being collected and will be added soon.</p>
+              </div>
+            </FlightDialog>
+          </div>
+        )}
       </div>
       {rows.map(([label, body]) => (
         <Challenge key={label} title={label}>{body}</Challenge>
@@ -518,34 +548,37 @@ export default function SkyOnePage() {
             {/* TEST FLIGHTS */}
             <section>
               <SectionHeading id="flights" title="Test Flights" />
-              <Table headers={["#", "Date", "Location", "Goal", "Outcome", "Status"]} rows={flightRows} />
               <Para>
-                <span className="font-medium text-primary">Conditions:</span> the 2026 flights were all in the morning, before any wind gusts, in pleasant weather. For the 2025 flights I don&apos;t remember exact conditions, but they were mostly between morning and afternoon.
+                Flight 1 was on my house terrace; every other flight was at the BITS Hyderabad campus New Football Ground. Each flight has a <span className="font-medium text-primary">Media</span> view for photos and video. Flights 5–7 also have a <span className="font-medium text-primary">Detailed Log Analysis</span> built from the APM&apos;s flight log.
               </Para>
-              <Para>
-                <span className="font-medium text-primary">Media:</span> not available yet. Photos and video will be added later.
-              </Para>
+              <SubHeading>Timing & Conditions</SubHeading>
+              <BulletList items={[
+                "2025 flights: I don't remember exact conditions, but they were mostly between morning and afternoon.",
+                "2026 flights: all in the morning, before any wind gusts, in pleasant weather.",
+                "Flights 1–4 have no logs; I didn't save them at the time.",
+                "The APM has no clock without GPS, so the cards show dates only.",
+              ]} />
 
               <SubHeading>2025: The First Build</SubHeading>
-              <FlightCard title="Flight 1 — Jul 5, 2025 (house terrace)" badge="done" badgeLabel="Resolved" rows={[
+              <FlightCard flight={1} title="Flight 1 — 5 Jul 2025 (house terrace)" badge="done" badgeLabel="Resolved" rows={[
                 ["Testing", "First flight of the first build."],
                 ["What happened", "The drone spun uncontrollably in yaw."],
                 ["Root cause", "I had completely messed up the motor layout and put the wrong prop on each motor. Adjacent motors were spinning the same way, when they should spin in opposite directions."],
                 ["Fix", "Corrected the motor layout and prop placement."],
               ]} />
-              <FlightCard title="Flight 2 — Jul 13, 2025" badge="progress" badgeLabel="Issue found" rows={[
+              <FlightCard flight={2} title="Flight 2 — 13 Jul 2025" badge="progress" badgeLabel="Issue found" rows={[
                 ["Testing", "Basic stable flight."],
                 ["What happened", "The flights were a bit more stable, but I had no real control against the wind. I made 9 successful takeoffs. On the 10th, a strong gust caused a crash that broke two props and an arm."],
                 ["Root cause", "A strong gust, combined with my limited control of the drone at the time."],
                 ["Fix", "Replaced the props and the arm with the same models."],
               ]} />
-              <FlightCard title="Flight 3 — Aug 8, 2025" badge="progress" badgeLabel="Issue found" rows={[
+              <FlightCard flight={3} title="Flight 3 — 8 Aug 2025" badge="progress" badgeLabel="Issue found" rows={[
                 ["Testing", "AltHold and Land modes."],
                 ["What happened", "I didn't understand how these modes work, so I kept overcorrecting. Then a dragonfly hit a prop and the drone hit the ground upside down. I lost an arm and the flight controller's shock absorber."],
                 ["Root cause", "Not understanding the flight modes, then the dragonfly strike."],
                 ["Fix", "Replaced the arm and the shock absorber."],
               ]} />
-              <FlightCard title="Flight 4 — Sep 7, 2025" badge="progress" badgeLabel="Issue found" rows={[
+              <FlightCard flight={4} title="Flight 4 — 7 Sep 2025" badge="progress" badgeLabel="Issue found" rows={[
                 ["Testing", "My brother tried flying it."],
                 ["What happened", "He lost control at height and it crashed. Nothing broke."],
                 ["Root cause", "Loss of pilot control."],
@@ -565,23 +598,33 @@ export default function SkyOnePage() {
                   The APM was tilted on its mount, so I corrected it and rebuilt the shock-mount plate level. <Code>MOT_TCRV_ENABLE</Code> was capping motor output at about 93%, so I disabled it.
                 </>],
               ]} />
-              <FlightCard title="Flight 5 — Sep 27, 2026" badge="done" badgeLabel="Resolved" rows={[
+              <FlightCard flight={5} log title="Flight 5 — 27 Sep 2026" badge="done" badgeLabel="Resolved" rows={[
                 ["Testing", "First flight after the restart."],
-                ["What happened", "It made 12 takeoffs on one battery, better than any earlier session. It drifted back-left in Stabilize, and AltHold kept descending. It crashed from about 8–9 ft (my estimate). The log shows the crash came about 0.5 s after switching to AltHold: the drone pitched 53° nose-up with the motors at 100%."],
-                ["Root cause", "The Back Left motor wire had come off its ESC bullet connector, so that motor lost thrust. The barometer was also faulty (reading about 473 hPa instead of about 950), which explains the AltHold descent."],
-                ["Fix", "Repaired the bullet connectors, replaced the prop and the APM suspension, and dropped AltHold so SkyOne flies in Stabilize only. Bench checks passed."],
+                ["What happened", "12 take-offs on one battery, better than any earlier session, using about 1,043 of the 2,200 mAh. It drifted back-left in Stabilize: the log shows I was holding it about 1° forward-right the whole time. AltHold kept sinking. On the 12th take-off it crashed from about 8–9 ft (my estimate). The log shows the crash came about 0.5 s after switching to AltHold, as the motors went to 100%: within 0.2 s it went from level to 53° nose-up and 10° left-down, then tumbled."],
+                ["Root cause", "Nose-up plus left-down means the back-left corner lost thrust under load. The Back Left motor wire had come off its ESC bullet connector. AltHold sank because the barometer is faulty (about 473 hPa instead of about 950) and noisy, and in some runs my stick sat below the hold zone. The drift most likely came from a level calibration about 1° off after I rebuilt the board mount."],
+                ["Fix", "Repaired the bullet connectors, replaced the prop and the APM suspension, redid the accelerometer calibration, and dropped AltHold so SkyOne flies in Stabilize only. I set THR_MID to 600 and LOG_BITMASK to 2046 so the next logs would include motor outputs and vibration. Bench checks passed."],
               ]} />
-              <FlightCard title="Flight 6 — Sep 29, 2026" badge="progress" badgeLabel="Root cause not confirmed" rows={[
+              <FlightCard flight={6} log title="Flight 6 — 29 Sep 2026" badge="progress" badgeLabel="Root cause not confirmed" rows={[
                 ["Testing", "Stabilize-only flight after the repairs."],
-                ["What happened", "It lifted off twice at low altitude but wobbled a lot, and the motors seemed to be \"choking\". I stopped after the second attempt. Nothing was damaged."],
-                ["Root cause", "Not confirmed. I suspected loose connections."],
+                ["What happened", "It lifted off at low altitude but wobbled a lot, and the motors seemed to be \"choking\". The log has three arm cycles. In each one, a strong fore–aft vibration (about ±23 m/s², against a healthy ±3) started at roughly a quarter throttle. A fraction of a second later, bad RC data reached the APM: the throttle channel dropped to about 996 µs, or all stick channels read one identical value. The APM ran a radio failsafe to Land twice. Nothing was damaged."],
+                ["Root cause", "Not confirmed. The \"choking\" was all four motors dropping to idle together whenever the throttle signal dropped out, not one weak motor. My live stick inputs still got through on other channels during those drop-outs, so the radio link was up. That makes the most likely cause a marginal connection between the R88 and the APM, shaken by the vibration."],
                 ["Fix", "As a precaution, I secured every wire with paper tape, except the receiver wires, which I thought were already tight. An armed bench test indoors afterwards showed no problem."],
               ]} />
-              <FlightCard title="Flight 7 — Sep 30, 2026" badge="open" badgeLabel="Unresolved" rows={[
+              <FlightCard flight={7} log title="Flight 7 — 30 Sep 2026" badge="open" badgeLabel="Unresolved" rows={[
                 ["Testing", "Stabilize flight."],
-                ["What happened", "The same choking happened again. After arming and throttling up, it lost signal. Then it lifted off again on its own, drifted back-left, touched the ground and flipped upside down. Afterwards the back-left motor was very hot while the others were cool."],
-                ["Suspected cause", "Loose power connections to the R88 receiver. It only happens outdoors with the props on, never on the bench, so I think prop downwash is loosening the receiver's power wires. This may also explain Flight 6."],
-                ["Fix", "Not yet done. SkyOne is grounded until it's fixed."],
+                ["What happened", "The same choking happened again. On the first arm cycle it lost signal on the ground. On the second, the whole RC input was repeatedly replaced by fixed placeholder values, then froze completely for 6.8 s. The radio failsafe switched to Land, and Land, trusting the faulty barometer, drove the throttle to 100%. SkyOne flew off on its own, rolling right, pitching up and spinning, with motor 4 (back-right) pinned at maximum for 3.4 s. When a placeholder frame cancelled Land, it dropped, touched the ground and flipped upside down. Afterwards one motor was very hot while the others were cool."],
+                ["Suspected cause", <>
+                  Three faults stacked up:
+                  <div className="mt-2">
+                    <BulletList items={[
+                      "The receiver's power or harness drops out once the props shake the frame. It never happened on the bench with props off, and the R88's own failsafe value never appears in the log.",
+                      "The Land failsafe can't work with this barometer.",
+                      "One motor corner couldn't produce its share of thrust: motor order, spin direction, prop or motor damage.",
+                    ]} />
+                  </div>
+                  The props are also the main vibration source.
+                </>],
+                ["Fix", "Not yet done. SkyOne is grounded until the receiver harness is replaced and secured, the motor/prop checks pass, and the barometer question is settled."],
               ]} />
             </section>
 
@@ -599,8 +642,10 @@ export default function SkyOnePage() {
               </div>
 
               <SubHeading>What Doesn&apos;t Work Yet</SubHeading>
-              <Challenge title="Receiver power">The suspected loose power connection to the R88 causes signal loss in flight. This is the main open issue.</Challenge>
-              <Challenge title="Barometer">It&apos;s faulty, so AltHold isn&apos;t usable and SkyOne is limited to Stabilize.</Challenge>
+              <Challenge title="Receiver connection">The R88&apos;s input drops out or freezes once the props shake the frame (Flights 6 and 7). This is the main open issue.</Challenge>
+              <Challenge title="Barometer">It&apos;s faulty, so AltHold isn&apos;t usable and SkyOne is limited to Stabilize. The Land failsafe also depends on it, and in Flight 7 it climbed instead of landing.</Challenge>
+              <Challenge title="Back-right corner">Motor 4 sat at maximum for 3.4 s in Flight 7 and still couldn&apos;t hold that corner up. Motor order, spin direction, prop and motor still need checking.</Challenge>
+              <Challenge title="Vibration">The props shake the frame hard at low throttle (up to about ±33 m/s² on the ground).</Challenge>
               <Challenge title="Voltage display">The APM reports voltage, but Mission Planner shows 0, and the voltage multiplier still needs calibrating.</Challenge>
               <Challenge title="Drift">There&apos;s a slight back-left drift in Stabilize.</Challenge>
 

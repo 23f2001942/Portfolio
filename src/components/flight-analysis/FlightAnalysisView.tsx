@@ -143,6 +143,13 @@ function RenderBlock({ block, data }: { block: Block; data: FlightData | null })
           {block.note && <span className="italic">{block.note}</span>}
         </div>
       );
+    case "legend":
+      return (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-3 text-xs text-muted-foreground">
+          {block.items.map(it => <span key={it.label} className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm" style={{ background: col(it.color), opacity: 0.55 }} />{it.label}</span>)}
+          {block.note && <span className="italic">{block.note}</span>}
+        </div>
+      );
     case "chart":
       return (
         <ChartCard title={block.title} caption={block.caption}>
@@ -154,24 +161,16 @@ function RenderBlock({ block, data }: { block: Block; data: FlightData | null })
 
 /* ---------- full report ---------- */
 
-// Chart data lives next to the code; each flight's file is its own chunk, loaded when its dialog opens.
-const chartData: Record<number, () => Promise<{ default: unknown }>> = {
-  1: () => import("./data/flight-1.json"), 2: () => import("./data/flight-2.json"), 3: () => import("./data/flight-3.json"),
-  4: () => import("./data/flight-4.json"), 5: () => import("./data/flight-5.json"), 6: () => import("./data/flight-6.json"),
-  7: () => import("./data/flight-7.json"), 8: () => import("./data/flight-8.json"), 9: () => import("./data/flight-9.json"),
-  10: () => import("./data/flight-10.json"), 11: () => import("./data/flight-11.json"), 12: () => import("./data/flight-12.json"),
-};
-
-export default function FlightAnalysisView({ analysis }: { analysis: FlightAnalysis }) {
+export default function FlightAnalysisView({ analysis, loadData }: { analysis: FlightAnalysis; loadData?: () => Promise<{ default: unknown }> }) {
   const [data, setData] = useState<FlightData | null>(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     let live = true;
-    (chartData[analysis.flight]?.() ?? Promise.reject())
+    (loadData?.() ?? Promise.reject())
       .then(m => live && setData(m.default as unknown as FlightData))
       .catch(() => live && setFailed(true));
     return () => { live = false; };
-  }, [analysis.flight]);
+  }, [analysis.flight, loadData]);
 
   return (
     <article className="px-5 sm:px-8 py-6">

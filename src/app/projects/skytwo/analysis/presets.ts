@@ -1,4 +1,4 @@
-import type { Block, TimeChart } from "./types";
+import type { Block, TimeChart } from "@/components/flight-analysis/types";
 
 // Standard time-series charts shared by every report built from a 4.6.3 log (Flights 4-12).
 // Mode bands sit behind each chart, so the same colours mean the same mode everywhere.

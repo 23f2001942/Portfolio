@@ -1,4 +1,4 @@
-import type { FlightAnalysis } from "../types";
+import type { FlightAnalysis } from "@/components/flight-analysis/types";
 
 const X: [number, number] = [75, 700];
 

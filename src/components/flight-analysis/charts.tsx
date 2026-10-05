@@ -5,7 +5,7 @@ import {
   ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis,
 } from "recharts";
 import dynamic from "next/dynamic";
-import type { ChartSpec, Color, TimeChart } from "./types";
+import type { BarsChart, ChartSpec, Color, ScatterChart as ScatterSpec, TimeChart } from "./types";
 import { useTokenColor } from "./useTokenColor";
 
 /* ---------- shared look ---------- */
@@ -20,6 +20,10 @@ export const MODE_LABEL: Record<string, string> = {
   stab: "Stabilize", alth: "AltHold", loit: "Loiter", rtl: "RTL", land: "Land", tune: "AutoTune",
 };
 const HOP: Color[] = ["s1", "s2", "s3", "s4", "s5", "s6", "land"];
+// RC-input fault types found by tools/skyone/extract_flight.py.
+export const FAULT_COLOR: Record<string, Color> = {
+  throttleLow: "warn", corrupted: "s4", frozen: "muted", placeholderA: "s2", placeholderB: "s5",
+};
 
 const GRID = "hsl(var(--border))";
 const AXIS = { stroke: "hsl(var(--muted-foreground))", fontSize: 11, tickLine: false } as const;
@@ -60,7 +64,7 @@ function thin(t: number[], y: (number | null)[], max = 1400): { t: number; v: nu
   return out;
 }
 
-/* ---------- data shapes from public/skytwo/analysis/data/flight-<n>.json ---------- */
+/* ---------- data shapes from each project's analysis/data/flight-<n>.json ---------- */
 
 type SeriesData = Record<string, { t: number[] } & Record<string, (number | null)[]>>;
 export interface FlightData {
@@ -107,9 +111,13 @@ function TimeSeries({ spec, data }: { spec: TimeChart; data: FlightData }) {
   const hasRight = spec.series.some(s => s.right);
   const bands: { a: number; b: number; c: string; o: number }[] = [];
   if (spec.bands === "modes") (data.modes ?? []).forEach(([a, b, m]) => MODE_COLOR[m] && bands.push({ a, b, c: col(MODE_COLOR[m]), o: 0.13 }));
+  if (spec.bands === "faults") {
+    (data.modes ?? []).forEach(([a, b, m]) => m === "Land" && bands.push({ a, b, c: col("land"), o: 0.1 }));
+    ((data.faults as [number, number, string][] | undefined) ?? []).forEach(([a, b, k]) => FAULT_COLOR[k] && bands.push({ a, b, c: col(FAULT_COLOR[k]), o: 0.26 }));
+  }
   if (spec.bands === "armed" || spec.bands === "hops") (data.armed ?? []).forEach(([a, b]) => bands.push({ a, b, c: col("s1"), o: 0.08 }));
   if (spec.bands === "hops") (data.hops ?? []).forEach(h => bands.push({ a: h.start, b: h.end, c: col("s2"), o: 0.18 }));
-  (spec.shade ?? []).forEach(([a, b]) => bands.push({ a, b, c: col("s5"), o: 0.14 }));
+  (spec.shade ?? []).forEach(([a, b, c]) => bands.push({ a, b, c: col(c ?? "s5"), o: c ? 0.2 : 0.14 }));
 
   return (
     <ResponsiveContainer width="100%" height={spec.height ?? 240}>
@@ -227,8 +235,9 @@ export function hopAverages(data: FlightData) {
   return [0, 1, 2, 3].map(k => Math.round(hops.reduce((a, h) => a + h.motors[k], 0) / Math.max(1, hops.length)));
 }
 
-function Quad({ data }: { data: FlightData }) {
-  const avg = hopAverages(data);
+function Quad({ data, src }: { data: FlightData; src?: string }) {
+  const custom = src ? (data[src] as { values: number[]; highlight?: number } | undefined) : undefined;
+  const avg = custom?.values ?? hopAverages(data);
   const pos: Record<number, [number, number]> = { 1: [270, 70], 2: [90, 230], 3: [90, 70], 4: [270, 230] };
   const dir: Record<number, string> = { 1: "CCW", 2: "CCW", 3: "CW", 4: "CW" };
   const name: Record<number, string> = { 1: "front right", 2: "back left", 3: "front left", 4: "back right" };
@@ -243,7 +252,7 @@ function Quad({ data }: { data: FlightData }) {
         const [x, y] = pos[m], v = avg[m - 1], t = (v - lo) / (hi - lo || 1), cc = col(mc[m - 1]);
         return (
           <g key={m}>
-            <circle cx={x} cy={y} r={38 + t * 10} fill={cc} fillOpacity={0.14 + t * 0.28} stroke={cc} strokeWidth="2" />
+            <circle cx={x} cy={y} r={38 + t * 10} fill={cc} fillOpacity={0.14 + t * 0.28} stroke={custom?.highlight === m ? col("warn") : cc} strokeWidth={custom?.highlight === m ? 4 : 2} />
             <text x={x} y={y - 4} textAnchor="middle" fontWeight="700" fontSize="22" fill="hsl(var(--primary))">{v}</text>
             <text x={x} y={y + 15} textAnchor="middle" fontSize="11" fill="hsl(var(--muted-foreground))">M{m} {dir[m]}</text>
             <text x={x} y={y + (y < 150 ? -56 : 66)} textAnchor="middle" fontSize="12" fill="hsl(var(--muted-foreground))">{name[m]}</text>
@@ -429,6 +438,49 @@ function LoiterScatter({ data }: { data: FlightData }) {
   );
 }
 
+/* ---------- generic scatter and bars ---------- */
+
+function PointCloud({ spec, data }: { spec: ScatterSpec; data: FlightData }) {
+  const sets = (data[spec.src] ?? {}) as Record<string, { x: number; y: number }[]>;
+  return (
+    <ResponsiveContainer width="100%" height={spec.height ?? 280}>
+      <ScatterChart margin={{ top: 8, right: 12, bottom: 14, left: 0 }}>
+        <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+        <XAxis type="number" dataKey="x" domain={[spec.x.min ?? "auto", spec.x.max ?? "auto"]} allowDataOverflow {...AXIS} label={axisLabel(spec.x.label)} />
+        <YAxis type="number" dataKey="y" domain={[spec.y.min ?? "auto", spec.y.max ?? "auto"]} allowDataOverflow width={48} {...AXIS} label={axisLabel(spec.y.label, -90, "insideLeft")} />
+        {spec.band && <ReferenceArea y1={spec.band[0]} y2={spec.band[1]} fill={col("loit")} fillOpacity={0.14} stroke="none" />}
+        {spec.sets.map(s => (
+          <Scatter key={s.key} name={s.label} data={sets[s.key] ?? []} fill={col(s.color)} isAnimationActive={false}
+            shape={(p: { cx?: number; cy?: number; fill?: string }) => <circle cx={p.cx} cy={p.cy} r={3} fill={p.fill} fillOpacity={0.7} />} />
+        ))}
+        <Tooltip content={<TipBox unit="%" />} cursor={{ strokeDasharray: "3 3" }} />
+        <Legend wrapperStyle={legendStyle} />
+      </ScatterChart>
+    </ResponsiveContainer>
+  );
+}
+
+function Bars({ spec, data }: { spec: BarsChart; data: FlightData }) {
+  const rows = (data[spec.src] ?? []) as { k: string; v: number; hi?: boolean }[];
+  return (
+    <ResponsiveContainer width="100%" height={spec.height ?? 220}>
+      <BarChart data={rows} margin={{ top: 8, right: 12, bottom: 4, left: 0 }}>
+        <CartesianGrid stroke={GRID} strokeDasharray="3 3" vertical={false} />
+        <XAxis dataKey="k" {...AXIS} interval={0} tick={{ fontSize: 10 }} />
+        <YAxis domain={[spec.y.min ?? "auto", spec.y.max ?? "auto"]} allowDataOverflow width={48} {...AXIS} label={axisLabel(spec.y.label, -90, "insideLeft")} />
+        {(spec.refs ?? []).map((r, i) => <ReferenceLine key={i} y={r.y} stroke={col(r.color ?? "muted")} strokeDasharray="3 3"
+          label={r.label ? { value: r.label, fontSize: 10, fill: col(r.color ?? "muted"), position: "insideTopRight" } : undefined} />)}
+        <Bar dataKey="v" name={spec.y.label ?? "Value"} radius={[4, 4, 0, 0]} isAnimationActive={false}
+          shape={(p: { x?: number; y?: number; width?: number; height?: number; payload?: { hi?: boolean } }) => {
+            const h = p.height ?? 0, y = h < 0 ? (p.y ?? 0) + h : p.y ?? 0;
+            return <rect x={p.x} y={y} width={p.width} height={Math.abs(h)} rx={3} fill={col(p.payload?.hi ? "warn" : spec.color ?? "s1")} />;
+          }} />
+        <Tooltip content={<TipBox />} cursor={{ fill: "hsl(var(--secondary))" }} />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
 /* ---------- dispatcher ---------- */
 
 export function Chart({ spec, data }: { spec: ChartSpec; data: FlightData }) {
@@ -437,7 +489,7 @@ export function Chart({ spec, data }: { spec: ChartSpec; data: FlightData }) {
     case "track": return <Track data={data} />;
     case "spectrum": return <Spectrum data={data} />;
     case "radar": return <Radar data={data} />;
-    case "quad": return <Quad data={data} />;
+    case "quad": return <Quad data={data} src={spec.src} />;
     case "pairs": return <Pairs data={data} />;
     case "earth": return <Earth data={data} />;
     case "hopSpeed": return <HopSpeed data={data} />;
@@ -446,5 +498,7 @@ export function Chart({ spec, data }: { spec: ChartSpec; data: FlightData }) {
     case "throttleCurve": return <ThrottleCurve />;
     case "motorBars": return <MotorBars data={data} />;
     case "loiterScatter": return <LoiterScatter data={data} />;
+    case "scatter": return <PointCloud spec={spec} data={data} />;
+    case "bars": return <Bars spec={spec} data={data} />;
   }
 }

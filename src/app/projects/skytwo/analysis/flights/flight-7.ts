@@ -1,4 +1,4 @@
-import type { FlightAnalysis } from "../types";
+import type { FlightAnalysis } from "@/components/flight-analysis/types";
 import { SHORT_HEADERS, SOURCE_46, timelinesSection } from "../presets";
 
 const flight7: FlightAnalysis = {

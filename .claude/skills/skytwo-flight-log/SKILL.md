@@ -26,12 +26,12 @@ Never invent numbers. Every figure in the report must come from the log, the ext
 | What | Path |
 |---|---|
 | Page (flight cards, config, results) | `src/app/projects/skytwo/page.tsx` |
-| Report schema | `src/app/projects/skytwo/analysis/types.ts` |
+| Report schema (shared with SkyOne) | `src/components/flight-analysis/types.ts` |
 | Shared chart presets and sections | `src/app/projects/skytwo/analysis/presets.ts` |
 | One report per flight | `src/app/projects/skytwo/analysis/flights/flight-<n>.ts` |
 | Chart data per flight | `src/app/projects/skytwo/analysis/data/flight-<n>.json` |
-| Lazy loaders (register new flights here) | `analysis/FlightAnalysisLoader.tsx` (text) and `analysis/FlightAnalysisView.tsx` (`chartData` map) |
-| Charts / satellite map | `analysis/charts.tsx`, `analysis/TrackMap.tsx` (Leaflet + Esri World Imagery) |
+| Lazy loaders (register new flights here) | `analysis/FlightAnalysisLoader.tsx` (`reports` and `data` maps) |
+| Shared renderer, charts, satellite map | `src/components/flight-analysis/` (`FlightAnalysisView.tsx`, `FlightReport.tsx`, `charts.tsx`, `TrackMap.tsx`; used by SkyOne too, so keep changes backward-compatible) |
 | Log extractor | `tools/skytwo/extract_flight.py` |
 | Best template to copy | `analysis/flights/flight-12.ts` (newest 4.6.3 format) |
 
@@ -84,8 +84,7 @@ Copy `flight-12.ts` and keep the same structure so every report looks identical:
 - Text markup: `**bold**` and `` `PARAM_NAME` `` only.
 
 ### 4. Register it
-- `FlightAnalysisLoader.tsx`: add `<n>: () => import("./flights/flight-<n>")`.
-- `FlightAnalysisView.tsx` `chartData`: add `<n>: () => import("./data/flight-<n>.json")`.
+- `FlightAnalysisLoader.tsx`: add `<n>: () => import("./flights/flight-<n>")` to `reports` and `<n>: () => import("./data/flight-<n>.json")` to `data`.
 
 ### 5. Update the page (`page.tsx`)
 - Add a `<FlightCard flight={n} title="Flight <n> — <d Mon yyyy>, <HH:MM>" badge=… badgeLabel=…>` under "2026: Upgrade & Flight Testing". Its rows are Testing / What happened / Root cause / Fix, as relevant.
@@ -107,7 +106,7 @@ Copy `flight-12.ts` and keep the same structure so every report looks identical:
 ## Rules (settled with the user — don't relitigate)
 
 - **No log numbers anywhere.** Flights are numbered 1, 2, 3… by date. Inside a report, separate take-offs are "Take-off 1/2/3", never "Flight 1/2", to avoid clashing with page numbering.
-- **Same content, site UI.** No iframes, no copied HTML, no new one-off layouts. If a new chart type is really needed, add it as a `SpecialChart` kind in `types.ts` + `charts.tsx` so it stays reusable.
+- **Same content, site UI.** No iframes, no copied HTML, no new one-off layouts. If a new chart type is really needed, add it as a `SpecialChart` kind in `src/components/flight-analysis/types.ts` + `charts.tsx` so it stays reusable (generic `scatter` and `bars` kinds already exist).
 - **Bullets:** diamonds for lists, spec-sheet rows for labelled points, bull's-eyes only in "What I Learned". Never "→" bullets.
 - **Honesty:** say "estimated" for anything not measured, and keep open issues (for example telemetry dropouts) visible until the log shows they're fixed.
 - **Commits:** no AI attribution or Co-Authored-By lines. Never commit `.bin` logs.

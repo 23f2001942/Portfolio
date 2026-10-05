@@ -24,7 +24,8 @@ export interface Axis { label?: string; min?: number; max?: number }
 
 export interface RefLine { y?: number; x?: number; right?: boolean; color?: Color; label?: string }
 
-export type Bands = "modes" | "armed" | "hops" | "none";
+// "faults": RC-input fault windows from data.faults, plus Land mode as a faint strip.
+export type Bands = "modes" | "armed" | "hops" | "faults" | "none";
 
 export interface TimeChart {
   kind: "time";
@@ -33,7 +34,7 @@ export interface TimeChart {
   y: Axis;
   y2?: Axis;
   bands?: Bands;
-  shade?: [number, number][];   // extra highlighted windows
+  shade?: ([number, number] | [number, number, Color])[];   // extra highlighted windows, optionally coloured
   cycleLabels?: boolean;        // number each arm cycle (data.cycles) above the trace
   refs?: RefLine[];
   height?: number;
@@ -44,7 +45,7 @@ export type SpecialChart =
   | { kind: "track" }                 // GPS path, coloured by mode
   | { kind: "spectrum" }              // gyro FFT before/after the notch
   | { kind: "radar" }                 // Flight 1: hop drift relative to the nose
-  | { kind: "quad" }                  // Flight 1: average PWM per motor on a quad diagram
+  | { kind: "quad"; src?: string }     // motor values on a quad X diagram (SkyTwo Flight 1 hop averages, or data[src])
   | { kind: "pairs" }                 // Flight 1: paired motor sums
   | { kind: "earth" }                 // Flight 1: hop tracks over the ground
   | { kind: "hopSpeed" }              // Flight 1: ground speed per hop
@@ -52,7 +53,28 @@ export type SpecialChart =
   | { kind: "throttleCurve" }         // Flight 3: Stabilize throttle curve
   | { kind: "motorBars" }             // Flight 3: average motor output in Loiter
   | { kind: "loiterScatter" }         // Flight 3: Loiter position scatter
-  | { kind: "params" };               // Flight 1: parameter snapshot grid
+  | { kind: "params" }                // Flight 1: parameter snapshot grid
+  | ScatterChart                      // generic x/y point clouds, data[src][set.key] = {x, y}[]
+  | BarsChart;                        // generic labelled bars, data[src] = {k, v, hi?}[]
+
+export interface ScatterChart {
+  kind: "scatter";
+  src: string;
+  sets: { key: string; label: string; color: Color }[];
+  x: Axis;
+  y: Axis;
+  band?: [number, number];            // shaded healthy y-range
+  height?: number;
+}
+
+export interface BarsChart {
+  kind: "bars";
+  src: string;
+  y: Axis;
+  color?: Color;                      // bars flagged `hi` use "warn"
+  refs?: RefLine[];
+  height?: number;
+}
 
 export type ChartSpec = TimeChart | SpecialChart;
 
@@ -66,7 +88,8 @@ export type Block =
   | { type: "checks"; items: { title: string; body: string }[] }
   | { type: "callout"; label: string; paras: string[] }
   | { type: "chart"; title?: string; caption?: string; chart: ChartSpec }
-  | { type: "modeLegend"; modes: Color[]; note?: string };
+  | { type: "modeLegend"; modes: Color[]; note?: string }
+  | { type: "legend"; items: { color: Color; label: string }[]; note?: string };
 
 export interface Finding {
   tag: Tag;
