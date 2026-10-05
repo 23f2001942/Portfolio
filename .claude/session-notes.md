@@ -243,6 +243,7 @@ Always use `git add .` (not selective staging) to avoid missing public assets �
 - Extractor: `tools/skytwo/extract_flight.py --flight <n> --bin <log>` writes `src/app/projects/skytwo/analysis/data/flight-<n>.json` and prints a report summary. It's generalised from the Flight 4–12 scratchpad script but **not yet run as this exact file**, so sanity-check its output on first use.
 
 ## SkyOne Test Flights restructure — done 2026-10-05
+- Future SkyOne flights: use the project skill `.claude/skills/skyone-flight-log/SKILL.md` (auto-loads on a new SkyOne log).
 - Same pattern as SkyTwo: no summary table, one `FlightCard` per flight with top-right dialogs. Flights 1–4 have **Media only** (no logs were saved); Flights 5–7 also have **Detailed Log Analysis**. Bench session card has no buttons. Card titles are date only (APM has no clock without GPS).
 - **Shared engine** moved to `src/components/flight-analysis/` (`types.ts`, `charts.tsx`, `FlightAnalysisView.tsx` with a `loadData` prop, `FlightReport.tsx` generic loader, `TrackMap.tsx`, `useTokenColor.ts`). Each project keeps `analysis/FlightAnalysisLoader.tsx` (its own `reports` + `data` registries), `flights/`, `data/`, `presets.ts`.
 - Engine additions: coloured `shade` entries, `bands: "faults"` (reads `data.faults`, plus Land as a faint strip), generic `scatter` and `bars` SpecialCharts, `quad` with `src` (values + highlighted motor), and a `legend` block.
