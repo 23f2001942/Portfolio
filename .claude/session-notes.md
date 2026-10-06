@@ -1,5 +1,5 @@
 # Portfolio Session Notes
-*Last updated: 2026-10-05*
+*Last updated: 2026-10-06*
 
 ## Project Overview
 Next.js 15 App Router + TypeScript + Tailwind CSS + Shadcn/ui portfolio site.
@@ -71,11 +71,11 @@ All shadcn `Dialog` overlay/content (`src/components/ui/dialog.tsx`) were bumped
 ---
 
 ## Project Carousel (src/components/project-carousel.tsx)
-- Featured order (as of 2026-09-16): **SkyOne & SkyTwo → Dum-E → AirLink → SpillSense** (formerly Smart Milk Froth Monitor). Vendora was removed from the carousel only (still listed under Software & Data).
+- Featured order (as of 2026-09-16): **SkyOne & SkyTwo → Dum-E → SpillSense** (formerly Smart Milk Froth Monitor). Vendora and (on 2026-10-06) AirLink were removed from the carousel only — both are still listed in their project sections.
 - `imageMap` pairs each project name to its actual photo — **the image files are NOT interchangeable/positional**, each one is a real photo of that specific project:
   - `"SkyOne": "/carousel/second.png"`
   - `"Dum-E": "/carousel/first.png"`
-  - `"AirLink": "/images/AirLink.png"` (reused from its existing project-card image — AirLink never had a dedicated `/carousel/` file)
+  - AirLink is no longer in the carousel, but `/images/AirLink.png` must stay — it is the AirLink card image in Hardware Projects (via `placeholder-images.json`).
   - `"SpillSense": "/carousel/third.png"` (AI-generated concept render, kept as-is per user)
   - `fourth.png` (old Vendora slot) was deleted as unused.
   - **Gotcha hit once already:** don't reassign carousel image files by raw position/order — always verify what's actually pictured in each file before remapping, or you'll show the wrong project's photo.
@@ -160,6 +160,7 @@ Some skills intentionally appear in multiple groups (e.g. Python/C++/MATLAB/Soli
 ### `License` type — `type: 'iitm' | 'mooc' | 'nptel' | 'solidworks'`
 The `licenses-section.tsx` `categories` array only has cards for `nptel`, `mooc`, `solidworks` — **the 4 `iitm` entries (Diplomas/Foundation Level from IIT Madras) exist in the data but are NOT shown anywhere in the Certifications UI** (no matching category card). This is longstanding, not something introduced this session — flag it if the user ever asks "why don't my IITM diplomas show under Certifications."
 `mooc` array is manually ordered so aerospace/hardware-relevant courses surface first when the modal opens (order = literal array order, no sorting logic exists) — keep new mooc entries roughly grouped by relevance if adding more.
+NPTEL (SWAYAM) now has 3 entries, newest first (added "Introduction to Airplane Performance", IIT Kanpur, Oct 2026 on 2026-10-06; has a verify-URL credential).
 `CertCategory` has an optional `note` field — currently only NPTEL uses it (small italic line above the cert list in the modal, e.g. "Currently enrolled in several NPTEL aerospace courses...").
 
 ### Contact email

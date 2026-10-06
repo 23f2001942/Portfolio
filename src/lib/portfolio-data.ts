@@ -126,6 +126,13 @@ export const portfolioData: PortfolioData = {
   ],
   licenses: [
     {
+      name: "Introduction to Airplane Performance",
+      issuer: "NPTEL & IIT Kanpur",
+      type: "nptel",
+      date: "Oct 2026",
+      credentialUrl: "https://nptel.ac.in/verify/NOC-466H-6EW2-GM7QC"
+    },
+    {
       name: "Introduction to Aerospace Engineering - Flight",
       issuer: "NPTEL & IIT Bombay",
       type: "nptel",

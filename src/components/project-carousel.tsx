@@ -21,7 +21,6 @@ import type { Project } from "@/types/portfolio";
 const featuredProjectNames = [
   "SkyOne", // This will be treated as the combined drone project
   "Dum-E",
-  "AirLink",
   "SpillSense",
 ];
 
@@ -29,7 +28,6 @@ const featuredProjectNames = [
 const imageMap: { [key: string]: string } = {
   "SkyOne": "/carousel/second.png",
   "Dum-E": "/carousel/first.png",
-  "AirLink": "/images/AirLink.png",
   "SpillSense": "/carousel/third.png",
 };
 
